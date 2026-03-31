@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { useEcommerce } from "../../context/EcommerceContext";
 import Loading from "../../components/Loading";
 import { fetchUserAddressAsync } from "../../features/address/addressSlice";
 import { clearCart } from "../../features/cart/cartSlice";
