@@ -20,7 +20,7 @@ const ProductItem = ({ productData }) => {
   const { wishlist, toggleWishlistLoading } = useSelector(
     (state) => state.wishlist,
   );
-  
+
   const dispatch = useDispatch();
   const productId = useParams().id;
   const productInfo = productData?.product;
@@ -28,8 +28,6 @@ const ProductItem = ({ productData }) => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const location = useLocation();
-
-  console.log(similarProducts);
 
   const checkProductIsWishlist = (id) => {
     return wishlist.some((product) => product.id === id);
@@ -127,6 +125,8 @@ const ProductItem = ({ productData }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [productId]);
+
+  // console.log(productInfo);
 
   return (
     <>
@@ -296,6 +296,17 @@ const ProductItem = ({ productData }) => {
                     </span>
                   </div>
                 ))}
+              </div>
+
+              <div>
+                <p>
+                  <strong>Dimension(in cm) :</strong> {productInfo.length}cm X
+                  {productInfo.width}cm X {productInfo.height}cm
+                </p>
+                <div>
+                  <strong>Care: </strong>
+                  {productInfo.care}
+                </div>
               </div>
             </div>
           </div>

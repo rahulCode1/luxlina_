@@ -1,4 +1,4 @@
-import { useNavigate, useParams, Form } from "react-router-dom";
+import { useNavigate, useParams, Form, useLocation, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { useEffect } from "react";
@@ -16,6 +16,7 @@ const UpdateAddress = ({ addressInfo }) => {
   const addressId = useParams().id;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const submitToUpdate = async (e) => {
     e.preventDefault();
@@ -31,13 +32,12 @@ const UpdateAddress = ({ addressInfo }) => {
         }),
       ).unwrap();
 
-      
-
       toast.success(response.message || "Address updated successfully.", {
         id: toastId,
       });
 
-      navigate(`/address`);
+      const redirectUrl = location.state?.from || "/address";
+      navigate(redirectUrl);
     } catch (error) {
       console.log(error);
       toast.error(error || "Failed to update address.", { id: toastId });
@@ -47,6 +47,9 @@ const UpdateAddress = ({ addressInfo }) => {
   useEffect(() => {
     dispatch(fetchUserAddressAsync());
   }, [dispatch]);
+  const goBack = location.state?.from || "address"
+
+  
 
   return (
     <>
@@ -55,10 +58,15 @@ const UpdateAddress = ({ addressInfo }) => {
           background: "linear-gradient(135deg, #f0f4ff 0%, #fafafa 100%)",
           minHeight: "100vh",
           padding: "2rem 0",
-          marginBottom: "5em"
+          marginBottom: "5em",
         }}
       >
         <div className="container">
+          <Link 
+          to={goBack}
+          className="btn btn-primary mb-3">
+          Back to {goBack.split("/")[1] || "address"}
+          </Link>
           <div className="row justify-content-center">
             <div className="col-12 col-md-10 col-lg-8 col-xl-7">
               {/* Card Wrapper */}

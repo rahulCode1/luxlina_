@@ -41,7 +41,6 @@ const BuyNow = ({ info }) => {
       return navigate("/address/addAddress", { state: { from: "/buyNow" } });
     }
 
-   
     const toastId = toast.loading("Placing your order...");
 
     try {
@@ -248,9 +247,10 @@ const BuyNow = ({ info }) => {
           </div>
 
           {/* ════════════════════════════
-              CARD 2 — Delivery Address
+              CARD 2 — Delivery Address  (RESTYLED)
           ════════════════════════════ */}
           <div className="card border-0 shadow-sm rounded-4 mb-3 overflow-hidden">
+            {/* Header */}
             <div className="card-header bg-white border-bottom px-4 py-3 d-flex align-items-center gap-2">
               <i className="bi bi-geo-alt-fill text-danger"></i>
               <span
@@ -259,106 +259,156 @@ const BuyNow = ({ info }) => {
               >
                 Delivery Address
               </span>
+              {/* Always-visible Add New button in header */}
               <Link
                 to="/address/addAddress"
                 state={{ from: "/buyNow" }}
                 className="btn btn-outline-primary btn-sm rounded-3 fw-semibold ms-auto d-flex align-items-center gap-1"
-                style={{ fontSize: "0.72rem" }}
+                style={{ fontSize: "0.72rem", padding: "5px 10px" }}
               >
-                <i className="bi bi-plus-lg"></i> Add New
+                <i className="bi bi-plus-lg"></i> Add new
               </Link>
             </div>
 
             <div className="card-body px-4 py-3">
               {selectedAddress ? (
-                <div
-                  className="rounded-3 p-3 border"
-                  style={{ background: "#f9fafb" }}
-                >
-                  {/* Name + Default badge */}
-                  <div className="d-flex justify-content-between align-items-center mb-3">
-                    <span
-                      className="fw-semibold text-dark"
-                      style={{ fontSize: "0.9rem" }}
-                    >
-                      {selectedAddress.name}
-                    </span>
-                    {selectedAddress.isDefault && (
+                <>
+                  {/* ── Existing default address block ── */}
+                  <div
+                    className="rounded-3 p-3"
+                    style={{
+                      background: "#f9fafb",
+                      border: "1px solid #e5e7eb",
+                    }}
+                  >
+                    {/* Name + Default badge */}
+                    <div className="d-flex justify-content-between align-items-center mb-3">
                       <span
-                        className="badge bg-primary-subtle text-primary border border-primary border-opacity-25 rounded-pill d-flex align-items-center gap-1"
-                        style={{ fontSize: "0.65rem" }}
+                        className="fw-semibold text-dark"
+                        style={{ fontSize: "0.9rem" }}
                       >
-                        <i className="bi bi-patch-check-fill"></i> Default
+                        {selectedAddress.name}
                       </span>
-                    )}
-                  </div>
+                      {selectedAddress.isDefault && (
+                        <span
+                          className="badge bg-primary-subtle text-primary border border-primary border-opacity-25 rounded-pill d-flex align-items-center gap-1"
+                          style={{ fontSize: "0.65rem" }}
+                        >
+                          <i className="bi bi-patch-check-fill"></i> Default
+                        </span>
+                      )}
+                    </div>
 
-                  {/* Detail rows */}
-                  <div className="d-flex flex-column gap-2 mb-3">
-                    <div className="d-flex align-items-center gap-2">
-                      <i
-                        className="bi bi-telephone-fill text-muted flex-shrink-0"
-                        style={{ fontSize: "0.82rem" }}
-                      ></i>
-                      <span
-                        className="text-muted"
-                        style={{ fontSize: "0.82rem" }}
-                      >
-                        {selectedAddress.phoneNumber}
-                      </span>
+                    {/* Detail rows */}
+                    <div className="d-flex flex-column gap-2 mb-3">
+                      <div className="d-flex align-items-center gap-2">
+                        <i
+                          className="bi bi-telephone-fill text-muted flex-shrink-0"
+                          style={{ fontSize: "0.82rem" }}
+                        ></i>
+                        <span
+                          className="text-muted"
+                          style={{ fontSize: "0.82rem" }}
+                        >
+                          {selectedAddress.phoneNumber}
+                        </span>
+                      </div>
+                      <div className="d-flex align-items-center gap-2">
+                        <i
+                          className="bi bi-mailbox text-muted flex-shrink-0"
+                          style={{ fontSize: "0.82rem" }}
+                        ></i>
+                        <span
+                          className="text-muted"
+                          style={{ fontSize: "0.82rem" }}
+                        >
+                          {selectedAddress.zipCode}
+                        </span>
+                      </div>
+                      <div className="d-flex align-items-start gap-2">
+                        <i
+                          className="bi bi-house-fill text-muted flex-shrink-0 mt-1"
+                          style={{ fontSize: "0.82rem" }}
+                        ></i>
+                        <span
+                          className="text-muted"
+                          style={{ fontSize: "0.82rem", lineHeight: 1.5 }}
+                        >
+                          {selectedAddress.fullAddress}
+                          {selectedAddress.area &&
+                            `, ${selectedAddress.area}`}, {selectedAddress.city}
+                          , {selectedAddress.state}
+                        </span>
+                      </div>
                     </div>
-                    <div className="d-flex align-items-center gap-2">
-                      <i
-                        className="bi bi-mailbox text-muted flex-shrink-0"
-                        style={{ fontSize: "0.82rem" }}
-                      ></i>
-                      <span
-                        className="text-muted"
-                        style={{ fontSize: "0.82rem" }}
-                      >
-                        {selectedAddress.zipCode}
-                      </span>
-                    </div>
-                    <div className="d-flex align-items-start gap-2">
-                      <i
-                        className="bi bi-house-fill text-muted flex-shrink-0 mt-1"
-                        style={{ fontSize: "0.82rem" }}
-                      ></i>
-                      <span
-                        className="text-muted"
-                        style={{ fontSize: "0.82rem", lineHeight: 1.5 }}
-                      >
-                        {selectedAddress.fullAddress}
-                        {selectedAddress.area &&
-                          `, ${selectedAddress.area}`}, {selectedAddress.city},{" "}
-                        {selectedAddress.state}
-                      </span>
-                    </div>
-                  </div>
 
-                  {/* Action buttons */}
-                  <div className="d-flex gap-2">
-                    {address.length > 1 && (
+                    {/* ── Action buttons — clearly recognisable ── */}
+                    <div className="d-flex gap-2">
+                      {address.length > 1 && (
+                        <Link
+                          to="/address"
+                          state={{ from: "/buyNow" }}
+                          className="btn btn-outline-secondary btn-sm flex-fill rounded-3 d-flex align-items-center justify-content-center gap-1 fw-medium"
+                          style={{ fontSize: "0.8rem", padding: "8px 12px" }}
+                        >
+                          <i className="bi bi-arrow-left-right"></i> Change
+                        </Link>
+                      )}
                       <Link
-                        to="/address"
+                        to={`/address/${selectedAddress.id}`}
                         state={{ from: "/buyNow" }}
-                        className="btn btn-outline-secondary btn-sm flex-fill rounded-3 d-flex align-items-center justify-content-center gap-1"
-                        style={{ fontSize: "0.78rem" }}
+                        className="btn btn-primary btn-sm flex-fill rounded-3 d-flex align-items-center justify-content-center gap-1 fw-medium"
+                        style={{ fontSize: "0.8rem", padding: "8px 12px" }}
                       >
-                        <i className="bi bi-arrow-left-right"></i> Change
+                        <i className="bi bi-pencil-fill"></i> Edit
                       </Link>
-                    )}
-                    <Link
-                      to="/address/addAddress"
-                      state={{ from: "/buyNow" }}
-                      className="btn btn-outline-primary btn-sm flex-fill rounded-3 d-flex align-items-center justify-content-center gap-1"
-                      style={{ fontSize: "0.78rem" }}
-                    >
-                      <i className="bi bi-plus-lg"></i> Add New
-                    </Link>
+                    </div>
                   </div>
-                </div>
+
+                  {/* ── Divider with label — clear separation ── */}
+                  <div className="d-flex align-items-center gap-2 my-3">
+                    <hr
+                      className="flex-grow-1 my-0"
+                      style={{ borderColor: "#e5e7eb" }}
+                    />
+                    <span
+                      className="text-muted"
+                      style={{ fontSize: "0.72rem", whiteSpace: "nowrap" }}
+                    >
+                      or deliver to a different address
+                    </span>
+                    <hr
+                      className="flex-grow-1 my-0"
+                      style={{ borderColor: "#e5e7eb" }}
+                    />
+                  </div>
+
+                  {/* ── Add New — solid button, unmistakably clickable ── */}
+                  <Link
+                    to="/address/addAddress"
+                    state={{ from: "/buyNow" }}
+                    className="btn btn-outline-primary w-100 rounded-3 d-flex align-items-center justify-content-center gap-2 fw-medium"
+                    style={{ fontSize: "0.85rem", padding: "10px" }}
+                  >
+                    <i className="bi bi-plus-circle-fill"></i>
+                    Add a new delivery address
+                  </Link>
+
+                  {/* Switch address — only if multiple saved addresses exist */}
+                  {address.length > 1 && (
+                    <Link
+                      to="/address"
+                      state={{ from: "/buyNow" }}
+                      className="btn btn-outline-secondary w-100 rounded-3 d-flex align-items-center justify-content-center gap-2 fw-medium mt-2"
+                      style={{ fontSize: "0.85rem", padding: "10px" }}
+                    >
+                      <i className="bi bi-arrow-left-right"></i>
+                      Switch to another saved address
+                    </Link>
+                  )}
+                </>
               ) : (
+                /* ── No address state ── */
                 <div className="text-center py-4">
                   <i
                     className="bi bi-geo-alt text-muted d-block mb-2"
@@ -376,45 +426,11 @@ const BuyNow = ({ info }) => {
                   </Link>
                 </div>
               )}
-
-              {/* Dashed quick-action links */}
-              <div className="d-flex flex-column gap-2 mt-3">
-                <Link
-                  to="/address/addAddress"
-                  state={{ from: "/buyNow" }}
-                  className="btn btn-sm d-flex align-items-center justify-content-center gap-2 rounded-3"
-                  style={{
-                    border: "0.5px dashed #93c5fd",
-                    background: "#eff6ff",
-                    color: "#1d4ed8",
-                    fontSize: "0.8rem",
-                    padding: "9px",
-                  }}
-                >
-                  <i className="bi bi-plus-circle-fill"></i> Add New Address
-                </Link>
-                {address && address.length > 1 && (
-                  <Link
-                    to="/address"
-                    state={{ from: "/buyNow" }}
-                    className="btn btn-sm d-flex align-items-center justify-content-center gap-2 rounded-3"
-                    style={{
-                      border: "0.5px dashed #d1d5db",
-                      background: "#f9fafb",
-                      color: "#6b7280",
-                      fontSize: "0.8rem",
-                      padding: "9px",
-                    }}
-                  >
-                    <i className="bi bi-arrow-left-right"></i> Switch Address
-                  </Link>
-                )}
-              </div>
             </div>
           </div>
 
           {/* ════════════════════════════
-              CARD 3 — Payment Method
+              CARD 3 — Payment Method  (RESTYLED)
           ════════════════════════════ */}
           <div className="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
             <div className="card-header bg-white border-bottom px-4 py-3 d-flex align-items-center gap-2">
@@ -430,64 +446,165 @@ const BuyNow = ({ info }) => {
 
             <div className="card-body px-4 py-3">
               <div className="d-flex flex-column gap-2">
-                {[
-                  {
-                    value: "ONLINE",
-                    label: "Pay Online",
-                    sub: "UPI / Card / Net Banking — Free delivery",
-                    icon: "bi-lightning-charge-fill",
-                    accent: "primary",
-                  },
-                  {
-                    value: "COD",
-                    label: "Cash on Delivery",
-                    sub: "Pay when your order arrives — ₹60 charge",
-                    icon: "bi-cash-coin",
-                    accent: "warning",
-                  },
-                ].map(({ value, label, sub, icon, accent }) => (
-                  <label
-                    key={value}
-                    className={`d-flex align-items-center gap-3 p-3 rounded-3 border ${
-                      payment === value
-                        ? `border-${accent} bg-${accent} bg-opacity-10`
-                        : "border bg-light"
-                    }`}
-                    style={{ cursor: "pointer", transition: "all 0.15s" }}
+                {/* ── Pay Online ── */}
+                <label
+                  className={`d-flex align-items-start gap-3 p-3 rounded-3 border ${
+                    payment === "ONLINE"
+                      ? "border-primary bg-primary bg-opacity-10"
+                      : "border bg-light"
+                  }`}
+                  style={{ cursor: "pointer", transition: "all 0.15s" }}
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="ONLINE"
+                    checked={payment === "ONLINE"}
+                    onChange={(e) => setPayment(e.target.value)}
+                    className="form-check-input mt-1 flex-shrink-0"
+                  />
+                  <div
+                    className="d-flex align-items-center justify-content-center rounded-2 flex-shrink-0 bg-primary bg-opacity-10"
+                    style={{ width: 34, height: 34 }}
                   >
-                    <input
-                      type="radio"
-                      name="payment"
-                      value={value}
-                      checked={payment === value}
-                      onChange={(e) => setPayment(e.target.value)}
-                      className="form-check-input mt-0 flex-shrink-0"
-                    />
-                    <div
-                      className={`d-flex align-items-center justify-content-center rounded-2 flex-shrink-0 bg-${accent} bg-opacity-10`}
-                      style={{ width: 34, height: 34 }}
+                    <i
+                      className="bi bi-lightning-charge-fill text-primary"
+                      style={{ fontSize: 15 }}
+                    ></i>
+                  </div>
+                  <div className="flex-grow-1">
+                    {/* Label + FREE delivery badge */}
+                    <p
+                      className="fw-semibold mb-1 text-dark d-flex align-items-center flex-wrap gap-2"
+                      style={{ fontSize: "0.88rem" }}
                     >
-                      <i
-                        className={`bi ${icon} text-${accent}`}
-                        style={{ fontSize: 15 }}
-                      ></i>
-                    </div>
-                    <div>
-                      <p
-                        className="fw-semibold mb-0 text-dark"
-                        style={{ fontSize: "0.88rem" }}
+                      Pay Online
+                      <span
+                        className="badge bg-success-subtle text-success rounded-pill"
+                        style={{ fontSize: "0.65rem", fontWeight: 500 }}
                       >
-                        {label}
-                      </p>
-                      <small
-                        className="text-muted"
-                        style={{ fontSize: "0.72rem" }}
+                        FREE delivery
+                      </span>
+                    </p>
+                    {/* Payment method logo pills */}
+                    <div className="d-flex flex-wrap gap-1 align-items-center">
+                      {/* UPI */}
+                      <span
+                        className="px-2 py-1 rounded-2 border fw-bold"
+                        style={{
+                          fontSize: "0.65rem",
+                          background: "#fff",
+                          color: "#5f259f",
+                          borderColor: "#d4b8ec",
+                          letterSpacing: "0.02em",
+                        }}
                       >
-                        {sub}
-                      </small>
+                        UPI
+                      </span>
+                      {/* Visa */}
+                      <span
+                        className="px-2 py-1 rounded-2 border fw-bold"
+                        style={{
+                          fontSize: "0.65rem",
+                          background: "#fff",
+                          color: "#1a1f71",
+                          borderColor: "#c0c4e0",
+                          letterSpacing: "0.03em",
+                        }}
+                      >
+                        VISA
+                      </span>
+                      {/* Mastercard overlapping circles */}
+                      <span
+                        className="px-2 py-1 rounded-2 border d-inline-flex align-items-center"
+                        style={{
+                          fontSize: "0.65rem",
+                          background: "#fff",
+                          borderColor: "#e5d0c8",
+                          gap: "1px",
+                        }}
+                      >
+                        <span
+                          style={{
+                            width: 10,
+                            height: 10,
+                            borderRadius: "50%",
+                            background: "#eb001b",
+                            display: "inline-block",
+                          }}
+                        ></span>
+                        <span
+                          style={{
+                            width: 10,
+                            height: 10,
+                            borderRadius: "50%",
+                            background: "#f79e1b",
+                            display: "inline-block",
+                            marginLeft: -4,
+                            opacity: 0.9,
+                          }}
+                        ></span>
+                      </span>
+                      {/* Net Banking */}
+                      <span
+                        className="px-2 py-1 rounded-2 border fw-medium"
+                        style={{
+                          fontSize: "0.65rem",
+                          background: "#fff",
+                          color: "#1b6b38",
+                          borderColor: "#b8ddc5",
+                        }}
+                      >
+                        Net Banking
+                      </span>
                     </div>
-                  </label>
-                ))}
+                  </div>
+                </label>
+
+                {/* ── Cash on Delivery ── */}
+                <label
+                  className={`d-flex align-items-center gap-3 p-3 rounded-3 border ${
+                    payment === "COD"
+                      ? "border-warning bg-warning bg-opacity-10"
+                      : "border bg-light"
+                  }`}
+                  style={{ cursor: "pointer", transition: "all 0.15s" }}
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="COD"
+                    checked={payment === "COD"}
+                    onChange={(e) => setPayment(e.target.value)}
+                    className="form-check-input mt-0 flex-shrink-0"
+                  />
+                  <div
+                    className="d-flex align-items-center justify-content-center rounded-2 flex-shrink-0 bg-warning bg-opacity-10"
+                    style={{ width: 34, height: 34 }}
+                  >
+                    <i
+                      className="bi bi-cash-coin text-warning"
+                      style={{ fontSize: 15 }}
+                    ></i>
+                  </div>
+                  <div>
+                    <p
+                      className="fw-semibold mb-0 text-dark"
+                      style={{ fontSize: "0.88rem" }}
+                    >
+                      Cash on Delivery
+                    </p>
+                    <small
+                      className="text-muted"
+                      style={{ fontSize: "0.72rem" }}
+                    >
+                      Pay when your order arrives ·{" "}
+                      <span className="text-warning fw-medium">
+                        +₹60 charge
+                      </span>
+                    </small>
+                  </div>
+                </label>
               </div>
 
               <p
