@@ -16,7 +16,7 @@ import sillBattaSmImg from "../../imgs/sillBattaSm.png";
 import chaklaBelanSmImg from "../../imgs/chaklaBelanSm.png";
 import MakingProcess from "./MakingProcess";
 import styles from "./HomePage.module.css";
-import HomeFooter from "./HomeFooter";
+import Footer from "../../components/product/Footer";
 
 const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -314,7 +314,8 @@ const HomePage = () => {
         </div>
       </section>
 
-      <HomeFooter />
+      <Footer from="/" />
+
       {/* CSS for hiding scrollbars while keeping functionality */}
       <style>{`
     .custom-scrollbar::-webkit-scrollbar {

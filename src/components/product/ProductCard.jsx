@@ -6,7 +6,7 @@ import { addOrRemoveWishlistAsync } from "../../features/wishlist/wishlistSlice"
 import { useState } from "react";
 import styles from "./ProductCard.module.css";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product , from }) {
   const { cart: productCart, addTocartLoading } = useSelector(
     (state) => state.cart,
   );
@@ -122,7 +122,10 @@ export default function ProductCard({ product }) {
         style={{ background: "#fff", flexGrow: 1 }}
       >
         {/* Name */}
-        <Link to={`/products/${product.id}`} className="text-decoration-none">
+        <Link
+          to={`/products/${product.id}`}
+          className="text-decoration-none"
+        >
           <h6
             className="fw-semibold mb-2"
             style={{
@@ -176,6 +179,7 @@ export default function ProductCard({ product }) {
           {isInCart(product.id) ? (
             <Link
               to="/cart"
+              state={{from : from }}
               className="btn w-100 fw-semibold d-flex align-items-center justify-content-center gap-2"
               style={{
                 border: "1.5px solid #4f46e5",

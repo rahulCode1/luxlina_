@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEcommerce } from "../../context/EcommerceContext";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
@@ -25,6 +25,8 @@ const AllAddress = () => {
   const { address, fetchUserAddressLoading, error, setDefaultAddressLoading } =
     useSelector((state) => state.address);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const goTo = location.state?.from;
 
   const selectDefaultAddress = async (id) => {
     setAddressId(id);
@@ -61,14 +63,16 @@ const AllAddress = () => {
 
             {/* ── Top Nav ── */}
             <div className="d-flex align-items-center justify-content-between mb-4 gap-2">
-              <Link
-                to="/user"
-                className="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2 rounded-3 fw-semibold"
-              >
-                <i className="bi bi-arrow-left"></i>
-                <span className="d-none d-sm-inline">Back to Profile</span>
-                <span className="d-sm-none">Back</span>
-              </Link>
+              {goTo && goTo !== "address" && (
+                <Link
+                  to={goTo}
+                  className="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2 rounded-3 fw-semibold"
+                >
+                  <i className="bi bi-arrow-left"></i>
+                  <span className="d-none d-sm-inline">Back to Profile</span>
+                  <span className="d-sm-none">Back</span>
+                </Link>
+              )}
 
               <Link
                 to="addAddress"
@@ -141,9 +145,7 @@ const AllAddress = () => {
                         </div>
                       ) : (
                         /* Thin neutral bar so non-default cards have the same height structure */
-                        <div
-                          style={{ height: 4, background: "#e5e7eb" }}
-                        />
+                        <div style={{ height: 4, background: "#e5e7eb" }} />
                       )}
 
                       <div className="card-body p-3 p-md-4">
@@ -257,7 +259,7 @@ const AllAddress = () => {
                            */
                           <Link
                             to={`${userAdd.id}`}
-                            state={{ from: "/user" }}
+                            state={{ from: "/address" }}
                             className="btn btn-sm w-100 rounded-3 fw-semibold d-flex align-items-center justify-content-center gap-2"
                             style={{
                               fontSize: "0.82rem",
@@ -267,7 +269,10 @@ const AllAddress = () => {
                               border: "1.5px solid #c4b5fd",
                             }}
                           >
-                            <i className="bi bi-pencil-fill" style={{ fontSize: 11 }}></i>
+                            <i
+                              className="bi bi-pencil-fill"
+                              style={{ fontSize: 11 }}
+                            ></i>
                             Edit address
                           </Link>
                         ) : (
@@ -281,7 +286,10 @@ const AllAddress = () => {
                               to={`${userAdd.id}`}
                               state={{ from: "/address" }}
                               className="btn btn-outline-secondary btn-sm flex-fill rounded-3 fw-semibold d-flex align-items-center justify-content-center gap-1"
-                              style={{ fontSize: "0.8rem", padding: "8px 10px" }}
+                              style={{
+                                fontSize: "0.8rem",
+                                padding: "8px 10px",
+                              }}
                             >
                               <i
                                 className="bi bi-pencil-fill"
@@ -348,6 +356,7 @@ const AllAddress = () => {
                   </p>
                   <Link
                     to="addAddress"
+                    state={{ from: "/address" }}
                     className="btn btn-primary fw-semibold px-4 py-2 rounded-3"
                   >
                     <i className="bi bi-plus-circle-fill me-2"></i>

@@ -1,10 +1,10 @@
 import {
   FiShoppingBag,
   FiShoppingCart,
-  FiUser,
   FiHome,
   FiLogOut,
   FiLock,
+  FiPackage,
 } from "react-icons/fi";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -66,7 +66,11 @@ const Footer = () => {
 
         {/* Shop */}
         <li className="nav-item flex-fill">
-          <NavLink to="/products" className="nav-link p-0 h-100">
+          <NavLink
+            to="/products"
+            state={{ from: "/products" }}
+            className="nav-link p-0 h-100"
+          >
             {({ isActive }) => (
               <div style={getLinkStyle(isActive)}>
                 <FiShoppingBag size={21} />
@@ -79,7 +83,11 @@ const Footer = () => {
         {/* Cart — only if logged in */}
         {token && (
           <li className="nav-item flex-fill">
-            <NavLink to="/cart" className="nav-link p-0 h-100">
+            <NavLink
+              to="/cart"
+              state={{ from: "/cart" }}
+              className="nav-link p-0 h-100"
+            >
               {({ isActive }) => (
                 <div style={getLinkStyle(isActive)}>
                   <span
@@ -115,13 +123,14 @@ const Footer = () => {
         {/* Profile or Login */}
         <li className="nav-item flex-fill">
           <NavLink
-            to={token ? "/user" : "/login"}
+            state={{ from: token ? "/orders" : "/login" }}
+            to={token ? "/orders" : "/login"}
             className="nav-link p-0 h-100"
           >
             {({ isActive }) => (
               <div style={getLinkStyle(isActive)}>
-                {token ? <FiUser size={21} /> : <FiLock size={21} />}
-                <span style={labelStyle}>{token ? "Profile" : "Login"}</span>
+                {token ? <FiPackage size={21} /> : <FiLock size={21} />}
+                <span style={labelStyle}>{token ? "Orders" : "Login"}</span>
               </div>
             )}
           </NavLink>

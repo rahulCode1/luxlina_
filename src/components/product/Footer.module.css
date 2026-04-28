@@ -1,0 +1,463 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap");
+
+/* ════════════════════════════════════════════
+   Footer — Stone Handicraft Ecommerce
+   Palette mirrors the product detail page:
+   warm ivory · deep walnut · terracotta · sand
+   ════════════════════════════════════════════ */
+
+.footer {
+  width: 100%;
+  background: #110e09;
+  font-family: "DM Sans", sans-serif;
+  color: #c4a882;
+  margin-top: 4rem;
+}
+
+/* ── Top Promise Band ─────────────────────── */
+.topBand {
+  background: linear-gradient(90deg, #2a1f12 0%, #1e1509 50%, #2a1f12 100%);
+  border-bottom: 1px solid #3a2a18;
+  overflow: hidden;
+}
+
+.bandInner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+.bandItem {
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #d4b896;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.bandItem i {
+  color: #c97b3a;
+  font-size: 0.85rem;
+}
+
+.bandDivider {
+  color: #5c4430;
+  font-size: 0.6rem;
+}
+
+/* ── Body ─────────────────────────────────── */
+.body {
+  border-bottom: 1px solid #2a1f12;
+}
+
+.inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 3rem;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1fr 1.6fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* ── Brand Column ─────────────────────────── */
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.logo {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: linear-gradient(135deg, #c97b3a, #e8a95c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.tagline {
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: #7a6450;
+  margin: 0;
+  max-width: 22rem;
+}
+
+/* ── Social Icons ─────────────────────────── */
+.socialRow {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
+.socialIcon {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #3a2a18;
+  border-radius: 50%;
+  color: #7a6450;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.socialIcon:hover {
+  border-color: #c97b3a;
+  color: #c97b3a;
+  background: rgba(201, 123, 58, 0.08);
+  transform: translateY(-1px);
+}
+
+/* ── Payment ──────────────────────────────── */
+.paymentIcons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.payLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5c4430;
+  font-weight: 500;
+}
+
+.payRow {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.payBadge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 0.25em 0.6em;
+  border: 1px solid #3a2a18;
+  border-radius: 0.25rem;
+  color: #9a7e60;
+  background: #1a1208;
+}
+
+/* ── Link Columns ─────────────────────────── */
+.linkCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.colHeading {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #d4b896;
+  margin: 0 0 1rem;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footerLink {
+  font-size: 0.82rem;
+  color: #6a5540;
+  text-decoration: none;
+  transition: color 0.18s ease;
+  line-height: 1.4;
+}
+
+.footerLink:hover {
+  color: #c97b3a;
+}
+
+/* ── Contact Column ───────────────────────── */
+.contactCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.newsletterText {
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: #6a5540;
+  margin: 0 0 0.85rem;
+}
+
+.newsletterForm {
+  display: flex;
+  border: 1px solid #3a2a18;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  background: #1a1208;
+}
+
+.emailInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0.65rem 0.85rem;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.78rem;
+  color: #c4a882;
+  min-width: 0;
+}
+
+.emailInput::placeholder {
+  color: #4a3828;
+}
+
+.subscribeBtn {
+  background: #c97b3a;
+  border: none;
+  padding: 0.65rem 1rem;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.subscribeBtn:hover {
+  background: #b06830;
+}
+
+.contactBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  color: #6a5540;
+}
+
+.contactItem i {
+  color: #c97b3a;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.address {
+  font-size: 0.8rem;
+  color: #6a5540;
+  line-height: 1.6;
+}
+
+/* ── Trust Badges ─────────────────────────── */
+.trustRow {
+  background: #0e0b07;
+  border-bottom: 1px solid #2a1f12;
+}
+
+.trustInner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 2rem;
+  flex-wrap: wrap;
+}
+
+.trustBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5c4430;
+  white-space: nowrap;
+}
+
+.trustBadge i {
+  font-size: 0.9rem;
+  color: #8b5e3c;
+}
+
+/* ── Bottom Bar ───────────────────────────── */
+.bottomBar {
+  background: #0a0805;
+}
+
+.bottomInner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1.1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.copyright {
+  font-size: 0.75rem;
+  color: #4a3828;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.legalLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.legalLink {
+  font-size: 0.72rem;
+  color: #4a3828;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.18s;
+}
+
+.legalLink:hover {
+  color: #c97b3a;
+}
+
+.dot {
+  color: #2a1f12;
+  font-size: 0.75rem;
+}
+
+.madeWith {
+  font-size: 0.72rem;
+  color: #4a3828;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ════════════════════════════════════════════
+   Responsive
+   ════════════════════════════════════════════ */
+
+@media (max-width: 1100px) {
+  .inner {
+    grid-template-columns: 1.5fr 1fr 1fr 1.4fr;
+  }
+  .contactCol {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2.5rem;
+    border-top: 1px solid #2a1f12;
+    padding-top: 1.5rem;
+  }
+  .contactBlock {
+    grid-column: 2;
+  }
+  .newsletterText,
+  .newsletterForm {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2.5rem 1.5rem 2rem;
+  }
+
+  .brandCol {
+    grid-column: 1 / -1;
+    border-bottom: 1px solid #2a1f12;
+    padding-bottom: 1.5rem;
+  }
+
+  .tagline {
+    max-width: 100%;
+  }
+
+  .contactCol {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #2a1f12;
+    padding-top: 1.5rem;
+  }
+
+  .bottomInner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .bandInner {
+    gap: 0.4rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .inner {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.25rem 1.5rem;
+  }
+
+  .brandCol {
+    grid-column: 1;
+  }
+
+  .trustInner {
+    gap: 0.5rem 1.25rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .bandItem {
+    font-size: 0.7rem;
+  }
+
+  .newsletterForm {
+    flex-direction: column;
+    border-radius: 0.5rem;
+  }
+
+  .subscribeBtn {
+    border-radius: 0 0 0.35rem 0.35rem;
+    padding: 0.7rem 1rem;
+  }
+}

@@ -1,11 +1,10 @@
-/* Tablet and up: side-by-side table | summary */
 @media (min-width: 768px) {
   .orderBodyGrid {
     grid-template-columns: 1fr 280px !important;
+    align-items: start;
   }
-  .orderSummaryCol {
-    border-top: none !important;
-    border-left: 1px solid #f0ebff;
+  .orderBodyGrid > div {
+    min-width: 0;
   }
 }
 

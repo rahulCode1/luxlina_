@@ -1,0 +1,739 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap");
+
+/* ════════════════════════════════════════════
+   ShippingPolicy.module.css
+   Warm stone palette — ivory · walnut · terracotta
+   ════════════════════════════════════════════ */
+
+.page {
+  font-family: "DM Sans", sans-serif;
+  color: #1a1208;
+  background: #fdf8f2;
+  min-height: 100vh;
+}
+
+/* ── Hero ─────────────────────────────────── */
+.hero {
+  position: relative;
+  background: linear-gradient(150deg, #0e0a06 0%, #1e1408 45%, #2e1c0c 100%);
+  padding: 5.5rem 1.5rem 4.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.heroPattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(201, 123, 58, 0.07) 0%, transparent 55%),
+    radial-gradient(circle at 80% 20%, rgba(201, 123, 58, 0.05) 0%, transparent 45%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255, 255, 255, 0.01) 40px,
+      rgba(255, 255, 255, 0.01) 41px
+    );
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c97b3a;
+  border: 1px solid rgba(201, 123, 58, 0.35);
+  padding: 0.35em 1.1em;
+  border-radius: 2rem;
+  background: rgba(201, 123, 58, 0.07);
+}
+
+.heroTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2rem, 5.5vw, 3.2rem);
+  font-weight: 700;
+  color: #f7ede2;
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.heroSub {
+  font-size: 0.875rem;
+  line-height: 1.8;
+  color: #8a6a4a;
+  margin: 0;
+  max-width: 520px;
+}
+
+.heroPills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.4rem;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #c4a882;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(196, 168, 130, 0.2);
+  padding: 0.3em 0.85em;
+  border-radius: 2rem;
+}
+
+.pill i {
+  color: #c97b3a;
+  font-size: 0.75rem;
+}
+
+/* ── Content ──────────────────────────────── */
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+.section {
+  margin-bottom: 3.5rem;
+}
+
+.sectionHead {
+  margin-bottom: 1.75rem;
+}
+
+.sectionTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #1a1208;
+  margin: 0 0 0.3rem;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid #edd9b8;
+}
+
+.sectionSub {
+  font-size: 0.8rem;
+  color: #9a7a5a;
+  margin: 0.5rem 0 0;
+}
+
+/* ── Plans Grid ───────────────────────────── */
+.plansGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.planCard {
+  position: relative;
+  background: #fff;
+  border: 1.5px solid #e8d8c4;
+  border-radius: 1rem;
+  padding: 1.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.planCard:hover {
+  border-color: #c97b3a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201, 123, 58, 0.12);
+}
+
+.planHighlight {
+  border-color: #c97b3a;
+  background: linear-gradient(160deg, #fdf6ee 0%, #fff 100%);
+  box-shadow: 0 4px 20px rgba(201, 123, 58, 0.15);
+}
+
+.popularBadge {
+  position: absolute;
+  top: -0.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #c97b3a;
+  padding: 0.25em 0.9em;
+  border-radius: 2rem;
+  white-space: nowrap;
+}
+
+.planIcon {
+  width: 3rem;
+  height: 3rem;
+  background: #fdf0e2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #c97b3a;
+  margin-bottom: 0.4rem;
+}
+
+.planName {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1a1208;
+  margin: 0;
+}
+
+.planPrice {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.planAmount {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #c97b3a;
+  line-height: 1;
+}
+
+.planPriceNote {
+  font-size: 0.7rem;
+  color: #9a7a5a;
+}
+
+.planPriceSub {
+  font-size: 0.72rem;
+  color: #b8a090;
+  margin: 0;
+}
+
+.planDivider {
+  width: 100%;
+  height: 1px;
+  background: #f0e4d4;
+  margin: 0.5rem 0;
+}
+
+.planDetail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: #5c4430;
+  width: 100%;
+  justify-content: center;
+}
+
+.planDetail i {
+  color: #c97b3a;
+  font-size: 0.85rem;
+}
+
+/* ── Journey Timeline ─────────────────────── */
+.journeyWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.journeyStep {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.journeyLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.journeyIconWrap {
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(135deg, #fdf0e2, #f7e0c8);
+  border: 1.5px solid #e8c9a8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #c97b3a;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.journeyLine {
+  width: 2px;
+  flex: 1;
+  min-height: 2rem;
+  background: linear-gradient(to bottom, #e8c9a8, #f7f0e8);
+  margin: 0.3rem 0;
+}
+
+.journeyBody {
+  padding: 0.25rem 0 2rem;
+  flex: 1;
+}
+
+.journeyMeta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.journeyTitle {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1a1208;
+  margin: 0;
+}
+
+.journeyTime {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c97b3a;
+  background: #fdf0e2;
+  padding: 0.2em 0.7em;
+  border-radius: 2rem;
+  border: 1px solid #e8c9a8;
+}
+
+.journeyDesc {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: #7a6450;
+  margin: 0;
+}
+
+/* ── Packaging Card ───────────────────────── */
+.packagingCard {
+  background: linear-gradient(135deg, #1a1208 0%, #2e1c0c 100%);
+  border-radius: 1.25rem;
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  overflow: hidden;
+}
+
+.packagingEyebrow {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c97b3a;
+  margin-bottom: 0.6rem;
+}
+
+.packagingTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.3rem, 3vw, 1.75rem);
+  font-weight: 600;
+  color: #f7ede2;
+  margin: 0 0 0.85rem;
+  line-height: 1.2;
+}
+
+.packagingDesc {
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: #8a6a4a;
+  margin: 0 0 1.25rem;
+}
+
+.packagingFeatures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.packagingFeature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #c4a882;
+}
+
+.packagingFeature i {
+  color: #c97b3a;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+/* ── Box Illustration ─────────────────────── */
+.packagingVisual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.boxIllustration {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.boxOuter {
+  width: 110px;
+  height: 110px;
+  background: linear-gradient(145deg, #c97b3a, #9a5a28);
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    0 8px 24px rgba(0,0,0,0.4);
+  position: relative;
+}
+
+.boxInner {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: rgba(247, 237, 226, 0.9);
+}
+
+.fragileLabel {
+  font-size: 0.45rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: rgba(247, 237, 226, 0.5);
+  text-transform: uppercase;
+}
+
+.boxShadow {
+  width: 90px;
+  height: 12px;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.4) 0%, transparent 70%);
+  margin-top: 4px;
+  border-radius: 50%;
+}
+
+/* ── Partners Grid ────────────────────────── */
+.partnersGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+}
+
+.partnerCard {
+  background: #fff;
+  border: 1px solid #e8d8c4;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  transition: border-color 0.18s, transform 0.18s;
+}
+
+.partnerCard:hover {
+  border-color: #c97b3a;
+  transform: translateY(-2px);
+}
+
+.partnerCard > i {
+  font-size: 1.5rem;
+  color: #c97b3a;
+}
+
+.partnerName {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1a1208;
+}
+
+.partnerCoverage {
+  font-size: 0.68rem;
+  color: #9a7a5a;
+  background: #fdf6ee;
+  padding: 0.2em 0.6em;
+  border-radius: 2rem;
+  border: 1px solid #edd9b8;
+}
+
+/* ── Notes Grid ───────────────────────────── */
+.notesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.noteCard {
+  background: #fff;
+  border: 1px solid #e8d8c4;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color 0.18s;
+}
+
+.noteCard:hover {
+  border-color: #c97b3a;
+}
+
+.noteCard > i {
+  font-size: 1.2rem;
+  color: #c97b3a;
+}
+
+.noteTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1a1208;
+  margin: 0;
+}
+
+.noteText {
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: #7a6450;
+  margin: 0;
+}
+
+/* ── FAQ ──────────────────────────────────── */
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.faqItem {
+  background: #fff;
+  border: 1px solid #e8d8c4;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  transition: border-color 0.18s;
+}
+
+.faqItem:hover,
+.faqOpen {
+  border-color: #c97b3a;
+}
+
+.faqQ {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1a1208;
+  text-align: left;
+  transition: color 0.18s;
+}
+
+.faqQ:hover {
+  color: #c97b3a;
+}
+
+.faqQ i {
+  flex-shrink: 0;
+  color: #c97b3a;
+  font-size: 1rem;
+}
+
+.faqA {
+  padding: 0.85rem 1.25rem 1rem;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: #6a5540;
+  border-top: 1px solid #f7f0e8;
+}
+
+/* ── Help Strip ───────────────────────────── */
+.helpStrip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, #fdf6ee 0%, #fbeeda 100%);
+  border: 1px solid #edd9b8;
+  border-radius: 1rem;
+  padding: 1.5rem 2rem;
+}
+
+.helpLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.helpLeft > i {
+  font-size: 1.75rem;
+  color: #c97b3a;
+  flex-shrink: 0;
+}
+
+.helpTitle {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1a1208;
+  margin: 0;
+}
+
+.helpSub {
+  font-size: 0.75rem;
+  color: #9a7a5a;
+  margin: 0.15rem 0 0;
+}
+
+.helpActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.helpBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #1a1208;
+  color: #f7ede2;
+  border: none;
+  padding: 0.7em 1.3em;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.helpBtn:hover {
+  background: #3b2a18;
+  transform: translateY(-1px);
+}
+
+.helpOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: transparent;
+  color: #5c4430;
+  border: 1.5px solid #d4b896;
+  padding: 0.7em 1.3em;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.helpOutline:hover {
+  border-color: #c97b3a;
+  color: #c97b3a;
+}
+
+/* ════════════════════════════════════════════
+   Responsive
+   ════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .plansGrid {
+    grid-template-columns: 1fr;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .partnersGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .notesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .packagingCard {
+    grid-template-columns: 1fr;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .packagingVisual {
+    display: none;
+  }
+
+  .helpStrip {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 3.5rem 1.25rem 3rem;
+  }
+
+  .content {
+    padding: 2rem 1rem 4rem;
+  }
+
+  .partnersGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .packagingFeatures {
+    grid-template-columns: 1fr;
+  }
+}

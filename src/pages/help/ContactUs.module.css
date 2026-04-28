@@ -1,0 +1,697 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap");
+
+/* ════════════════════════════════════════════
+   ContactUs.module.css
+   Warm stone palette — ivory · walnut · terracotta
+   Matches FAQs.module.css design language
+   ════════════════════════════════════════════ */
+
+.page {
+  font-family: "DM Sans", sans-serif;
+  color: #1a1208;
+  background: #fdf8f2;
+  min-height: 100vh;
+}
+
+/* ── Hero ─────────────────────────────────── */
+.hero {
+  position: relative;
+  background: linear-gradient(150deg, #0e0a06 0%, #1e1408 50%, #2a1c0e 100%);
+  padding: 5rem 1.5rem 4rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 60%, rgba(201, 123, 58, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 85% 30%, rgba(201, 123, 58, 0.05) 0%, transparent 55%),
+    repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 60px,
+      rgba(255, 255, 255, 0.012) 60px,
+      rgba(255, 255, 255, 0.012) 61px
+    );
+}
+
+.heroInner {
+  position: relative;
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c97b3a;
+  border: 1px solid rgba(201, 123, 58, 0.3);
+  background: rgba(201, 123, 58, 0.06);
+  padding: 0.32em 1em;
+  border-radius: 2rem;
+}
+
+.heroTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+  font-weight: 700;
+  color: #f7ede2;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.heroSub {
+  font-size: 0.875rem;
+  line-height: 1.8;
+  color: #7a5a3a;
+  margin: 0;
+  max-width: 480px;
+}
+
+.heroMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  color: #5a4030;
+  letter-spacing: 0.03em;
+}
+
+.heroMeta i {
+  color: #c97b3a;
+  margin-right: 0.25rem;
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
+  background: #4a3020;
+  border-radius: 50%;
+}
+
+/* ── Layout ───────────────────────────────── */
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* ── Aside ────────────────────────────────── */
+.aside {
+  position: sticky;
+  top: 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.asideLabel {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b8a090;
+  margin: 0 0 0.15rem;
+}
+
+/* ── Channel Cards ────────────────────────── */
+.channels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.channelCard {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 1rem;
+  background: #fff;
+  border: 1px solid #e8d8c4;
+  border-radius: 0.65rem;
+  text-decoration: none;
+  transition: border-color 0.18s, box-shadow 0.18s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.channelCard::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #c97b3a;
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.18s;
+  border-radius: 0 2px 2px 0;
+}
+
+.channelCard:hover {
+  border-color: #c97b3a;
+  box-shadow: 0 2px 12px rgba(201, 123, 58, 0.1);
+  transform: translateX(2px);
+}
+
+.channelCard:hover::before {
+  transform: scaleY(1);
+}
+
+.channelIcon {
+  width: 2.4rem;
+  height: 2.4rem;
+  background: #fdf0e2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #c97b3a;
+  flex-shrink: 0;
+  transition: background 0.18s;
+}
+
+.channelCard:hover .channelIcon {
+  background: #c97b3a;
+  color: #fff;
+}
+
+.channelBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.channelTitle {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1a1208;
+  margin-bottom: 0.1rem;
+}
+
+.channelDesc {
+  font-size: 0.72rem;
+  color: #9a7a5a;
+  margin-bottom: 0.2rem;
+}
+
+.channelValue {
+  font-size: 0.72rem;
+  color: #c97b3a;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.channelRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.channelBadge {
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: #7a6450;
+  background: #f0e8dc;
+  padding: 0.18em 0.55em;
+  border-radius: 1rem;
+  white-space: nowrap;
+}
+
+.channelArrow {
+  font-size: 0.75rem;
+  color: #c97b3a;
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity 0.18s, transform 0.18s;
+}
+
+.channelCard:hover .channelArrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* ── Office Card ──────────────────────────── */
+.officeCard {
+  background: #fff;
+  border: 1px solid #e8d8c4;
+  border-radius: 0.65rem;
+  padding: 1rem 1.1rem;
+}
+
+.officeHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #c97b3a;
+  margin-bottom: 0.65rem;
+}
+
+.officeHeader i {
+  font-size: 0.85rem;
+}
+
+.officeAddr {
+  font-size: 0.8rem;
+  line-height: 1.75;
+  color: #6a5540;
+  margin: 0 0 0.75rem;
+}
+
+.officeLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #c97b3a;
+  text-decoration: none;
+  transition: color 0.18s;
+}
+
+.officeLink:hover {
+  color: #b06830;
+}
+
+/* ── Quick Links ──────────────────────────── */
+.quickLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 0.5rem;
+}
+
+.qLink {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.78rem;
+  color: #9a7a5a;
+  text-decoration: none;
+  border-radius: 0.4rem;
+  transition: background 0.18s, color 0.18s;
+}
+
+.qLink i {
+  font-size: 0.85rem;
+  width: 1rem;
+  text-align: center;
+  color: #c97b3a;
+}
+
+.qLink:hover {
+  background: #f0e8dc;
+  color: #3b2810;
+}
+
+/* ── Form Card ────────────────────────────── */
+.main {
+  min-width: 0;
+}
+
+.formCard {
+  background: #fff;
+  border: 1px solid #e8d8c4;
+  border-radius: 0.85rem;
+  padding: 2rem 2.25rem 2.25rem;
+}
+
+.formHeader {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #f0e8dc;
+}
+
+.formTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a1208;
+  margin: 0 0 0.3rem;
+  letter-spacing: -0.01em;
+}
+
+.formSub {
+  font-size: 0.82rem;
+  color: #9a7a5a;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Form Fields ──────────────────────────── */
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7a6450;
+}
+
+.req {
+  color: #c97b3a;
+  margin-left: 0.15rem;
+}
+
+.opt {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #b8a090;
+  font-size: 0.68rem;
+  margin-left: 0.25rem;
+}
+
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #fdfaf6;
+  border: 1.5px solid #e8d8c4;
+  border-radius: 0.55rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.inputWrap:focus-within {
+  border-color: #c97b3a;
+  box-shadow: 0 0 0 3px rgba(201, 123, 58, 0.08);
+}
+
+.inputWrap > i:first-child {
+  position: absolute;
+  left: 0.9rem;
+  color: #b8a090;
+  font-size: 0.85rem;
+  pointer-events: none;
+  transition: color 0.2s;
+  z-index: 1;
+}
+
+.inputWrap:focus-within > i:first-child {
+  color: #c97b3a;
+}
+
+.inputErr {
+  border-color: #d45a3a;
+}
+
+.inputErr:focus-within {
+  box-shadow: 0 0 0 3px rgba(212, 90, 58, 0.08);
+}
+
+.input {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.6rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.855rem;
+  color: #1a1208;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: #c4a882;
+}
+
+/* Select */
+.select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 2.25rem;
+}
+
+.placeholder {
+  color: #c4a882;
+}
+
+/* Textarea */
+.textareaWrap {
+  align-items: flex-start;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.65;
+  padding-top: 0.8rem;
+}
+
+.charCount {
+  font-size: 0.65rem;
+  color: #b8a090;
+  text-align: right;
+  margin-top: 0.2rem;
+}
+
+/* Error */
+.errMsg {
+  font-size: 0.72rem;
+  color: #c0402a;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.errMsg i {
+  font-size: 0.75rem;
+}
+
+/* ── Submit ───────────────────────────────── */
+.submitBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #c97b3a;
+  color: #fff;
+  border: none;
+  padding: 0.9em 2.25em;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.55rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, opacity 0.2s;
+  margin-top: 1.25rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #b06830;
+  transform: translateY(-1px);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.formNote {
+  font-size: 0.72rem;
+  color: #b8a090;
+  text-align: center;
+  margin: 0.85rem 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.formNote i {
+  color: #c97b3a;
+  font-size: 0.75rem;
+}
+
+/* ── Success ──────────────────────────────── */
+.successBox {
+  background: #fff;
+  border: 1px solid #e8d8c4;
+  border-radius: 0.85rem;
+  padding: 3.5rem 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.successIcon {
+  width: 4rem;
+  height: 4rem;
+  background: linear-gradient(135deg, #c97b3a, #e8a060);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(201, 123, 58, 0.25);
+}
+
+.successTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1208;
+  margin: 0;
+}
+
+.successText {
+  font-size: 0.875rem;
+  color: #6a5540;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 380px;
+}
+
+.successText strong {
+  color: #1a1208;
+}
+
+.successRef {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: #9a7a5a;
+  background: #fdf0e2;
+  border: 1px solid #e8c9a8;
+  padding: 0.45em 1em;
+  border-radius: 2rem;
+}
+
+.successRef i {
+  color: #c97b3a;
+}
+
+.successBtn {
+  margin-top: 0.5rem;
+  padding: 0.75em 2em;
+  background: transparent;
+  border: 1.5px solid #d4b896;
+  border-radius: 0.55rem;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8rem;
+  color: #7a6450;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.successBtn:hover {
+  border-color: #c97b3a;
+  color: #c97b3a;
+}
+
+/* ════════════════════════════════════════════
+   Responsive
+   ════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    padding: 1.75rem 1.25rem 4rem;
+    gap: 1.5rem;
+  }
+
+  .aside {
+    position: static;
+  }
+
+  .channels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .channelRight {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 3.5rem 1.25rem 3rem;
+  }
+
+  .heroMeta {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .dot {
+    display: none;
+  }
+
+  .channels {
+    grid-template-columns: 1fr;
+  }
+
+  .row2 {
+    grid-template-columns: 1fr;
+  }
+
+  .formCard {
+    padding: 1.5rem 1.25rem 1.75rem;
+  }
+
+  .successBox {
+    padding: 2.5rem 1.5rem;
+  }
+}

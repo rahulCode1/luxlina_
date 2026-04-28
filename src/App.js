@@ -14,10 +14,8 @@ import ErrorPage from "./pages/ErrorPage";
 import { lazy, Suspense } from "react";
 import Loading from "./components/Loading";
 import ProtectedRoutes from "./pages/auth/ProtectedRoutes";
-import Contact from "./pages/home/Contact";
-import Privacy from "./pages/home/Privacy";
-import Shipping from "./pages/home/Shipping";
-import Terms from "./pages/home/Terms";
+import UpdateProductPage from "./pages/product/UpdateProductPage.jsx";
+
 
 const Products = lazy(() => import("./features/product/Products"));
 const ProductDetails = lazy(() => import("./features/product/ProductDetails"));
@@ -32,6 +30,20 @@ const UpdateAddressPage = lazy(
 );
 const LoginWithOtp = lazy(() => import("./features/user/LoginWithOtp"));
 const BuyNowPage = lazy(() => import("./pages/order/BuyNowPage"));
+const ReturnRefund = lazy(() => import("./pages/help/ReturnRefund.jsx"));
+const ShippingPolicy = lazy(() => import("./pages/help/ShippingPolicy.jsx"));
+const FAQs = lazy(() => import("./pages/help/FAQs.jsx"));
+const ContactUs = lazy(() => import("./pages/help/ContactUs.jsx"));
+const AboutUs = lazy(() => import("./pages/help/AboutUs.jsx"));
+const PrivacyPolicy = lazy(() => import("./pages/help/PrivacyPolicy.jsx"));
+const TermsAndConditions = lazy(
+  () => import("./pages/help/TermsAndConditions.jsx"),
+);
+const CancellationPolicy = lazy(
+  () => import("./pages/help/CancellationPolicy.jsx"),
+);
+const OurArtisans = lazy(() => import("./pages/help/OurArtisans.jsx"));
+const Sustainability = lazy(() => import("./pages/help/Sustainability.jsx"));
 
 function App() {
   const router = createBrowserRouter([
@@ -61,15 +73,25 @@ function App() {
             },
             {
               path: ":id",
-              element: (
-                <Suspense fallback={<Loading />}>
-                  <ProductDetails />
-                </Suspense>
-              ),
+              id: "productDetails",
               loader: (meta) =>
                 import("./features/product/ProductDetails").then((module) =>
                   module.loader(meta),
                 ),
+              children: [
+                {
+                  index: true,
+                  element: (
+                    <Suspense fallback={<Loading />}>
+                      <ProductDetails />
+                    </Suspense>
+                  ),
+                },
+                {
+                  path: "edit",
+                  element: <UpdateProductPage />,
+                },
+              ],
             },
           ],
         },
@@ -185,7 +207,7 @@ function App() {
             <ProtectedRoutes>
               <UserProfilePage />
             </ProtectedRoutes>
-          )
+          ),
         },
         {
           path: "login",
@@ -194,19 +216,43 @@ function App() {
 
         {
           path: "terms",
-          element: <Terms />,
+          element: <TermsAndConditions />,
         },
         {
-          path: "privacy",
-          element: <Privacy />,
-        },
-        {
-          path: "shipping",
-          element: <Shipping />,
+          path: "shipping-policy",
+          element: <ShippingPolicy />,
         },
         {
           path: "contact",
-          element: <Contact />,
+          element: <ContactUs />,
+        },
+        {
+          path: "returns",
+          element: <ReturnRefund />,
+        },
+        {
+          path: "faqs",
+          element: <FAQs />,
+        },
+        {
+          path: "about",
+          element: <AboutUs />,
+        },
+        {
+          path: "privacy-policy",
+          element: <PrivacyPolicy />,
+        },
+        {
+          path: "cancellation",
+          element: <CancellationPolicy />,
+        },
+        {
+          path: "artisans",
+          element: <OurArtisans />,
+        },
+        {
+          path: "sustainability",
+          element: <Sustainability />,
         },
         { path: "*", element: <NotFound /> },
       ],

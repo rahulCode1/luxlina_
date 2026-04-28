@@ -6,7 +6,6 @@ const ProductGrid = ({
   handleClearFilter,
   productCategory,
 }) => {
- 
   return (
     <div
       className="col-md-9 p-3 p-md-4 pb-5"
@@ -99,7 +98,11 @@ const ProductGrid = ({
         {filteredProducts && filteredProducts.length > 0 && (
           <div className={styles.productContainer}>
             {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                from={"/products"}
+              />
             ))}
           </div>
         )}

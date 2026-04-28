@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import { indianStates } from "../../data/states";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
 import ErrorModal from "../../components/ErrorModal";
 import { addNewAddressAsync, clearError } from "./addressSlice";
@@ -20,12 +20,10 @@ const AddAddress = () => {
   const [formData, setFormData] = useState(initialValue);
   const navigate = useNavigate();
   const location = useLocation();
+  const goTo = location.state?.from;
   const dispatch = useDispatch();
   const redirectTo = location.state?.from || "/address";
   const { addNewAddressLoading, error } = useSelector((state) => state.address);
-
-
-  
 
   const handleOnChange = (e) => {
     setFormData((prevStat) => ({
@@ -33,8 +31,6 @@ const AddAddress = () => {
       [e.target.id]: e.target.value,
     }));
   };
-
-  
 
   const submitAddress = async (e) => {
     e.preventDefault();
@@ -54,7 +50,10 @@ const AddAddress = () => {
   };
 
   return (
-    <main className="container py-4 py-md-5" style={{ maxWidth: 680 , marginBottom: "5em"}}>
+    <main
+      className="container py-4 py-md-5"
+      style={{ maxWidth: 680, marginBottom: "5em" }}
+    >
       {addNewAddressLoading === "loading" && (
         <div className="overlay">
           <Loading />
@@ -64,6 +63,15 @@ const AddAddress = () => {
         <ErrorModal message={error} onClose={() => dispatch(clearError())} />
       )}
 
+      {goTo && (
+        <Link
+          to={goTo}
+          className="btn text-light mb-3"
+          style={{ backgroundColor: "#4f46e5" }}
+        >
+          <i className="bi bi-arrow-left"></i> Back
+        </Link>
+      )}
       {/* ── Page Header ── */}
       <div className="d-flex align-items-center gap-3 mb-4">
         <div

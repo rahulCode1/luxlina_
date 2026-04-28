@@ -1,7 +1,7 @@
 import { fetchUserAddressAsync } from "../../features/address/addressSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { privateApi } from "../../utils/axios";
 import ErrorModal from "../ErrorModal";
@@ -14,6 +14,8 @@ const BuyNow = ({ info }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const location = useLocation();
+  const goTo = location.state?.from;
 
   const totalQuantity = info.quantity;
   const totalPrice = Number(info.product.price) * Number(info.quantity);
@@ -121,6 +123,20 @@ const BuyNow = ({ info }) => {
         style={{ marginBottom: "5em" }}
       >
         <div className="container" style={{ maxWidth: 540 }}>
+          {goTo && (
+            <Link
+              to={goTo}
+              style={{
+                padding: "6px 15px",
+                marginBottom: "15px",
+                display: "inline-block",
+              }}
+              className="text-light rounded bg-dark text-decoration-none"
+            >
+              <i className="bi bi-arrow-left"></i> Back
+            </Link>
+          )}
+
           {/* Page heading */}
           <h5 className="fw-bold mb-3 d-flex align-items-center gap-2">
             <i className="bi bi-cart-check text-primary"></i>
@@ -344,16 +360,6 @@ const BuyNow = ({ info }) => {
 
                     {/* ── Action buttons — clearly recognisable ── */}
                     <div className="d-flex gap-2">
-                      {address.length > 1 && (
-                        <Link
-                          to="/address"
-                          state={{ from: "/buyNow" }}
-                          className="btn btn-outline-secondary btn-sm flex-fill rounded-3 d-flex align-items-center justify-content-center gap-1 fw-medium"
-                          style={{ fontSize: "0.8rem", padding: "8px 12px" }}
-                        >
-                          <i className="bi bi-arrow-left-right"></i> Change
-                        </Link>
-                      )}
                       <Link
                         to={`/address/${selectedAddress.id}`}
                         state={{ from: "/buyNow" }}

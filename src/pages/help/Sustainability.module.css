@@ -1,0 +1,695 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap");
+
+/* ════════════════════════════════════════════
+   Sustainability.module.css
+   Warm stone palette — ivory · walnut · terracotta
+   Matches AboutUs / FAQs / ContactUs design language
+   ════════════════════════════════════════════ */
+
+/* ── Base ─────────────────────────────────── */
+.page {
+  font-family: "DM Sans", sans-serif;
+  color: #1a1208;
+  background: #fdf8f2;
+  min-height: 100vh;
+}
+
+/* ── Hero ─────────────────────────────────── */
+.hero {
+  position: relative;
+  background: linear-gradient(150deg, #0e0a06 0%, #1e1408 50%, #2a1c0e 100%);
+  padding: 5.5rem 1.5rem 4rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 60%, rgba(60, 140, 80, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 85% 30%, rgba(201, 123, 58, 0.06) 0%, transparent 55%),
+    repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 60px,
+      rgba(255, 255, 255, 0.012) 60px,
+      rgba(255, 255, 255, 0.012) 61px
+    );
+}
+
+.heroInner {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #6db87a;
+  border: 1px solid rgba(109, 184, 122, 0.3);
+  background: rgba(109, 184, 122, 0.07);
+  padding: 0.32em 1em;
+  border-radius: 2rem;
+}
+
+.heroTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  font-weight: 700;
+  color: #f7ede2;
+  margin: 0;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.heroTitleEm {
+  font-style: italic;
+  color: #6db87a;
+}
+
+.heroSub {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  color: #7a5a3a;
+  margin: 0;
+  max-width: 520px;
+}
+
+.heroDivider {
+  width: 52px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #6db87a, transparent);
+  border-radius: 1px;
+}
+
+/* ── Stats ────────────────────────────────── */
+.statsRow {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid rgba(109, 184, 122, 0.15);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.stat {
+  flex: 1;
+  min-width: 110px;
+  padding: 1.1rem 1rem;
+  text-align: center;
+  border-left: 1px solid rgba(109, 184, 122, 0.15);
+}
+
+.stat:first-child {
+  border-left: none;
+}
+
+.statNum {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #f7ede2;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5a4030;
+  margin-top: 0.35rem;
+}
+
+/* ── Intro Quote Strip ────────────────────── */
+.introStrip {
+  background: linear-gradient(135deg, #1a1208 0%, #2e1c0c 100%);
+  padding: 2.75rem 1.5rem;
+  text-align: center;
+  border-top: 1px solid rgba(109, 184, 122, 0.1);
+  border-bottom: 1px solid rgba(109, 184, 122, 0.1);
+}
+
+.introInner {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.introQuoteIcon {
+  font-size: 2rem;
+  color: rgba(109, 184, 122, 0.3);
+  line-height: 1;
+}
+
+.introQuote {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: #d4b896;
+  line-height: 1.65;
+  margin: 0;
+  text-align: center;
+}
+
+.introAttr {
+  font-size: 0.65rem;
+  color: #5a4030;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ── Shared Section Styles ────────────────── */
+.section {
+  padding: 4rem 1.5rem;
+}
+
+.sectionAlt {
+  background: #fff;
+  border-top: 1px solid #edd9b8;
+  border-bottom: 1px solid #edd9b8;
+}
+
+.sectionInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sectionHead {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.sectionEyebrow {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6db87a;
+  margin: 0 0 0.6rem;
+}
+
+.sectionTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  color: #1a1208;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* ── Six Pillars Grid ─────────────────────── */
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.pillarCard {
+  background: #fdfaf6;
+  border: 1px solid #e8d8c4;
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.pillarCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #6db87a, transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.pillarCard:hover {
+  border-color: #6db87a;
+  box-shadow: 0 4px 16px rgba(109, 184, 122, 0.1);
+}
+
+.pillarCard:hover::before {
+  opacity: 0.8;
+}
+
+.pillarIcon {
+  width: 2.4rem;
+  height: 2.4rem;
+  background: #edf6ef;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #4a9e5a;
+  margin-bottom: 0.9rem;
+  transition: background 0.18s, color 0.18s;
+}
+
+.pillarCard:hover .pillarIcon {
+  background: #4a9e5a;
+  color: #fff;
+}
+
+.pillarTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1208;
+  margin: 0 0 0.45rem;
+}
+
+.pillarDesc {
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: #7a6450;
+  margin: 0;
+}
+
+/* ── Timeline ─────────────────────────────── */
+.timeline {
+  max-width: 740px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timelineItem {
+  display: grid;
+  grid-template-columns: 80px 32px 1fr;
+  gap: 0 1rem;
+  align-items: flex-start;
+}
+
+.timelineLeft {
+  text-align: right;
+  padding-top: 0.1rem;
+}
+
+.timelineYear {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #c97b3a;
+  letter-spacing: 0.02em;
+}
+
+.timelineConnector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timelineDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #c97b3a;
+  border: 2px solid #fdf8f2;
+  outline: 1px solid #c97b3a;
+  flex-shrink: 0;
+  margin-top: 0.22rem;
+}
+
+.timelineLine {
+  width: 2px;
+  flex: 1;
+  min-height: 2.5rem;
+  background: linear-gradient(to bottom, #e8d8c4 0%, #e8d8c4 100%);
+  margin: 4px 0;
+}
+
+.timelineRight {
+  padding-bottom: 2rem;
+}
+
+.timelineTitle {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1a1208;
+  margin: 0 0 0.3rem;
+}
+
+.timelineDesc {
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: #7a6450;
+  margin: 0;
+}
+
+/* ── Lifecycle Journey ────────────────────── */
+.lifecycle {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.lifecycleStep {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.lifecycleCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1rem 1.25rem;
+  background: #fff;
+  border: 1px solid #e8d8c4;
+  border-radius: 0.75rem;
+  width: 148px;
+  transition: border-color 0.18s, box-shadow 0.18s, transform 0.15s;
+  gap: 0.4rem;
+}
+
+.lifecycleCard:hover {
+  border-color: #6db87a;
+  box-shadow: 0 4px 14px rgba(109, 184, 122, 0.1);
+  transform: translateY(-2px);
+}
+
+.lifecycleNum {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #b8a090;
+  text-transform: uppercase;
+}
+
+.lifecycleIconWrap {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #edf6ef;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #4a9e5a;
+}
+
+.lifecycleLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #1a1208;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.lifecycleSub {
+  font-size: 0.65rem;
+  color: #b8a090;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.lifecycleArrow {
+  font-size: 0.8rem;
+  color: #e8d8c4;
+  padding: 0 0.4rem;
+  flex-shrink: 0;
+}
+
+/* ── Certifications ───────────────────────── */
+.certsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.certCard {
+  background: linear-gradient(135deg, #1a1208 0%, #2e1c0c 100%);
+  border-radius: 0.85rem;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.55rem;
+  transition: transform 0.18s;
+}
+
+.certCard:hover {
+  transform: translateY(-2px);
+}
+
+.certIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(109, 184, 122, 0.12);
+  border: 1px solid rgba(109, 184, 122, 0.22);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #6db87a;
+}
+
+.certLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #f7ede2;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.certSub {
+  font-size: 0.65rem;
+  color: #7a5a3a;
+  margin: 0;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+}
+
+/* ── CTA Strip ────────────────────────────── */
+.cta {
+  background: linear-gradient(135deg, #1a1208 0%, #2e1c0c 100%);
+  padding: 4rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 60% at 10% 50%, rgba(109, 184, 122, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 90% 50%, rgba(201, 123, 58, 0.05) 0%, transparent 60%);
+}
+
+.ctaInner {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ctaIcon {
+  width: 3rem;
+  height: 3rem;
+  background: rgba(109, 184, 122, 0.12);
+  border: 1px solid rgba(109, 184, 122, 0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #6db87a;
+  margin-bottom: 0.25rem;
+}
+
+.ctaTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: #f7ede2;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.ctaSub {
+  font-size: 0.855rem;
+  color: #7a5a3a;
+  line-height: 1.85;
+  margin: 0;
+  max-width: 520px;
+}
+
+.ctaBtns {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #4a9e5a;
+  color: #fff;
+  border: none;
+  padding: 0.8em 1.75em;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 0.55rem;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btnPrimary:hover {
+  background: #3a8a4a;
+  transform: translateY(-1px);
+}
+
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: transparent;
+  color: #c4a882;
+  border: 1.5px solid rgba(196, 168, 130, 0.3);
+  padding: 0.8em 1.75em;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 0.55rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btnOutline:hover {
+  border-color: #6db87a;
+  color: #6db87a;
+}
+
+/* ════════════════════════════════════════════
+   Responsive
+   ════════════════════════════════════════════ */
+@media (max-width: 1000px) {
+  .certsRow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .pillarsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lifecycle {
+    gap: 0.5rem;
+  }
+
+  .lifecycleArrow {
+    display: none;
+  }
+
+  .lifecycleCard {
+    width: 130px;
+  }
+}
+
+@media (max-width: 700px) {
+  .lifecycle {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .lifecycleStep {
+    display: contents;
+  }
+
+  .lifecycleArrow {
+    display: none;
+  }
+
+  .lifecycleCard {
+    width: 100%;
+  }
+
+  .timelineItem {
+    grid-template-columns: 60px 28px 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 4rem 1.25rem 3rem;
+  }
+
+  .statsRow {
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    min-width: 50%;
+    border-top: 1px solid rgba(109, 184, 122, 0.15);
+  }
+
+  .stat:nth-child(odd) {
+    border-left: none;
+  }
+
+  .stat:nth-child(-n + 2) {
+    border-top: none;
+  }
+
+  .pillarsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .certsRow {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 3rem 1.25rem;
+  }
+
+  .cta {
+    padding: 3rem 1.25rem;
+  }
+
+  .timelineItem {
+    grid-template-columns: 52px 24px 1fr;
+    gap: 0 0.75rem;
+  }
+}

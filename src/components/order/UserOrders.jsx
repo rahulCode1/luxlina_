@@ -1,8 +1,10 @@
-import { Link, useSearchParams } from "react-router-dom";
-import styles from "./Order.module.css";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
+import styles from "./UsersOrder.module.css";
 
 const UserOrders = ({ userOrders }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  const goTo = location?.state?.from;
 
   let filteredOrders = searchParams.get("status")
     ? userOrders.filter(
@@ -52,18 +54,20 @@ const UserOrders = ({ userOrders }) => {
         }}
       >
         {/* Back Button */}
-        <Link
-          to="/user"
-          className="btn mb-4 text-white d-inline-flex align-items-center gap-2"
-          style={{
-            background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
-            borderRadius: 8,
-            fontSize: "0.83rem",
-            fontWeight: 500,
-          }}
-        >
-          <i className="bi bi-arrow-left"></i> Back to Profile
-        </Link>
+        {goTo && goTo !== "/orders" && (
+          <Link
+            to={goTo}
+            className="btn mb-4 text-white d-inline-flex align-items-center gap-2"
+            style={{
+              background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
+              borderRadius: 8,
+              fontSize: "0.83rem",
+              fontWeight: 500,
+            }}
+          >
+            <i className="bi bi-arrow-left"></i> Back
+          </Link>
+        )}
 
         {/* Page Header */}
         <div className="d-flex align-items-center gap-3 mb-4">
@@ -397,7 +401,12 @@ const UserOrders = ({ userOrders }) => {
                       </div>
 
                       {/* Summary + CTA */}
-                      <div className="col-12 col-md-6 col-xl-4 px-3">
+                      <div
+                        style={{
+                          padding:
+                            "clamp(14px, 2.5vw, 22px) clamp(12px, 3vw, 22px)",
+                        }}
+                      >
                         <div className="card border rounded-3 h-100">
                           <div className="card-header bg-white border-bottom px-3 py-2 d-flex align-items-center gap-2">
                             <i
@@ -443,11 +452,11 @@ const UserOrders = ({ userOrders }) => {
                                 MRP
                               </span>
                               <span className="fw-semibold text-dark">
-                                ₹{order.summary.totalPrice}
+                                ₹
+                                {order.summary.totalPrice -
+                                  order.summary?.totalDiscount}
                               </span>
                             </div>
-
-                          
 
                             {/* Delivery */}
                             <div
@@ -489,8 +498,11 @@ const UserOrders = ({ userOrders }) => {
                               <span className="fw-bold text-primary fs-5">
                                 ₹
                                 {order.paymentMethod === "COD"
-                                  ? order.summary.totalPrice + 60
-                                  : order.summary.totalPrice}
+                                  ? order.summary.totalPrice +
+                                    60 -
+                                    order?.summary?.totalDiscount
+                                  : order.summary.totalPrice -
+                                    order?.summary?.totalDiscount}
                               </span>
                             </div>
                           </div>

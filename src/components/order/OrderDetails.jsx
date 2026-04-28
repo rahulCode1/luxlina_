@@ -1,8 +1,11 @@
-import { useRevalidator, Link } from "react-router-dom";
+import { useRevalidator, Link, useLocation } from "react-router-dom";
 import { useEcommerce } from "../../context/EcommerceContext";
+import OrderStatusTracker from "./OrderStatusTracker";
 
 const OrderDetails = ({ order }) => {
   const { isLoading, handleCancelOrder } = useEcommerce();
+  const location = useLocation();
+  const goTo = location?.state?.from || "/orders";
 
   const transformedOrder = order.products.map((product) => ({
     ...product.product,
@@ -36,11 +39,12 @@ const OrderDetails = ({ order }) => {
         }}
       >
         <Link
-          to=".."
+          to={goTo}
           className="btn mb-3 text-light"
           style={{ background: "linear-gradient(135deg, #4f46e5, #7c3aed" }}
         >
-          Back to All Orders
+          <i className="bi bi-arrow-left"> </i>{" "}
+          {goTo ? "Back" : "Go to All Orders"}
         </Link>
         {/* Page Header */}
         <div className="row mb-5">
@@ -130,6 +134,9 @@ const OrderDetails = ({ order }) => {
               {/* Card Body */}
               <div className="card-body p-4">
                 <div className="row g-4">
+                  {/* Order status tracker */}
+                  <OrderStatusTracker order={order} />
+
                   {/* ── Products Table ── */}
                   <div className="col-12">
                     <h6
@@ -314,9 +321,7 @@ const OrderDetails = ({ order }) => {
                             MRP
                           </span>
                           <span className="fw-semibold text-dark">
-                            ₹
-                            {order.summary.totalPrice +
-                              (order.summary.totalDiscount || 0)}
+                            ₹{order.summary.totalPrice || 0}
                           </span>
                         </div>
 
@@ -379,8 +384,11 @@ const OrderDetails = ({ order }) => {
                           <span className="fw-bold text-primary fs-5">
                             ₹
                             {order.paymentMethod === "COD"
-                              ? order.summary.totalPrice + 60
-                              : order.summary.totalPrice}
+                              ? order.summary.totalPrice +
+                                60 -
+                                order.summary.totalDiscount
+                              : order.summary.totalPrice -
+                                order.summary.totalDiscount}
                           </span>
                         </div>
                       </div>

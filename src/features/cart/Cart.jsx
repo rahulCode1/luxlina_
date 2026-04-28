@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { toast } from "react-hot-toast";
 import Loading from "../../components/Loading";
@@ -29,10 +29,13 @@ const Cart = () => {
   } = useSelector((state) => state.cart);
 
   const { wishlist } = useSelector((state) => state.wishlist);
-
+  const location = useLocation();
+  const goTo = location.state?.from;
   const isExistOnWishlist = (productId) => {
     return wishlist.some((wish) => wish.id === productId);
   };
+
+  console.log(goTo)
 
   const handleIncreaseQuantity = async (productId) => {
     const toastId = toast.loading("Quantity increasing...");
@@ -129,6 +132,20 @@ const Cart = () => {
           <div className="container">
             {productCart && productCart.length > 0 ? (
               <>
+                {goTo && goTo !== "/cart" && (
+                  <Link
+                    to={goTo}
+                    style={{
+                      padding: "6px 15px",
+                      marginBottom: "20px",
+                      display: "inline-block",
+                    }}
+                    className="text-light rounded bg-primary text-decoration-none"
+                  >
+                    <i className="bi bi-arrow-left"></i> Back
+                  </Link>
+                )}
+
                 {/* ── Page Header ── */}
                 <div className="d-flex align-items-center gap-3 mb-4">
                   <div
@@ -160,7 +177,10 @@ const Cart = () => {
                           <div className="row g-0">
                             {/* Image */}
                             <div className="col-4 col-sm-3">
-                              <Link to={`/products/${product.id}`}>
+                              <Link
+                                to={`/products/${product.id}`}
+                                state={{ from: "/cart" }}
+                              >
                                 <img
                                   src={product?.images[0]?.url}
                                   className="w-100 h-100"
@@ -301,6 +321,7 @@ const Cart = () => {
                                     {isExistOnWishlist(product.id) ? (
                                       <Link
                                         to="/wishlist"
+                                        state={{ from: "/cart" }}
                                         className="btn btn-primary btn-sm rounded-3 fw-semibold d-flex align-items-center justify-content-center gap-1"
                                         style={{
                                           fontSize: "0.75rem",
@@ -432,6 +453,7 @@ const Cart = () => {
                         <div className="d-grid mb-2">
                           <Link
                             to="/checkout"
+                            state={{ from: "/cart" }}
                             className="btn btn-dark fw-bold py-3 rounded-3 d-flex align-items-center justify-content-center gap-2"
                             style={{
                               fontSize: "1rem",
@@ -480,6 +502,7 @@ const Cart = () => {
                       </p>
                       <Link
                         to="/products"
+                        state={{ from: "/cart" }}
                         className="btn btn-primary fw-semibold px-4 py-2 rounded-3"
                       >
                         <i className="bi bi-shop me-2"></i>Browse Products

@@ -14,7 +14,7 @@ const S = {
   stage: {
     position: "relative",
     width: "100%",
-    aspectRatio: "6 / 7", // square keeps ratio stable on all screens
+    aspectRatio: "4 / 5", // square keeps ratio stable on all screens
     background: "#fdf6ee",
     borderRadius: "0.75rem 0.75rem 0 0",
     overflow: "hidden",
@@ -43,9 +43,9 @@ const S = {
     width: "2rem",
     height: "2rem",
     borderRadius: "50%",
-    border: "1.5px solid rgba(212,184,150,0.7)",
-    background: "rgba(253,246,238,0.88)",
-    backdropFilter: "blur(4px)",
+    border: "1.5px solid rgba(212,184,150,0.4)",
+    background: "rgba(253,246,238,0.35)",
+    backdropFilter: "blur(2px)",
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
@@ -230,7 +230,15 @@ const ProductImageCarousel = ({ images = [] }) => {
                 e.currentTarget.style.transform = "translateY(-50%) scale(1)";
               }}
             >
-              ‹
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path
+                  d="M6.5 2L3.5 5L6.5 8"
+                  stroke="#5c4430"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </button>
             <button
               onClick={next}
@@ -246,7 +254,15 @@ const ProductImageCarousel = ({ images = [] }) => {
                 e.currentTarget.style.transform = "translateY(-50%) scale(1)";
               }}
             >
-              ›
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path
+                  d="M3.5 2L6.5 5L3.5 8"
+                  stroke="#5c4430"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </button>
           </>
         )}

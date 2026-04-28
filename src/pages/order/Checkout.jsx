@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -16,6 +16,8 @@ const Checkout = () => {
   const { address } = useSelector((state) => state.address);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const goTo = location.state?.from;
 
   const totalPrice = productCart.reduce(
     (acc, curr) => acc + Number(curr.discountPrice) * curr.quantity,
@@ -137,6 +139,20 @@ const Checkout = () => {
             </div>
           )}
 
+          {goTo && (
+            <Link
+              to={goTo}
+              style={{
+                padding: "6px 15px",
+                marginBottom: "20px",
+                display: "inline-block",
+              }}
+              className="text-light rounded bg-dark text-decoration-none"
+            >
+              <i className="bi bi-arrow-left"></i> Back
+            </Link>
+          )}
+
           {/* Page heading */}
           <h5 className="fw-bold mb-3 d-flex align-items-center gap-2">
             <i className="bi bi-cart-check text-primary"></i>
@@ -168,6 +184,7 @@ const Checkout = () => {
                   >
                     <Link
                       to={`/products/${product.id}`}
+                      state={{ from: "/checkout" }}
                       className="flex-shrink-0"
                     >
                       <img
@@ -290,7 +307,7 @@ const Checkout = () => {
               {/* Always-visible Add New button in header */}
               <Link
                 to="/address/addAddress"
-                state={{ from: "/buyNow" }}
+                state={{ from: "/checkout" }}
                 className="btn btn-outline-primary btn-sm rounded-3 fw-semibold ms-auto d-flex align-items-center gap-1"
                 style={{ fontSize: "0.72rem", padding: "5px 10px" }}
               >
@@ -372,23 +389,13 @@ const Checkout = () => {
 
                     {/* ── Action buttons — clearly recognisable ── */}
                     <div className="d-flex gap-2">
-                      {address.length > 1 && (
-                        <Link
-                          to="/address"
-                          state={{ from: "/buyNow" }}
-                          className="btn btn-outline-secondary btn-sm flex-fill rounded-3 d-flex align-items-center justify-content-center gap-1 fw-medium"
-                          style={{ fontSize: "0.8rem", padding: "8px 12px" }}
-                        >
-                          <i className="bi bi-arrow-left-right"></i> Change
-                        </Link>
-                      )}
                       <Link
                         to={`/address/${selectedAddress.id}`}
                         state={{ from: "/checkout" }}
                         className="btn btn-primary btn-sm flex-fill rounded-3 d-flex align-items-center justify-content-center gap-1 fw-medium"
                         style={{ fontSize: "0.8rem", padding: "8px 12px" }}
                       >
-                        <i className="bi bi-pencil-fill"></i> Edit
+                        <i className="bi bi-pencil-fill"></i> Edit address
                       </Link>
                     </div>
                   </div>
@@ -414,7 +421,7 @@ const Checkout = () => {
                   {/* ── Add New — solid button, unmistakably clickable ── */}
                   <Link
                     to="/address/addAddress"
-                    state={{ from: "/buyNow" }}
+                    state={{ from: "/checkout" }}
                     className="btn btn-outline-primary w-100 rounded-3 d-flex align-items-center justify-content-center gap-2 fw-medium"
                     style={{ fontSize: "0.85rem", padding: "10px" }}
                   >
@@ -426,7 +433,7 @@ const Checkout = () => {
                   {address.length > 1 && (
                     <Link
                       to="/address"
-                      state={{ from: "/buyNow" }}
+                      state={{ from: "/checkout" }}
                       className="btn btn-outline-secondary w-100 rounded-3 d-flex align-items-center justify-content-center gap-2 fw-medium mt-2"
                       style={{ fontSize: "0.85rem", padding: "10px" }}
                     >
@@ -447,7 +454,7 @@ const Checkout = () => {
                   </p>
                   <Link
                     to="/address/addAddress"
-                    state={{ from: "/buyNow" }}
+                    state={{ from: "/checkout" }}
                     className="btn btn-primary btn-sm rounded-pill px-4 d-inline-flex align-items-center gap-1"
                   >
                     <i className="bi bi-plus-circle-fill"></i> Add Address

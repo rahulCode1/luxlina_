@@ -1,0 +1,702 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap");
+
+/* ════════════════════════════════════════════
+   AboutUs.module.css
+   Warm stone palette — ivory · walnut · terracotta
+   Matches FAQs / ContactUs design language
+   ════════════════════════════════════════════ */
+
+/* ── Base ─────────────────────────────────── */
+.page {
+  font-family: "DM Sans", sans-serif;
+  color: #1a1208;
+  background: #fdf8f2;
+  min-height: 100vh;
+}
+
+/* ── Hero ─────────────────────────────────── */
+.hero {
+  position: relative;
+  background: linear-gradient(150deg, #0e0a06 0%, #1e1408 50%, #2a1c0e 100%);
+  padding: 5.5rem 1.5rem 4rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 60%, rgba(201, 123, 58, 0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 85% 30%, rgba(201, 123, 58, 0.06) 0%, transparent 55%),
+    repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 60px,
+      rgba(255, 255, 255, 0.012) 60px,
+      rgba(255, 255, 255, 0.012) 61px
+    );
+}
+
+.heroInner {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c97b3a;
+  border: 1px solid rgba(201, 123, 58, 0.3);
+  background: rgba(201, 123, 58, 0.06);
+  padding: 0.32em 1em;
+  border-radius: 2rem;
+}
+
+.heroTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  font-weight: 700;
+  color: #f7ede2;
+  margin: 0;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.heroTitleEm {
+  font-style: italic;
+  color: #c97b3a;
+}
+
+.heroSub {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  color: #7a5a3a;
+  margin: 0;
+  max-width: 500px;
+}
+
+.heroDivider {
+  width: 52px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c97b3a, transparent);
+  border-radius: 1px;
+}
+
+/* ── Stats ────────────────────────────────── */
+.statsRow {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  width: 100%;
+  max-width: 560px;
+  border: 1px solid rgba(201, 123, 58, 0.15);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.stat {
+  flex: 1;
+  min-width: 100px;
+  padding: 1.1rem 1rem;
+  text-align: center;
+  border-left: 1px solid rgba(201, 123, 58, 0.15);
+}
+
+.stat:first-child {
+  border-left: none;
+}
+
+.statNum {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #f7ede2;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5a4030;
+  margin-top: 0.35rem;
+}
+
+/* ── Shared Section Styles ────────────────── */
+.section {
+  padding: 4rem 1.5rem;
+}
+
+.sectionAlt {
+  background: #fff;
+  border-top: 1px solid #edd9b8;
+  border-bottom: 1px solid #edd9b8;
+}
+
+.sectionInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sectionHead {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.sectionEyebrow {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c97b3a;
+  margin: 0 0 0.6rem;
+}
+
+.sectionTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  color: #1a1208;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* ── Story ────────────────────────────────── */
+.story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.storyText {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.storyText .sectionEyebrow {
+  margin-bottom: 0.6rem;
+}
+
+.storyText .sectionTitle {
+  text-align: left;
+  margin-bottom: 1.25rem;
+}
+
+.storyP {
+  font-size: 0.875rem;
+  line-height: 1.85;
+  color: #5a4030;
+  margin: 0 0 0.85rem;
+}
+
+.storyBadges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #7a5a3a;
+  background: #fdf0e2;
+  border: 1px solid #e8c9a8;
+  padding: 0.3em 0.8em;
+  border-radius: 2rem;
+}
+
+.badge i {
+  color: #c97b3a;
+  font-size: 0.75rem;
+}
+
+/* ── Stone Frame (visual side of story) ────── */
+.storyVisual {
+  position: relative;
+}
+
+.stoneFrame {
+  background: linear-gradient(135deg, #1a1208 0%, #2e1c0c 100%);
+  border-radius: 1.25rem;
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.stoneFrame::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(201, 123, 58, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.stoneFrame::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(201, 123, 58, 0.07) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.stoneGlyph {
+  width: 3.5rem;
+  height: 3.5rem;
+  background: rgba(201, 123, 58, 0.12);
+  border: 1px solid rgba(201, 123, 58, 0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: #c97b3a;
+  position: relative;
+  z-index: 1;
+}
+
+.stoneTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.stoneTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  color: #c97b3a;
+  background: rgba(201, 123, 58, 0.1);
+  border: 1px solid rgba(201, 123, 58, 0.22);
+  padding: 0.3em 0.75em;
+  border-radius: 2rem;
+}
+
+.stoneTag i {
+  font-size: 0.7rem;
+}
+
+.stoneQuote {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #d4b896;
+  text-align: center;
+  line-height: 1.65;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.stoneAttr {
+  font-size: 0.65rem;
+  color: #5a4030;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Values ───────────────────────────────── */
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.valCard {
+  background: #fdfaf6;
+  border: 1px solid #e8d8c4;
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.valCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #c97b3a, transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.valCard:hover {
+  border-color: #c97b3a;
+  box-shadow: 0 4px 16px rgba(201, 123, 58, 0.1);
+}
+
+.valCard:hover::before {
+  opacity: 0.7;
+}
+
+.valIcon {
+  width: 2.4rem;
+  height: 2.4rem;
+  background: #fdf0e2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #c97b3a;
+  margin-bottom: 0.9rem;
+  transition: background 0.18s;
+}
+
+.valCard:hover .valIcon {
+  background: #c97b3a;
+  color: #fff;
+}
+
+.valTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1208;
+  margin: 0 0 0.45rem;
+}
+
+.valDesc {
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: #7a6450;
+  margin: 0;
+}
+
+/* ── Collections ──────────────────────────── */
+.catsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.7rem;
+}
+
+.catPill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.25rem 0.9rem 1rem;
+  background: #fff;
+  border: 1px solid #e8d8c4;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  transition: border-color 0.18s, box-shadow 0.18s, transform 0.15s;
+  gap: 0.35rem;
+}
+
+.catPill:hover {
+  border-color: #c97b3a;
+  box-shadow: 0 4px 16px rgba(201, 123, 58, 0.1);
+  transform: translateY(-2px);
+}
+
+.catIcon {
+  font-size: 1.6rem;
+  color: #c97b3a;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.catName {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #1a1208;
+  line-height: 1.3;
+}
+
+.catSub {
+  font-size: 0.67rem;
+  color: #b8a090;
+  line-height: 1.4;
+}
+
+/* ── Materials ────────────────────────────── */
+.matsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.matCard {
+  background: linear-gradient(135deg, #1a1208 0%, #2e1c0c 100%);
+  border-radius: 0.85rem;
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s;
+}
+
+.matCard:hover {
+  transform: translateY(-3px);
+}
+
+.matAccent {
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(201, 123, 58, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.matName {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f7ede2;
+  margin: 0 0 0.3rem;
+  letter-spacing: -0.01em;
+}
+
+.matOrigin {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c97b3a;
+  margin: 0 0 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.matDesc {
+  font-size: 0.8rem;
+  line-height: 1.75;
+  color: #7a5a3a;
+  margin: 0;
+}
+
+/* ── Promise Strip ────────────────────────── */
+.promise {
+  background: linear-gradient(135deg, #1a1208 0%, #2e1c0c 100%);
+  padding: 4rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.promise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 60% at 10% 50%, rgba(201, 123, 58, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 90% 50%, rgba(201, 123, 58, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.promiseInner {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.promiseIcon {
+  width: 3rem;
+  height: 3rem;
+  background: rgba(201, 123, 58, 0.12);
+  border: 1px solid rgba(201, 123, 58, 0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #c97b3a;
+  margin-bottom: 0.25rem;
+}
+
+.promiseTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: #f7ede2;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.promiseSub {
+  font-size: 0.855rem;
+  color: #7a5a3a;
+  line-height: 1.85;
+  margin: 0;
+  max-width: 520px;
+}
+
+.promiseBtns {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #c97b3a;
+  color: #fff;
+  border: none;
+  padding: 0.8em 1.75em;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 0.55rem;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btnPrimary:hover {
+  background: #b06830;
+  transform: translateY(-1px);
+}
+
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: transparent;
+  color: #c4a882;
+  border: 1.5px solid rgba(196, 168, 130, 0.3);
+  padding: 0.8em 1.75em;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 0.55rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btnOutline:hover {
+  border-color: #c97b3a;
+  color: #c97b3a;
+}
+
+/* ════════════════════════════════════════════
+   Responsive
+   ════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .story {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .storyText .sectionTitle {
+    text-align: center;
+  }
+
+  .storyText .sectionEyebrow {
+    text-align: center;
+  }
+
+  .storyBadges {
+    justify-content: center;
+  }
+
+  .storyP {
+    text-align: center;
+  }
+
+  .valuesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .catsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .matsRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 4rem 1.25rem 3rem;
+  }
+
+  .statsRow {
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    min-width: 50%;
+    border-top: 1px solid rgba(201, 123, 58, 0.15);
+  }
+
+  .stat:nth-child(odd) {
+    border-left: none;
+  }
+
+  .stat:nth-child(-n + 2) {
+    border-top: none;
+  }
+
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .catsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section {
+    padding: 3rem 1.25rem;
+  }
+
+  .promise {
+    padding: 3rem 1.25rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .catsGrid {
+    grid-template-columns: 1fr;
+  }
+}

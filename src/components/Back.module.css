@@ -1,0 +1,39 @@
+/* ── Back Button ──────────────────────────── */
+.backWrap {
+  background: linear-gradient(160deg, #1a1208 0%, #2e1f0f 55%);
+  padding: 1rem 1.5rem 0;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.78rem;
+  margin-bottom: 1em;
+  font-weight: 500;
+  color: #c4a882;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(196, 168, 130, 0.22);
+  padding: 0.45em 1.05em;
+  border-radius: 2rem;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+
+.backBtn i {
+  font-size: 0.8rem;
+  color: #c97b3a;
+  transition: transform 0.18s;
+}
+
+.backBtn:hover {
+  background: rgba(201, 123, 58, 0.1);
+  border-color: rgba(201, 123, 58, 0.35);
+  color: #f0d9be;
+}
+
+.backBtn:hover i {
+  transform: translateX(-3px);
+}

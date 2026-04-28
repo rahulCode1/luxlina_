@@ -9,10 +9,12 @@ import { addOrRemoveWishlistAsync } from "../../features/wishlist/wishlistSlice"
 import { privateApi } from "../../utils/axios";
 import styles from "./ProductItem.module.css";
 import SimilarProducts from "./SimilarProducts";
+import Footer from "./Footer";
 
 const ProductItem = ({ productData }) => {
   const [quantity, setQuantity] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const userId = localStorage.getItem("userId") || "";
 
   const { cart: productCart, addTocartLoading } = useSelector(
     (state) => state.cart,
@@ -111,7 +113,7 @@ const ProductItem = ({ productData }) => {
       });
 
       toast.success("Added to checkout.", { id: toastId });
-      return navigate(`/buyNow`);
+      return navigate(`/buyNow`, { state: { from: `/products/${productId}` } });
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to add checkout.", {
         id: toastId,
@@ -125,8 +127,6 @@ const ProductItem = ({ productData }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [productId]);
-
-  // console.log(productInfo);
 
   return (
     <>
@@ -219,7 +219,9 @@ const ProductItem = ({ productData }) => {
                 {/* Cart + Wishlist Buttons */}
                 <div className={styles.cartAndWishlistContainer}>
                   {checkProductIsInCart(productInfo.id) ? (
-                    <Link to="/cart">Go to Cart</Link>
+                    <Link to="/cart" state={{ from: `/products/${productId}` }}>
+                      Go to Cart
+                    </Link>
                   ) : (
                     <button
                       disabled={addTocartLoading === "loading"}
@@ -270,7 +272,9 @@ const ProductItem = ({ productData }) => {
                   )}
                 </button>
               </div>
-
+              {userId === productInfo?.createdBy && (
+                <Link to={`edit`}> ✏️ Edit Product </Link>
+              )}
               {/* Trust Icons */}
               <div className={styles.trustIconsWrapper}>
                 {[
@@ -298,15 +302,55 @@ const ProductItem = ({ productData }) => {
                 ))}
               </div>
 
-              <div>
-                <p>
-                  <strong>Dimension(in cm) :</strong> {productInfo.length}cm X
-                  {productInfo.width}cm X {productInfo.height}cm
-                </p>
-                <div>
-                  <strong>Care: </strong>
-                  {productInfo.care}
+              {/* Product Specs */}
+              <div className={styles.specsBlock}>
+                <h4 className={styles.specsTitle}>
+                  <i className="bi bi-rulers" /> Dimensions &amp; Details
+                </h4>
+                <div className={styles.specsGrid}>
+                  <div className={styles.specItem}>
+                    <span className={styles.specLabel}>Length</span>
+                    <span className={styles.specValue}>
+                      {productInfo?.length} cm
+                      <span className={styles.specAlt}>
+                        / {(productInfo?.length / 2.54).toFixed(2)}" (inch)
+                      </span>
+                    </span>
+                  </div>
+                  <div className={styles.specItem}>
+                    <span className={styles.specLabel}>Width</span>
+                    <span className={styles.specValue}>
+                      {productInfo?.width} cm
+                      <span className={styles.specAlt}>
+                        / {(productInfo?.width / 2.54).toFixed(2)}" (inch)
+                      </span>
+                    </span>
+                  </div>
+                  <div className={styles.specItem}>
+                    <span className={styles.specLabel}>Height</span>
+                    <span className={styles.specValue}>
+                      {productInfo?.height} cm
+                      <span className={styles.specAlt}>
+                        / {(productInfo?.height / 2.54).toFixed(2)}" (inch)
+                      </span>
+                    </span>
+                  </div>
+                  <div className={styles.specItem}>
+                    <span className={styles.specLabel}>Weight</span>
+                    <span className={styles.specValue}>
+                      {productInfo?.weight} gm or {productInfo?.weight / 1000}{" "}
+                      kg
+                    </span>
+                  </div>
                 </div>
+                {productInfo?.care && (
+                  <div className={styles.specCare}>
+                    <i className="bi bi-info-circle" />
+                    <span>
+                      <strong>Care:</strong> {productInfo.care}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -316,6 +360,7 @@ const ProductItem = ({ productData }) => {
       <div className={styles.similarProducts}>
         <SimilarProducts similarProducts={similarProducts} />
       </div>
+      <Footer from={`/products/${productId}`} />
     </>
   );
 };

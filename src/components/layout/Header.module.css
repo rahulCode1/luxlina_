@@ -1,182 +1,287 @@
+/* ════════════════════════════════════════════
+   Header.module.css
+   ════════════════════════════════════════════ */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background: #fff;
+  border-bottom: 1px solid #ede9fe;
+  box-shadow: 0 1px 8px rgba(79, 70, 229, 0.07);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 16px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
 /* ── Logo ── */
 .brand {
-  font-size: clamp(1rem, 3vw, 1.35rem);
+  font-size: clamp(1rem, 3vw, 1.3rem);
   letter-spacing: 0.1em;
   background: linear-gradient(135deg, #4f46e5, #7c3aed);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 800;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-/* ── Search bar shared ── */
-.searchWrap {
-  border: 1.5px solid #ddd6fe;
-  background: #f5f3ff;
-  border-radius: 999px;
-  overflow: hidden;
+/* ── Nav items row ── */
+.navItems {
   display: flex;
-  align-items: center;
-  transition: border-color 0.2s;
-}
-.searchWrap:focus-within {
-  border-color: #7c3aed;
-}
-.searchInput {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  color: #1e1b4b;
-  font-size: clamp(0.78rem, 2vw, 0.9rem);
-}
-.searchInput::placeholder {
-  color: #a5b4fc;
-}
-.searchBtn {
-  background: transparent !important;
-  border: none !important;
+  align-items: stretch;
+  height: 100%;
+  gap: 2px;
 }
 
-/* ── Mobile search toggle button ── */
-.mobileSearchToggle {
-  background: #f5f3ff;
-  border: none;
-  border-radius: 50%;
-  padding: 8px;
-  color: #4f46e5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.18s;
-  cursor: pointer;
-}
-.mobileSearchToggle:hover {
-  background: #ede9fe;
-}
-
-/* ── Mobile search row (below main row) ── */
-.mobileSearchRow {
-  display: none;
-  padding-top: 10px;
-}
-.mobileSearchRow.open {
-  display: flex;
-}
-
-/* ── Nav tab (Wishlist / Cart / Login) ── */
+/* ── Nav tab ── */
 .navTab {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  border-radius: 10px;
-  position: relative;
   color: #9ca3af;
+  padding: 6px 10px;
+  min-width: 48px;
+  position: relative;
+  border-bottom: 2.5px solid transparent;
+  border-top: 2.5px solid transparent;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+  gap: 2px;
   background: transparent;
-  transition: background 0.18s, color 0.18s;
-  padding: clamp(5px, 1vw, 8px) clamp(6px, 1.5vw, 12px);
-  min-width: clamp(40px, 8vw, 56px);
-}
-.navTab:hover {
-  background: #f5f3ff;
-  color: #4f46e5;
-}
-.navTab.activeTab {
-  background: #f5f3ff;
-  color: #4f46e5;
+  border-radius: 0;
 }
 
+.navTab:hover {
+  color: #4f46e5;
+  background: #f5f3ff;
+}
+
+.activeTab {
+  color: #4f46e5 !important;
+  border-bottom-color: #4f46e5 !important;
+}
+
+/* Desktop-only tabs (Home, Shop) */
+.desktopTab {
+  display: none;
+}
+
+/* ── Nav label ── */
 .navLabel {
-  font-size: clamp(0.55rem, 1.2vw, 0.62rem);
-  font-weight: 600;
-  margin-top: 3px;
-  letter-spacing: 0.3px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
   line-height: 1;
   white-space: nowrap;
 }
 
-/* ── Badge ── */
-.badge {
+/* ── Icon wrapper ── */
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Hamburger button ── */
+.hamBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  padding: 6px 10px;
+  min-width: 48px;
+  cursor: pointer;
+  border-bottom: 2.5px solid transparent;
+  border-top: 2.5px solid transparent;
+  transition: color 0.18s, background 0.18s;
+  border-radius: 0;
+}
+
+.hamBtn:hover {
+  color: #4f46e5;
+  background: #f5f3ff;
+}
+
+.hamOpen {
+  color: #4f46e5 !important;
+  background: #f5f3ff;
+  border-bottom-color: #4f46e5 !important;
+}
+
+.hamIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Dropdown ── */
+.dropdown {
   position: absolute;
-  top: 3px;
-  right: 5px;
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
-  color: #fff;
-  border-radius: 999px;
-  font-size: clamp(0.48rem, 1vw, 0.58rem);
-  padding: 0.2em 0.42em;
-  min-width: 14px;
-  text-align: center;
-  line-height: 1.5;
-  font-weight: 600;
+  top: 56px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ede9fe;
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 12px 40px rgba(79, 70, 229, 0.14);
+  min-width: 200px;
+  z-index: 1029;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
-/* ── Breakpoints ── */
+.dropdownOpen {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
 
-/* xs only (< 576px): hide desktop search, show mobile toggle, hide nav labels */
-@media (max-width: 575px) {
-  .desktopSearch {
+/* ── Dropdown item ── */
+.dropItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 20px;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid #f5f3ff;
+  transition: background 0.15s, color 0.15s;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
+.dropItem:last-child {
+  border-bottom: none;
+}
+
+.dropItem:hover {
+  background: #f5f3ff;
+  color: #4f46e5;
+}
+
+/* Mobile-only drawer items (Home, Shop) */
+.mobileDropItem {
+  display: flex;
+}
+
+.dropItemBtn {
+  border: none;
+  border-bottom: 1px solid #f5f3ff;
+}
+
+.dropItemDanger:hover {
+  background: #fff1f2;
+  color: #ef4444;
+}
+
+/* Count pill in drawer (right side) */
+.dropCount {
+  margin-left: auto;
+  color: #7c3aed;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/* ── Backdrop ── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1028;
+  background: rgba(17, 9, 60, 0.15);
+  backdrop-filter: blur(1.5px);
+  animation: fadeIn 0.18s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ════════════════════════════════════════════
+   Responsive
+   ════════════════════════════════════════════ */
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  .desktopTab {
     display: none !important;
   }
-  .mobileSearchToggle {
-    display: flex !important;
+
+  .mobileDropItem {
+    display: flex; /* Home & Shop visible in drawer on mobile */
   }
+
   .navLabel {
-    display: none;
+    display: none; /* save space on mobile */
   }
-  .navTab {
-    min-width: clamp(34px, 10vw, 44px);
-    padding: 6px 6px;
+
+  .navTab,
+  .hamBtn {
+    min-width: 40px;
+    padding: 6px 8px;
   }
-  .badge {
-    right: 2px;
-    top: 2px;
+
+  .dropdown {
+    right: 0;
+    left: 0;
+    border-radius: 0 0 16px 16px;
+    min-width: 100%;
   }
 }
 
-/* sm (576–767px): show desktop search, hide mobile toggle */
-@media (min-width: 576px) {
-  .mobileSearchToggle {
-    display: none !important;
-  }
-  .mobileSearchRow {
-    display: none !important;
-  }
-}
-
-/* sm–md: slightly smaller search */
-@media (min-width: 576px) and (max-width: 767px) {
-  .desktopSearch {
-    max-width: 260px;
-  }
-}
-
-/* md+ */
+/* Desktop (≥ 768px) */
 @media (min-width: 768px) {
-  .desktopSearch {
-    max-width: 400px;
+  .desktopTab {
+    display: flex; /* show Home & Shop in navbar */
   }
+
+  .mobileDropItem {
+    display: none; /* hide Home & Shop from drawer on desktop */
+  }
+
   .navLabel {
-    font-size: 0.62rem;
+    display: block;
+  }
+
+  .dropdown {
+    right: 16px;
+    left: auto;
+    min-width: 200px;
   }
 }
 
-@media (min-width: 992px) {
-  .desktopSearch {
-    max-width: 480px;
-  }
-}
-
-/* Very small (< 360px) */
+/* Very small screens */
 @media (max-width: 359px) {
   .brand {
     font-size: 0.88rem;
   }
-  .navTab {
-    min-width: 32px;
-    padding: 5px 4px;
+  .navTab,
+  .hamBtn {
+    min-width: 34px;
+    padding: 5px 6px;
   }
 }

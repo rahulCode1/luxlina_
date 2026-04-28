@@ -1,11 +1,11 @@
-import { Await, useLoaderData } from "react-router-dom";
+import { Await,  useRouteLoaderData } from "react-router-dom";
 import ProductItem from "../../components/product/ProductItem";
 import { Suspense } from "react";
 import Loading from "../../components/Loading";
 import { API } from "../../utils/axios";
 
 const ProductDetails = () => {
-  const { product } = useLoaderData();
+  const { product } = useRouteLoaderData("productDetails");
 
   return (
     <Suspense fallback={<Loading />}>

@@ -208,6 +208,7 @@ const UserProfile = ({ user }) => {
                         fontSize: "0.92rem",
                       }}
                       to="/address/addAddress"
+                      state={{ from: "/user" }}
                     >
                       Add new Address{" "}
                     </Link>

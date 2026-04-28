@@ -1,0 +1,798 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap");
+
+/* ════════════════════════════════════════════
+   OurArtisans.module.css
+   Warm stone palette — ivory · walnut · terracotta
+   Matches FAQs / ContactUs / AboutUs / Policy pages
+   ════════════════════════════════════════════ */
+
+.page {
+  font-family: "DM Sans", sans-serif;
+  color: #1a1208;
+  background: #fdf8f2;
+  min-height: 100vh;
+}
+
+/* ── Hero ─────────────────────────────────── */
+.hero {
+  position: relative;
+  background: linear-gradient(150deg, #0e0a06 0%, #1e1408 50%, #2a1c0e 100%);
+  padding: 5.5rem 1.5rem 4rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 60%, rgba(201, 123, 58, 0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 85% 30%, rgba(201, 123, 58, 0.06) 0%, transparent 55%),
+    repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 60px,
+      rgba(255, 255, 255, 0.012) 60px,
+      rgba(255, 255, 255, 0.012) 61px
+    );
+}
+
+.heroInner {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c97b3a;
+  border: 1px solid rgba(201, 123, 58, 0.3);
+  background: rgba(201, 123, 58, 0.06);
+  padding: 0.32em 1em;
+  border-radius: 2rem;
+}
+
+.heroTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.8rem, 7vw, 4.5rem);
+  font-weight: 700;
+  color: #f7ede2;
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+.heroEm {
+  font-style: italic;
+  color: #c97b3a;
+}
+
+.heroSub {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  color: #7a5a3a;
+  margin: 0;
+  max-width: 500px;
+}
+
+.heroDivider {
+  width: 52px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c97b3a, transparent);
+  border-radius: 1px;
+}
+
+/* ── Stats ────────────────────────────────── */
+.statsRow {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 560px;
+  border: 1px solid rgba(201, 123, 58, 0.15);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.stat {
+  flex: 1;
+  min-width: 100px;
+  padding: 1.1rem 1rem;
+  text-align: center;
+  border-left: 1px solid rgba(201, 123, 58, 0.15);
+}
+
+.stat:first-child {
+  border-left: none;
+}
+
+.statNum {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #f7ede2;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5a4030;
+  margin-top: 0.35rem;
+}
+
+/* ── Shared Section ───────────────────────── */
+.section {
+  padding: 4rem 1.5rem;
+}
+
+.sectionAlt {
+  background: #fff;
+  border-top: 1px solid #edd9b8;
+  border-bottom: 1px solid #edd9b8;
+}
+
+.sectionInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sectionHead {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.sectionEyebrow {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c97b3a;
+  margin: 0 0 0.6rem;
+}
+
+.sectionTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  color: #1a1208;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.sectionSubtitle {
+  font-size: 0.82rem;
+  color: #9a7a5a;
+  margin: 0.4rem 0 0;
+}
+
+/* ── Intro ────────────────────────────────── */
+.intro {
+  padding: 4rem 1.5rem;
+}
+
+.introInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.introText {
+  display: flex;
+  flex-direction: column;
+}
+
+.introText .sectionEyebrow {
+  margin-bottom: 0.6rem;
+}
+
+.introText .sectionTitle {
+  text-align: left;
+  margin-bottom: 1.25rem;
+}
+
+.introP {
+  font-size: 0.875rem;
+  line-height: 1.85;
+  color: #5a4030;
+  margin: 0 0 0.85rem;
+}
+
+.introVisual {
+  position: relative;
+}
+
+.introCard {
+  background: linear-gradient(135deg, #1a1208 0%, #2e1c0c 100%);
+  border-radius: 1.25rem;
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.introCard::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(201, 123, 58, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.introCard > i {
+  font-size: 1.75rem;
+  color: #c97b3a;
+  opacity: 0.7;
+}
+
+.introQuote {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #d4b896;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.introAttr {
+  font-size: 0.65rem;
+  color: #5a4030;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ── Artisan Cards ────────────────────────── */
+.artisansGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+}
+
+.artisanCard {
+  background: #fdfaf6;
+  border: 1px solid #e8d8c4;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.artisanCard:hover {
+  border-color: #c97b3a;
+  box-shadow: 0 4px 20px rgba(201, 123, 58, 0.1);
+}
+
+.artisanCardOpen {
+  border-color: #c97b3a;
+  box-shadow: 0 4px 24px rgba(201, 123, 58, 0.14);
+}
+
+/* Card top */
+.artisanTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+}
+
+.artisanAvatar {
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(135deg, #1a1208, #2e1c0c);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: #c97b3a;
+  flex-shrink: 0;
+  border: 2px solid rgba(201, 123, 58, 0.2);
+  transition: border-color 0.2s;
+}
+
+.artisanCardOpen .artisanAvatar {
+  border-color: #c97b3a;
+}
+
+.artisanMeta {
+  flex: 1;
+  min-width: 0;
+}
+
+.artisanName {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1208;
+  margin: 0 0 0.15rem;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.artisanTitle {
+  font-size: 0.72rem;
+  color: #c97b3a;
+  font-weight: 500;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.artisanBadges {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.artisanBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.65rem;
+  color: #7a6450;
+  background: #f0e8dc;
+  padding: 0.2em 0.55em;
+  border-radius: 1rem;
+}
+
+.artisanBadge i {
+  font-size: 0.65rem;
+  color: #c97b3a;
+}
+
+.artisanToggle {
+  width: 1.6rem;
+  height: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fdf0e2;
+  border-radius: 50%;
+  color: #c97b3a;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  transition: background 0.18s, color 0.18s;
+}
+
+.artisanCardOpen .artisanToggle {
+  background: #c97b3a;
+  color: #fff;
+}
+
+/* Specialty row */
+.artisanSpecialty {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1.25rem;
+  background: #fff;
+  border-top: 1px solid #f0e8dc;
+  flex-wrap: wrap;
+}
+
+.specialtyLabel {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b8a090;
+  flex-shrink: 0;
+}
+
+.specialtyValue {
+  font-size: 0.78rem;
+  color: #3b2810;
+  font-weight: 500;
+  flex: 1;
+}
+
+.generationTag {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: #c97b3a;
+  background: rgba(201, 123, 58, 0.1);
+  border: 1px solid rgba(201, 123, 58, 0.2);
+  padding: 0.18em 0.6em;
+  border-radius: 1rem;
+  white-space: nowrap;
+}
+
+/* Expandable detail */
+.artisanDetail {
+  padding: 1.1rem 1.25rem 1.25rem;
+  border-top: 1px solid #f0e8dc;
+  background: #fdf6ee;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.artisanQuote {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 0.98rem;
+  color: #5a3820;
+  line-height: 1.7;
+  margin: 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.artisanQuote i {
+  font-size: 1.2rem;
+  color: #c97b3a;
+  opacity: 0.5;
+  flex-shrink: 0;
+  margin-top: -0.1rem;
+}
+
+.skillsRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.skillsLabel {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b8a090;
+  margin: 0;
+}
+
+.skills {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.skill {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #3b2810;
+  background: #fff;
+  border: 1px solid #e8d8c4;
+  padding: 0.25em 0.7em;
+  border-radius: 0.4rem;
+  transition: border-color 0.18s, color 0.18s;
+}
+
+.skill:hover {
+  border-color: #c97b3a;
+  color: #c97b3a;
+}
+
+/* ── Process ──────────────────────────────── */
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem 2rem;
+  position: relative;
+}
+
+.processStep {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.processNum {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #edd9b8;
+  line-height: 1;
+  margin-bottom: -0.25rem;
+  letter-spacing: -0.03em;
+}
+
+.processLine {
+  display: none;
+}
+
+.processTitle {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1a1208;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.processDesc {
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: #6a5540;
+  margin: 0;
+}
+
+/* ── Values ───────────────────────────────── */
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.valueCard {
+  background: #fdfaf6;
+  border: 1px solid #e8d8c4;
+  border-radius: 0.75rem;
+  padding: 1.4rem 1.2rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.valueCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #c97b3a, transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.valueCard:hover {
+  border-color: #c97b3a;
+  box-shadow: 0 4px 16px rgba(201, 123, 58, 0.1);
+}
+
+.valueCard:hover::before {
+  opacity: 0.7;
+}
+
+.valueIcon {
+  width: 2.2rem;
+  height: 2.2rem;
+  background: #fdf0e2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  color: #c97b3a;
+  margin-bottom: 0.9rem;
+  transition: background 0.18s, color 0.18s;
+}
+
+.valueCard:hover .valueIcon {
+  background: #c97b3a;
+  color: #fff;
+}
+
+.valueTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1208;
+  margin: 0 0 0.45rem;
+}
+
+.valueDesc {
+  font-size: 0.78rem;
+  line-height: 1.72;
+  color: #7a6450;
+  margin: 0;
+}
+
+/* ── CTA Strip ────────────────────────────── */
+.cta {
+  background: linear-gradient(135deg, #1a1208 0%, #2e1c0c 100%);
+  padding: 4rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 60% at 10% 50%, rgba(201, 123, 58, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 90% 50%, rgba(201, 123, 58, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.ctaInner {
+  position: relative;
+  max-width: 580px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ctaIcon {
+  width: 3rem;
+  height: 3rem;
+  background: rgba(201, 123, 58, 0.12);
+  border: 1px solid rgba(201, 123, 58, 0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: #c97b3a;
+  margin-bottom: 0.2rem;
+}
+
+.ctaTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: #f7ede2;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.ctaSub {
+  font-size: 0.855rem;
+  color: #7a5a3a;
+  line-height: 1.85;
+  margin: 0;
+}
+
+.ctaBtns {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #c97b3a;
+  color: #fff;
+  border: none;
+  padding: 0.8em 1.75em;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 0.55rem;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btnPrimary:hover {
+  background: #b06830;
+  transform: translateY(-1px);
+}
+
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: transparent;
+  color: #c4a882;
+  border: 1.5px solid rgba(196, 168, 130, 0.3);
+  padding: 0.8em 1.75em;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 0.55rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btnOutline:hover {
+  border-color: #c97b3a;
+  color: #c97b3a;
+}
+
+/* ════════════════════════════════════════════
+   Responsive
+   ════════════════════════════════════════════ */
+@media (max-width: 960px) {
+  .valuesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .processGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .introInner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .introText .sectionTitle {
+    text-align: center;
+  }
+
+  .introText .sectionEyebrow {
+    text-align: center;
+  }
+
+  .introP {
+    text-align: center;
+  }
+
+  .artisansGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 580px) {
+  .hero {
+    padding: 4rem 1.25rem 3rem;
+  }
+
+  .statsRow {
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    min-width: 50%;
+    border-top: 1px solid rgba(201, 123, 58, 0.15);
+  }
+
+  .stat:nth-child(odd) {
+    border-left: none;
+  }
+
+  .stat:nth-child(-n + 2) {
+    border-top: none;
+  }
+
+  .section {
+    padding: 3rem 1.25rem;
+  }
+
+  .intro {
+    padding: 3rem 1.25rem;
+  }
+
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .processGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .artisanSpecialty {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  .cta {
+    padding: 3rem 1.25rem;
+  }
+}
