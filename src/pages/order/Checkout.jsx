@@ -9,7 +9,7 @@ import { privateApi } from "../../utils/axios";
 import ErrorModal from "../../components/ErrorModal";
 
 const Checkout = () => {
-  const [payment, setPayment] = useState("ONLINE");
+  const [payment, setPayment] = useState("COD");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const { cart: productCart } = useSelector((state) => state.cart);
@@ -482,7 +482,7 @@ const Checkout = () => {
             <div className="card-body px-4 py-3">
               <div className="d-flex flex-column gap-2">
                 {/* ── Pay Online ── */}
-                <label
+                {/* <label
                   className={`d-flex align-items-start gap-3 p-3 rounded-3 border ${
                     payment === "ONLINE"
                       ? "border-primary bg-primary bg-opacity-10"
@@ -508,7 +508,7 @@ const Checkout = () => {
                     ></i>
                   </div>
                   <div className="flex-grow-1">
-                    {/* Label + FREE delivery badge */}
+                   
                     <p
                       className="fw-semibold mb-1 text-dark d-flex align-items-center flex-wrap gap-2"
                       style={{ fontSize: "0.88rem" }}
@@ -521,9 +521,9 @@ const Checkout = () => {
                         FREE delivery
                       </span>
                     </p>
-                    {/* Payment method logo pills */}
+                
                     <div className="d-flex flex-wrap gap-1 align-items-center">
-                      {/* UPI */}
+                    
                       <span
                         className="px-2 py-1 rounded-2 border fw-bold"
                         style={{
@@ -536,7 +536,7 @@ const Checkout = () => {
                       >
                         UPI
                       </span>
-                      {/* Visa */}
+                     
                       <span
                         className="px-2 py-1 rounded-2 border fw-bold"
                         style={{
@@ -549,7 +549,7 @@ const Checkout = () => {
                       >
                         VISA
                       </span>
-                      {/* Mastercard overlapping circles */}
+                  
                       <span
                         className="px-2 py-1 rounded-2 border d-inline-flex align-items-center"
                         style={{
@@ -580,7 +580,7 @@ const Checkout = () => {
                           }}
                         ></span>
                       </span>
-                      {/* Net Banking */}
+                 
                       <span
                         className="px-2 py-1 rounded-2 border fw-medium"
                         style={{
@@ -594,7 +594,7 @@ const Checkout = () => {
                       </span>
                     </div>
                   </div>
-                </label>
+                </label> */}
 
                 {/* ── Cash on Delivery ── */}
                 <label
