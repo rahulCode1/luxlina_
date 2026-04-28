@@ -137,9 +137,8 @@ const Sustainability = () => {
       <section className={styles.introStrip}>
         <div className={styles.introInner}>
           <i
-            className="bi bi-quote"
             aria-hidden="true"
-            className={styles.introQuoteIcon}
+            className={`${styles.introQuoteIcon} bi bi-quote`}
           />
           <blockquote className={styles.introQuote}>
             Stone is ancient. Our responsibility to it — and to the hands that
