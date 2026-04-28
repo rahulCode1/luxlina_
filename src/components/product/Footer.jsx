@@ -42,7 +42,11 @@ const Footer = ({ from }) => {
             </p>
             <div className={styles.socialRow}>
               {[
-                { icon: "bi-instagram", label: "Instagram", href: "#" },
+                {
+                  icon: "bi-instagram",
+                  label: "Instagram",
+                  href: "https://www.instagram.com/itshandicrafted/",
+                },
                 { icon: "bi-facebook", label: "Facebook", href: "#" },
                 { icon: "bi-pinterest", label: "Pinterest", href: "#" },
                 { icon: "bi-youtube", label: "YouTube", href: "#" },
