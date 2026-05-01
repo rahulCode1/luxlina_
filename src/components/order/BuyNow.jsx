@@ -17,7 +17,7 @@ const BuyNow = ({ info }) => {
   const location = useLocation();
   const goTo = location.state?.from;
 
-  console.log(info);
+ 
 
   const totalQuantity = info?.quantity;
   const totalPrice =

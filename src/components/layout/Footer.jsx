@@ -1,6 +1,5 @@
 import {
   FiShoppingBag,
-  FiShoppingCart,
   FiHome,
   FiLogOut,
   FiLock,
