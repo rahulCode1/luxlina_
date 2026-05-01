@@ -35,7 +35,7 @@ const Cart = () => {
     return wishlist.some((wish) => wish.id === productId);
   };
 
-  console.log(goTo)
+
 
   const handleIncreaseQuantity = async (productId) => {
     const toastId = toast.loading("Quantity increasing...");

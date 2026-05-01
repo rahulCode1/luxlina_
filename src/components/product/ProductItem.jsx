@@ -45,15 +45,30 @@ const ProductItem = ({ productData }) => {
     return productCart.some((cart) => cart.id === id);
   };
 
-  const handleAddToCart = async (productId) => {
+  const handleAddToCart = async (product) => {
     if (!token) {
       return navigate("/login", { state: { from: location.pathname } });
     }
     const toastId = toast.loading("Adding to cart...");
     try {
       const res = await dispatch(
-        addToCartAsync({ productId, quantity }),
+        addToCartAsync({ productId: product.id, quantity }),
       ).unwrap();
+
+      if (window.fbq && res) {
+        window.fbq("track", "AddToCart", {
+          content_name: product.name,
+          content_ids: [product.id],
+          value: product.discountPrice,
+          currency: "INR",
+          contents: [
+            {
+              id: product.id,
+              quantity: quantity,
+            },
+          ],
+        });
+      }
 
       toast.success(res.message || "Product added to cart.", { id: toastId });
     } catch (error) {
@@ -62,27 +77,37 @@ const ProductItem = ({ productData }) => {
     }
   };
 
-  const handleAddToWishList = async (productId, type) => {
+  const handleAddToWishList = async (product, type) => {
     if (!token) {
       return navigate("/login", { state: { from: location.pathname } });
     }
 
-    const tostId = toast.loading(
+    const toastId = toast.loading(
       type === "add" ? "Adding to wishlist..." : "Removing from wishlist...",
     );
 
     try {
       const res = await dispatch(
-        addOrRemoveWishlistAsync({ productId }),
+        addOrRemoveWishlistAsync({ productId: product.id }),
       ).unwrap();
 
+      if (type !== "remove") {
+        if (window.fbq && res) {
+          window.fbq("track", "AddToWishlist", {
+            content_name: product.name,
+            content_ids: [product.id],
+            value: Number(product.discountPrice),
+            currency: "INR",
+          });
+        }
+      }
       toast.success(
         res.message ||
           (type === "remove"
             ? "Product removed from wishlist"
             : "Product added to wishlist."),
         {
-          id: tostId,
+          id: toastId,
         },
       );
     } catch (error) {
@@ -92,7 +117,7 @@ const ProductItem = ({ productData }) => {
             ? "Failed to add product to wishlist."
             : "Failed to remove from wishlist."),
         {
-          id: tostId,
+          id: toastId,
         },
       );
     }
@@ -111,6 +136,21 @@ const ProductItem = ({ productData }) => {
         product: productId,
         quantity,
       });
+
+      if (window.fbq) {
+        window.fbq("track", "InitiateCheckout", {
+          content_name: productInfo.name,
+          content_ids: [productInfo.id],
+          value: productInfo.discountPrice,
+          currency: "INR",
+          contents: [
+            {
+              id: productInfo.id,
+              quantity: quantity,
+            },
+          ],
+        });
+      }
 
       toast.success("Added to checkout.", { id: toastId });
       return navigate(`/buyNow`, { state: { from: `/products/${productId}` } });
@@ -225,7 +265,7 @@ const ProductItem = ({ productData }) => {
                   ) : (
                     <button
                       disabled={addTocartLoading === "loading"}
-                      onClick={() => handleAddToCart(productInfo.id, quantity)}
+                      onClick={() => handleAddToCart(productInfo, quantity)}
                       className={`${styles.btn} ${styles.addToCartBtn}`}
                     >
                       {addTocartLoading === "loading"
@@ -241,7 +281,7 @@ const ProductItem = ({ productData }) => {
                     disabled={toggleWishlistLoading === "loading"}
                     onClick={() =>
                       handleAddToWishList(
-                        productInfo.id,
+                        productInfo,
                         checkProductIsWishlist(productInfo.id)
                           ? "remove"
                           : "add",

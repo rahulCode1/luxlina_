@@ -10,7 +10,7 @@ const BuyNowPage = () => {
   return (
     <Suspense fallback={<Loading />}>
       <Await resolve={buyNow}>
-        {(isDataLoad) => <BuyNow info={isDataLoad.item} />}
+        {(isDataLoad) => <BuyNow info={isDataLoad?.item} />}
       </Await>
     </Suspense>
   );
@@ -24,7 +24,7 @@ const buyNowItem = async () => {
 
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.log(error?.response?.data?.message);
   }
 };
 

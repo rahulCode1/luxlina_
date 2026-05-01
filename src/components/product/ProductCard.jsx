@@ -6,7 +6,7 @@ import { addOrRemoveWishlistAsync } from "../../features/wishlist/wishlistSlice"
 import { useState } from "react";
 import styles from "./ProductCard.module.css";
 
-export default function ProductCard({ product , from }) {
+export default function ProductCard({ product, from }) {
   const { cart: productCart, addTocartLoading } = useSelector(
     (state) => state.cart,
   );
@@ -21,15 +21,32 @@ export default function ProductCard({ product , from }) {
   const isWishlisted = (id) => wishlist.some((p) => p.id === id);
   const isInCart = (id) => productCart.some((c) => c.id === id);
 
-  const handleAddToCart = async (productId, quantity) => {
+  const handleAddToCart = async (product, quantity) => {
     if (!token) return navigate("/login");
     const toastId = toast.loading("Adding to cart...");
+
     try {
-      setProductId(productId);
+      setProductId(product.id);
       const res = await dispatch(
-        addToCartAsync({ productId, quantity }),
+        addToCartAsync({ productId: product.id, quantity }),
       ).unwrap();
       setProductId("");
+
+      if (window.fbq && res ) {
+        window.fbq("track", "AddToCart", {
+          content_name: product.name,
+          content_ids: [product.id],
+          value: product.discountPrice,
+          currency: "INR",
+          contents: [
+            {
+              id: product.id,
+              quantity: quantity,
+            },
+          ],
+        });
+      }
+
       toast.success(res.message || "Product added to cart.", { id: toastId });
     } catch (error) {
       toast.error(error || "Failed to add product to cart.", { id: toastId });
@@ -122,10 +139,7 @@ export default function ProductCard({ product , from }) {
         style={{ background: "#fff", flexGrow: 1 }}
       >
         {/* Name */}
-        <Link
-          to={`/products/${product.id}`}
-          className="text-decoration-none"
-        >
+        <Link to={`/products/${product.id}`} className="text-decoration-none">
           <h6
             className="fw-semibold mb-2"
             style={{
@@ -179,7 +193,7 @@ export default function ProductCard({ product , from }) {
           {isInCart(product.id) ? (
             <Link
               to="/cart"
-              state={{from : from }}
+              state={{ from: from }}
               className="btn w-100 fw-semibold d-flex align-items-center justify-content-center gap-2"
               style={{
                 border: "1.5px solid #4f46e5",
@@ -195,7 +209,7 @@ export default function ProductCard({ product , from }) {
           ) : (
             <button
               disabled={isCartLoading}
-              onClick={() => handleAddToCart(product.id, 1)}
+              onClick={() => handleAddToCart(product, 1)}
               className="btn w-100 fw-semibold d-flex align-items-center justify-content-center gap-2 text-white"
               style={{
                 background: "linear-gradient(135deg, #1e1b4b, #4f46e5)",

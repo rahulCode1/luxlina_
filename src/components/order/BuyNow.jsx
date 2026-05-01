@@ -17,13 +17,15 @@ const BuyNow = ({ info }) => {
   const location = useLocation();
   const goTo = location.state?.from;
 
-  const totalQuantity = info.quantity;
-  const totalPrice = Number(info.product.price) * Number(info.quantity);
+  
+
+  const totalQuantity = info?.quantity;
+  const totalPrice = Number(info?.product.price) * Number(info?.quantity);
   const totalDiscount =
-    (info.product.price - info.product.discountPrice) * Number(info.quantity);
-  const finalTotal = Number(info.product.discountPrice) * Number(info.quantity);
+    (info?.product.price - info?.product.discountPrice) * Number(info?.quantity);
+  const finalTotal = Number(info?.product.discountPrice) * Number(info?.quantity);
   const discountPct = Math.round(
-    ((info.product.price - info.product.discountPrice) / info.product.price) *
+    ((info?.product.price - info?.product.discountPrice) / info?.product.price) *
       100,
   );
 
@@ -74,7 +76,7 @@ const BuyNow = ({ info }) => {
             toast.success(data?.message || "Order placed successfully!", {
               id: toastId,
             });
-            navigate(`/orders/${data.order}`);
+            navigate(`/orders/${data?.orderId}`);
           },
         };
 
@@ -85,10 +87,19 @@ const BuyNow = ({ info }) => {
           `/order/placeOrderViaBuyNow`,
           order,
         );
+
+        if (window.fbq) {
+          window.fbq("track", "Purchase", {
+            value: totalPrice,
+            currency: "INR",
+            content_ids: info?.product?.id,
+            content_type: "product",
+          });
+        }
         toast.success(data?.message || "Order placed successfully!", {
           id: toastId,
         });
-        navigate(`/orders/${data.order}`);
+        navigate(`/orders/${data?.orderId}`);
       }
     } catch (err) {
       const msg =

@@ -56,6 +56,11 @@ const Checkout = () => {
     try {
       setIsLoading(true);
       if (payment === "ONLINE") {
+        if (!window.Razorpay) {
+          toast.error("Payment SDK failed to load", { id: toastId });
+          return;
+        }
+
         const { data } = await privateApi.post(`/order/create-order`, {
           amount: totalPrice,
         });
@@ -75,16 +80,25 @@ const Checkout = () => {
             toast.success(data?.message || "Order place successfully.", {
               id: toastId,
             });
-            navigate(`/orders/${data.order.id}`);
+            navigate(`/orders/${data?.order.id}`);
           },
         };
         const rzp = new window.Razorpay(options);
         rzp.open();
       } else {
-        setIsLoading(true);
         const { data } = await privateApi.post(`/order/placeOrder`, order);
+
+        if (window.fbq) {
+          window.fbq("track", "Purchase", {
+            value: totalPrice,
+            currency: "INR",
+            content_ids: productCart.map((item) => item.id),
+            content_type: "product",
+          });
+        }
+
         dispatch(clearCart());
-        navigate(`/orders/${data.order.id}`);
+        navigate(`/orders/${data?.order.id}`);
         toast.success(data?.message || "Order place successfully.", {
           id: toastId,
         });
@@ -92,10 +106,10 @@ const Checkout = () => {
     } catch (error) {
       console.log(error);
       setError(
-        error.response?.data?.message || "Error occurred while place order.",
+        error?.response?.data?.message || "Error occurred while place order.",
       );
       toast.error(
-        error.response?.data?.message || "Error occurred while place order.",
+        error?.response?.data?.message || "Error occurred while place order.",
         { id: toastId },
       );
     } finally {
