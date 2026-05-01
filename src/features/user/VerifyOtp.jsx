@@ -16,7 +16,6 @@ const VerifyOtp = ({
   return (
     <div className="container d-flex align-items-center justify-content-center min-vh-100">
       <div className="w-100" style={{ maxWidth: 480 }}>
-
         {/* Brand mark */}
         <div className="mb-4 text-center">
           <span
@@ -55,7 +54,10 @@ const VerifyOtp = ({
             color: "#92400e",
           }}
         >
-          <i className="bi bi-exclamation-triangle-fill flex-shrink-0" style={{ color: "#f59e0b" }} />
+          <i
+            className="bi bi-exclamation-triangle-fill flex-shrink-0"
+            style={{ color: "#f59e0b" }}
+          />
           <span>Do not refresh the page until OTP is verified.</span>
         </div>
 
@@ -69,7 +71,6 @@ const VerifyOtp = ({
           }}
         >
           <form onSubmit={handleVerifyOtp}>
-
             {/* OTP label */}
             <div className="mb-4">
               <label
@@ -114,7 +115,8 @@ const VerifyOtp = ({
                     style={{
                       width: 9,
                       height: 9,
-                      background: (otp?.length ?? 0) > i ? "#4f46e5" : "#ddd6fe",
+                      background:
+                        (otp?.length ?? 0) > i ? "#4f46e5" : "#ddd6fe",
                       transition: "background 0.2s",
                     }}
                   />
@@ -130,7 +132,7 @@ const VerifyOtp = ({
 
             {/* Verify button */}
             <button
-              disabled={verifyOtpLoading === "loading"}
+              disabled={verifyOtpLoading === "loading" || otp.length !== 4}
               type="submit"
               className="btn w-100 fw-bold rounded-3 py-2 mb-2 d-flex align-items-center justify-content-center gap-2"
               style={{
@@ -192,7 +194,6 @@ const VerifyOtp = ({
                 </>
               )}
             </button>
-
           </form>
         </div>
 
@@ -210,7 +211,6 @@ const VerifyOtp = ({
             Privacy Policy
           </span>
         </p>
-
       </div>
     </div>
   );
