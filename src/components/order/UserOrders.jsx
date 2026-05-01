@@ -452,9 +452,7 @@ const UserOrders = ({ userOrders }) => {
                                 MRP
                               </span>
                               <span className="fw-semibold text-dark">
-                                ₹
-                                {order.summary.totalPrice -
-                                  order.summary?.totalDiscount}
+                                ₹{order.summary.totalPrice}
                               </span>
                             </div>
 
@@ -498,11 +496,8 @@ const UserOrders = ({ userOrders }) => {
                               <span className="fw-bold text-primary fs-5">
                                 ₹
                                 {order.paymentMethod === "COD"
-                                  ? order.summary.totalPrice +
-                                    60 -
-                                    order?.summary?.totalDiscount
-                                  : order.summary.totalPrice -
-                                    order?.summary?.totalDiscount}
+                                  ? order.summary.totalPrice + 60
+                                  : order.summary.totalPrice}
                               </span>
                             </div>
                           </div>

@@ -384,11 +384,8 @@ const OrderDetails = ({ order }) => {
                           <span className="fw-bold text-primary fs-5">
                             ₹
                             {order.paymentMethod === "COD"
-                              ? order.summary.totalPrice +
-                                60 -
-                                order.summary.totalDiscount
-                              : order.summary.totalPrice -
-                                order.summary.totalDiscount}
+                              ? order.summary.totalPrice + 60
+                              : order.summary.totalPrice}
                           </span>
                         </div>
                       </div>

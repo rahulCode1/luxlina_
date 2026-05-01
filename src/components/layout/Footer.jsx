@@ -9,6 +9,7 @@ import {
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEcommerce } from "../../context/EcommerceContext";
+import cartIcon from "../../imgs/cart.png";
 
 const Footer = () => {
   const { cart: productCart } = useSelector((state) => state.cart);
@@ -40,6 +41,26 @@ const Footer = () => {
     letterSpacing: "0.4px",
     lineHeight: 1,
   };
+
+  const CartIcon = ({ count }) => (
+    <span style={{ position: "relative" }}>
+      <img
+        src={cartIcon}
+        style={{ width: count > 9 ? "22px" : "20px" }}
+        alt="Cart"
+      />
+      <span
+        style={{
+          position: "absolute",
+          top: `${count > 9 ? "-2px" : "-4px"}`,
+          left: `${count > 9 ? "7px" : "9px"}`,
+          fontSize: `${count > 9 ? "0.7rem" : "0.8rem"}`,
+        }}
+      >
+        {count}
+      </span>
+    </span>
+  );
 
   return (
     <footer
@@ -93,25 +114,7 @@ const Footer = () => {
                   <span
                     style={{ position: "relative", display: "inline-flex" }}
                   >
-                    <FiShoppingCart size={21} />
-                    {totalItemsInCart > 0 && (
-                      <span
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontSize: "0.52rem",
-                          fontWeight: 800,
-                          color: "#fff",
-                          pointerEvents: "none",
-                          textShadow: "0 0 3px rgba(0,0,0,0.5)",
-                        }}
-                      >
-                        {totalItemsInCart}
-                      </span>
-                    )}
+                    <CartIcon count={totalItemsInCart} />
                   </span>
                   <span style={labelStyle}>Cart</span>
                 </div>

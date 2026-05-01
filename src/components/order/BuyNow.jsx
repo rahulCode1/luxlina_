@@ -17,15 +17,19 @@ const BuyNow = ({ info }) => {
   const location = useLocation();
   const goTo = location.state?.from;
 
-  
+  console.log(info);
 
   const totalQuantity = info?.quantity;
-  const totalPrice = Number(info?.product.price) * Number(info?.quantity);
+  const totalPrice =
+    Number(info?.product.discountPrice) * Number(info?.quantity);
   const totalDiscount =
-    (info?.product.price - info?.product.discountPrice) * Number(info?.quantity);
-  const finalTotal = Number(info?.product.discountPrice) * Number(info?.quantity);
+    (info?.product.price - info?.product.discountPrice) *
+    Number(info?.quantity);
+  const finalTotal =
+    Number(info?.product.discountPrice) * Number(info?.quantity);
   const discountPct = Math.round(
-    ((info?.product.price - info?.product.discountPrice) / info?.product.price) *
+    ((info?.product.price - info?.product.discountPrice) /
+      info?.product.price) *
       100,
   );
 
@@ -96,9 +100,13 @@ const BuyNow = ({ info }) => {
             content_type: "product",
           });
         }
+
         toast.success(data?.message || "Order placed successfully!", {
           id: toastId,
         });
+
+        console.log(data);
+
         navigate(`/orders/${data?.orderId}`);
       }
     } catch (err) {

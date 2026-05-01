@@ -24,6 +24,8 @@ const Checkout = () => {
     0,
   );
 
+ 
+
   const totalQuantity = productCart.reduce(
     (acc, curr) => acc + curr.quantity,
     0,
@@ -31,7 +33,7 @@ const Checkout = () => {
 
   const totalDiscount = productCart.reduce(
     (acc, curr) =>
-      acc + (Number(curr.price) - Number(curr.discountPrice)) * curr.quantity,
+      acc + (Number(curr?.price) - Number(curr.discountPrice)) * curr.quantity,
     0,
   );
 
