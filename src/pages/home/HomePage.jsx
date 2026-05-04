@@ -24,6 +24,17 @@ const HomePage = () => {
   const navigate = useNavigate();
   const categories = [
     {
+      name: "Candle Holders",
+      category: "CandleHolders",
+      imgUrl: deepakCategoryImg,
+    },
+
+    {
+      name: "Statues & Idols",
+      category: "StatuesIdols",
+      imgUrl: ganesh,
+    },
+    {
       name: "Mortar Pestle",
       category: "MortarPestle",
       imgUrl: MortarPestleImg,
@@ -38,17 +49,6 @@ const HomePage = () => {
       name: "Sil & Batta",
       category: "SilBatta",
       imgUrl: SillBattaImg,
-    },
-    {
-      name: "Candle Holders",
-      category: "CandleHolders",
-      imgUrl: deepakCategoryImg,
-    },
-
-    {
-      name: "Statues & Idols",
-      category: "StatuesIdols",
-      imgUrl: ganesh,
     },
 
     {
@@ -110,7 +110,7 @@ const HomePage = () => {
       <section className="container">
         {/* 1. Categories - Horizontal Scroll with improved touch target */}
         <div
-          className="d-flex gap-3 gap-md-4 w-100  pb-3 custom-scrollbar"
+          className="d-flex gap-1 gap-md-4 w-100  pb-3 custom-scrollbar"
           style={{
             overflowX: "auto",
             WebkitOverflowScrolling: "touch",
