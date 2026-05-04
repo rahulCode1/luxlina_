@@ -15,7 +15,9 @@ import { lazy, Suspense } from "react";
 import Loading from "./components/Loading";
 import ProtectedRoutes from "./pages/auth/ProtectedRoutes";
 import UpdateProductPage from "./pages/product/UpdateProductPage.jsx";
-
+import AllOrdersPage, {
+  loader as allOrdersLoader,
+} from "./pages/order/AllOrdersPage.jsx";
 
 const Products = lazy(() => import("./features/product/Products"));
 const ProductDetails = lazy(() => import("./features/product/ProductDetails"));
@@ -253,6 +255,15 @@ function App() {
         {
           path: "sustainability",
           element: <Sustainability />,
+        },
+        {
+          path: "admin",
+          element: (
+            <ProtectedRoutes>
+              <AllOrdersPage />
+            </ProtectedRoutes>
+          ),
+          loader: allOrdersLoader,
         },
         { path: "*", element: <NotFound /> },
       ],

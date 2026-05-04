@@ -27,7 +27,7 @@ export const inputFields = [
     type: "number",
     placeholder: "Enter discount price",
   },
-  
+
   {
     id: "length",
     name: "length",
@@ -57,7 +57,6 @@ export const inputFields = [
     placeholder: "Enter product weight",
   },
 ];
-
 
 export const seoInputs = [
   {
@@ -90,7 +89,6 @@ export const ratingField = {
   ],
 };
 
-
 export const materialTypeField = {
   id: "materialType",
   name: "materialType",
@@ -98,6 +96,7 @@ export const materialTypeField = {
   placeholder: "Select Material Type",
   options: [
     { value: "WhiteMarble", label: "White Marble" },
+    { value: "Marble Dust", label: "Marble Dust" },
     { value: "BlackMarble", label: "Black Marble" },
     { value: "GreenMarble", label: "Green Marble" },
     { value: "PinkMarble", label: "Pink Marble" },
@@ -117,7 +116,7 @@ export const materialTypeField = {
     { value: "Limestone", label: "Limestone" },
     { value: "Alabaster", label: "Alabaster Stone" },
     { value: "SlateStone", label: "Slate Stone" },
-    { value: "QuartzStone", label: "Quartz Stone" }
+    { value: "QuartzStone", label: "Quartz Stone" },
   ],
 };
 
@@ -155,6 +154,7 @@ export const categoryField = {
     { value: "Coasters", label: "Coasters" },
     { value: "PaperWeights", label: "Paper Weights" },
     { value: "LuxuryDecor", label: "Luxury Decor" },
-    { value: "GiftSets", label: "Gift Sets" }
+    { value: "GiftSets", label: "Gift Sets" },
+    { value: "Idols & Murtis", label: "Idols & Murtis" },
   ],
 };
