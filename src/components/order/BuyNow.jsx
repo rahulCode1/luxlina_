@@ -36,8 +36,8 @@ const BuyNow = ({ info }) => {
     address.length > 0 &&
     address.find((addr) => addr.isDefault === true);
 
-  console.log("KEY_ID:", process.env.RAZORPAY_KEY_ID);
-  console.log("KEY_SECRET:", process.env.RAZORPAY_KEY_SECRET);
+  console.log("KEY_ID:", process.env.REACT_APP_RAZORPAY_KEY_ID);
+  console.log("KEY_SECRET:", process.env.REACT_APP_RAZORPAY_KEY_SECRET);
 
   const handleSubmitOrder = async (e) => {
     e.preventDefault();
