@@ -40,10 +40,6 @@ const Checkout = () => {
     address.length > 0 &&
     address.find((address) => address.isDefault === true);
 
-
-    console.log(process.env.REACT_APP_RAZORPAY_KEY_ID)
-
-
   const handleSubmitOrder = async () => {
     if (!selectedAddress) {
       return navigate("/address/addAddress", { state: { from: "/checkout" } });
@@ -68,6 +64,8 @@ const Checkout = () => {
         const { data } = await privateApi.post(`/order/create-order`, {
           amount: totalPrice,
         });
+
+        console.log("RAZORPAY ORDER RESPONSE:", data);
 
         const options = {
           key: process.env.REACT_APP_RAZORPAY_KEY_ID,
