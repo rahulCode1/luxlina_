@@ -68,7 +68,7 @@ const Checkout = () => {
         console.log("RAZORPAY ORDER RESPONSE:", data);
 
         const options = {
-          key: "rzp_live_SljFx7Ou2U5bD0",
+          key: process.env.REACT_APP_RAZORPAY_KEY_ID,
           amount: data.amount,
           currency: "INR",
           name: "It's Handicrafted",
