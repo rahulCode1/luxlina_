@@ -64,7 +64,7 @@ const BuyNow = ({ info }) => {
         });
 
         const options = {
-          key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+          key: "rzp_live_SljFx7Ou2U5bD0",
           amount: data.amount,
           currency: "INR",
           name: "It's Handicrafted",

@@ -68,14 +68,12 @@ const Checkout = () => {
         console.log("RAZORPAY ORDER RESPONSE:", data);
 
         const options = {
-          key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+          key: "rzp_live_SljFx7Ou2U5bD0",
           amount: data.amount,
           currency: "INR",
           name: "It's Handicrafted",
           order_id: data.id,
           handler: async function (response) {
-          
-            
             const { data } = await privateApi.post(`/order/placeOrder`, {
               ...response,
               ...order,
