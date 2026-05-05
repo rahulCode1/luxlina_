@@ -40,6 +40,10 @@ const Checkout = () => {
     address.length > 0 &&
     address.find((address) => address.isDefault === true);
 
+
+    console.log(process.env.REACT_APP_RAZORPAY_KEY_ID)
+
+
   const handleSubmitOrder = async () => {
     if (!selectedAddress) {
       return navigate("/address/addAddress", { state: { from: "/checkout" } });
@@ -72,8 +76,7 @@ const Checkout = () => {
           name: "It's Handicrafted",
           order_id: data.id,
           handler: async function (response) {
-            await privateApi.post("/order/verify-payment", response);
-
+          
             
             const { data } = await privateApi.post(`/order/placeOrder`, {
               ...response,
