@@ -64,18 +64,22 @@ const Checkout = () => {
         const { data } = await privateApi.post(`/order/create-order`, {
           amount: totalPrice,
         });
+
         const options = {
           key: process.env.REACT_APP_RAZORPAY_KEY_ID,
           amount: data.amount,
           currency: "INR",
           name: "It's Handicrafted",
           order_id: data.id,
-          method: { upi: true },
           handler: async function (response) {
+            await privateApi.post("/order/verify-payment", response);
+
+            
             const { data } = await privateApi.post(`/order/placeOrder`, {
               ...response,
               ...order,
             });
+
             dispatch(clearCart());
             toast.success(data?.message || "Order place successfully.", {
               id: toastId,

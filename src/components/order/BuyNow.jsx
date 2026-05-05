@@ -69,8 +69,10 @@ const BuyNow = ({ info }) => {
           currency: "INR",
           name: "It's Handicrafted",
           order_id: data.id,
-          method: { upi: true },
           handler: async function (response) {
+
+            await privateApi.post("/order/verify-payment", response);
+
             const { data } = await privateApi.post(
               `/order/placeOrderViaBuyNow`,
               { ...response, ...order },
