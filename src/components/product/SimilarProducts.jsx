@@ -7,10 +7,10 @@ const SimilarProducts = ({ similarProducts }) => {
   return (
     <section className={styles.section}>
       {/* Header */}
-      <div className={styles.header}>
+      {/* <div className={styles.header}>
         <h2 className={styles.heading}>You May Also Like</h2>
         <span className={styles.subtext}>Similar handcrafted pieces</span>
-      </div>
+      </div> */}
 
       {/* Scroll Track */}
       <div className={styles.scrollWrapper}>

@@ -1,3 +1,5 @@
+
+
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCartAsync } from "../../features/cart/cartSlice";
@@ -32,7 +34,7 @@ export default function ProductCard({ product, from }) {
       ).unwrap();
       setProductId("");
 
-      if (window.fbq && res ) {
+      if (window.fbq && res) {
         window.fbq("track", "AddToCart", {
           content_name: product.name,
           content_ids: [product.id],
@@ -85,140 +87,116 @@ export default function ProductCard({ product, from }) {
   const isWishlistLoading =
     toggleWishlistLoading === "loading" && product.id === productId;
 
+  // Calculate discount % if both prices exist
+  const discountPercent =
+    product.originalPrice && product.originalPrice > product.discountPrice
+      ? Math.round(
+          ((product.originalPrice - product.discountPrice) /
+            product.originalPrice) *
+            100,
+        )
+      : null;
+
   return (
     <div className={styles.cardContainer}>
-      {/* ── Wishlist Button ── */}
-      <button
-        disabled={isWishlistLoading}
-        onClick={() =>
-          handleAddToWishList(
-            product.id,
-            isWishlisted(product.id) ? "remove" : "add",
-          )
-        }
-        className="btn position-absolute top-0 end-0 m-2 d-flex align-items-center justify-content-center rounded-circle"
-        style={{
-          width: 34,
-          height: 34,
-          zIndex: 10,
-          padding: 0,
-          background: "rgba(255,255,255,0.95)",
-          border: "1.5px solid #ede9fe",
-          boxShadow: "0 2px 8px rgba(79,70,229,0.12)",
-        }}
-      >
-        {!isWishlistLoading && (
-          <i
-            className={`bi bi-heart${isWishlisted(product.id) ? "-fill" : ""}`}
-            style={{
-              color: isWishlisted(product.id) ? "#ef4444" : "#7c3aed",
-              fontSize: 14,
-            }}
+      {/* ── Image Wrapper (ratio-locked) ── */}
+      <div className={styles.imgWrapper}>
+        <Link to={`/products/${product.id}`} className="d-block h-100">
+          <img
+            src={product.images[0].url}
+            alt={product.name}
+            className={styles.imgStyle}
           />
-        )}
-        {isWishlistLoading && (
-          <span className="spinner-border spinner-border-sm"></span>
-        )}
-      </button>
+          <div className={styles.imgOverlay} />
+        </Link>
 
-      {/* ── Product Image ── */}
-      <Link
-        to={`/products/${product.id}`}
-        className="text-decoration-none d-block overflow-hidden"
-      >
-        <img
-          src={product.images[0].url}
-          alt={product.name}
-          className={styles.imgStyle}
-        />
-      </Link>
+        {/* Discount Badge */}
+        {discountPercent && (
+          <span className={styles.discountBadge}>{discountPercent}% off</span>
+        )}
+
+        {/* Wishlist Button */}
+        <button
+          disabled={isWishlistLoading}
+          onClick={() =>
+            handleAddToWishList(
+              product.id,
+              isWishlisted(product.id) ? "remove" : "add",
+            )
+          }
+          className={styles.wishlistBtn}
+        >
+          {!isWishlistLoading && (
+            <i
+              className={`bi bi-heart${isWishlisted(product.id) ? "-fill" : ""}`}
+              style={{
+                color: isWishlisted(product.id) ? "#ef4444" : "#7c3aed",
+                fontSize: 13,
+              }}
+            />
+          )}
+          {isWishlistLoading && (
+            <span className="spinner-border spinner-border-sm" />
+          )}
+        </button>
+      </div>
 
       {/* ── Card Body ── */}
-      <div
-        className="d-flex flex-column p-3"
-        style={{ background: "#fff", flexGrow: 1 }}
-      >
+      <div className={styles.cardBody}>
         {/* Name */}
         <Link to={`/products/${product.id}`} className="text-decoration-none">
-          <h6
-            className="fw-semibold mb-2"
-            style={{
-              fontSize: "0.88rem",
-              lineHeight: 1.4,
-              height: "2.5em",
-              overflow: "hidden",
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-              color: "#1e1b4b",
-            }}
-          >
-            {product.name}
-          </h6>
+          <h6 className={styles.productName}>{product.name}</h6>
         </Link>
 
         {/* Rating */}
-        <div className="d-flex align-items-center gap-1 mb-2">
+        <div className={styles.ratingRow}>
           {[...Array(5)].map((_, index) => (
             <i
               key={index}
               className={`bi bi-star${index < Math.floor(product.rating) ? "-fill" : ""}`}
               style={{
-                fontSize: 11,
+                fontSize: 10,
                 color:
-                  index < Math.floor(product.rating) ? "#f59e0b" : "#d1d5db",
+                  index < Math.floor(product.rating) ? "#f59e0b" : "#e5e7eb",
               }}
             />
           ))}
-          <span
-            className="ms-1 fw-semibold"
-            style={{ fontSize: "0.72rem", color: "#6b7280" }}
-          >
+          <span className={styles.ratingValue}>
             {product.rating.toFixed(1)}
           </span>
         </div>
 
         {/* Price */}
-        <div className="mb-3">
-          <span
-            className="fw-bold"
-            style={{ fontSize: "1.05rem", color: "#4f46e5" }}
-          >
+        <div className={styles.priceRow}>
+          <span className={styles.discountPrice}>
             ₹{product.discountPrice.toLocaleString()}
           </span>
+          {product.originalPrice &&
+            product.originalPrice > product.discountPrice && (
+              <span className={styles.originalPrice}>
+                ₹{product.originalPrice.toLocaleString()}
+              </span>
+            )}
         </div>
 
         {/* Action Button */}
-        <div className="mt-auto">
+        <div className={styles.actionBtn}>
           {isInCart(product.id) ? (
             <Link
               to="/cart"
               state={{ from: from }}
-              className="btn w-100 fw-semibold d-flex align-items-center justify-content-center gap-2"
-              style={{
-                border: "1.5px solid #4f46e5",
-                color: "#4f46e5",
-                borderRadius: 10,
-                background: "#f5f3ff",
-                fontSize: "0.8rem",
-              }}
+              className={styles.viewCartBtn}
             >
-              <i className="bi bi-cart-check-fill" style={{ fontSize: 13 }} />
+              <i className="bi bi-cart-check-fill" style={{ fontSize: 12 }} />
               View in Cart
             </Link>
           ) : (
             <button
               disabled={isCartLoading}
               onClick={() => handleAddToCart(product, 1)}
-              className="btn w-100 fw-semibold d-flex align-items-center justify-content-center gap-2 text-white"
-              style={{
-                background: "linear-gradient(135deg, #1e1b4b, #4f46e5)",
-                border: "none",
-                borderRadius: 10,
-                fontSize: "0.8rem",
-              }}
+              className={styles.cartBtn}
             >
-              <i className="bi bi-cart-plus-fill" style={{ fontSize: 13 }} />
+              <i className="bi bi-cart-plus-fill" style={{ fontSize: 12 }} />
               {isCartLoading ? "Adding…" : "Add to Cart"}
               {isCartLoading && (
                 <span className="spinner-border spinner-border-sm ms-1" />

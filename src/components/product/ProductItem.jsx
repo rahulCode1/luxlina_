@@ -8,7 +8,7 @@ import { addToCartAsync, getAllCartAsync } from "../../features/cart/cartSlice";
 import { addOrRemoveWishlistAsync } from "../../features/wishlist/wishlistSlice";
 import { privateApi } from "../../utils/axios";
 import styles from "./ProductItem.module.css";
-import SimilarProducts from "./SimilarProducts";
+// import SimilarProducts from "./SimilarProducts";
 import Footer from "./Footer";
 
 const ProductItem = ({ productData }) => {
@@ -26,7 +26,7 @@ const ProductItem = ({ productData }) => {
   const dispatch = useDispatch();
   const productId = useParams().id;
   const productInfo = productData?.product;
-  const similarProducts = productData?.similarProducts;
+  // const similarProducts = productData?.similarProducts;
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const location = useLocation();
@@ -397,10 +397,6 @@ const ProductItem = ({ productData }) => {
         </section>
       </main>
 
-      <div className={styles.similarProducts}>
-        <SimilarProducts similarProducts={similarProducts} />
-      </div>
-      <Footer from={`/products/${productId}`} />
     </>
   );
 };

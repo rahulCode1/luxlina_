@@ -1,0 +1,67 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.empty {
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  color: #9a8c7e;
+  font-size: 0.95rem;
+  padding: 1.5rem 0;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e8e0d6;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 18px rgba(120, 90, 60, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.userName {
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c1f14;
+  margin: 0;
+}
+
+.stars {
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.reviewText {
+  font-family: 'Georgia', serif;
+  font-size: 0.93rem;
+  color: #5a4a3a;
+  line-height: 1.65;
+  margin: 0 0 0.85rem 0;
+}
+
+.imageRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.reviewImage {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e0d5c8;
+}

@@ -1,63 +1,225 @@
+
+
+/* ─── Card Shell ─────────────────────────────────────────────── */
 .cardContainer {
   position: relative;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
   background: #fff;
-  border: 1px solid #ede9fe;
-  box-shadow: 0 2px 12px rgba(79, 70, 229, 0.07);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  border: 1px solid #e8e4f8;
+  box-shadow: 0 1px 6px rgba(79, 70, 229, 0.06);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
   display: flex;
   flex-direction: column;
   height: 100%;
+  cursor: pointer;
 }
 
 .cardContainer:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 28px rgba(79, 70, 229, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(79, 70, 229, 0.13);
+}
+
+/* ─── Image Wrapper ──────────────────────────────────────────── */
+.imgWrapper {
+  position: relative;
+  width: 100%;
+  /* Fixed 4:5 portrait ratio — works for fashion/product photography */
+  padding-bottom: 125%;
+  overflow: hidden;
+  background: #f3f0fc;
+  flex-shrink: 0;
 }
 
 .imgStyle {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 270px;
+  height: 100%;
   object-fit: cover;
+  object-position: center top;
   display: block;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
 }
-
-
 
 .cardContainer:hover .imgStyle {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
-@media (min-width: 400px) {
-  .imgStyle {
-    height: 350px;
-  }
+/* ─── Overlay Gradient (bottom fade for text contrast) ────────── */
+.imgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 55%,
+    rgba(15, 12, 50, 0.18) 100%
+  );
+  pointer-events: none;
 }
 
-@media (min-width: 500px) {
-  .imgStyle {
-    height: 400px;
-  }
+/* ─── Discount Badge ─────────────────────────────────────────── */
+.discountBadge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #4f46e5;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  z-index: 5;
 }
 
-@media (min-width: 576px) {
-  .imgStyle {
-    height: 270px;
-  }
+/* ─── Wishlist Button ────────────────────────────────────────── */
+.wishlistBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #e8e4f8;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+  padding: 0;
 }
 
-@media (min-width: 768px) {
-  .imgStyle {
-    height: 200px;
-  }
+.wishlistBtn:hover {
+  background: #fff;
+  transform: scale(1.08);
 }
 
-@media (min-width: 992px) {
-  .imgStyle {
-    height: 260px;
-  }
+.wishlistBtn:disabled {
+  opacity: 0.7;
+}
+
+/* ─── Card Body ──────────────────────────────────────────────── */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 14px 12px;
+  background: #fff;
+  flex-grow: 1;
+  gap: 6px;
+}
+
+/* ─── Product Name ───────────────────────────────────────────── */
+.productName {
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #1e1b4b;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-decoration: none;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.productName:hover {
+  color: #4f46e5;
+}
+
+/* ─── Rating Row ─────────────────────────────────────────────── */
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.ratingValue {
+  margin-left: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+/* ─── Price Row ──────────────────────────────────────────────── */
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin-top: 2px;
+}
+
+.discountPrice {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #4f46e5;
+  letter-spacing: -0.02em;
+}
+
+.originalPrice {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+/* ─── Action Button ──────────────────────────────────────────── */
+.actionBtn {
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.cartBtn {
+  width: 100%;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 0;
+  border: none;
+  background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+}
+
+.cartBtn:hover:not(:disabled) {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.cartBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.viewCartBtn {
+  width: 100%;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 0;
+  border: 1.5px solid #4f46e5;
+  background: #f5f3ff;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  letter-spacing: 0.01em;
+}
+
+.viewCartBtn:hover {
+  background: #ede9fe;
+  color: #3730a3;
 }

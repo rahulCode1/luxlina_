@@ -1,0 +1,198 @@
+/* ── Page-level layout ─────────────────────────────────── */
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  font-family: "Georgia", serif;
+  color: #2c1f14;
+}
+
+/* ── Section headings ──────────────────────────────────── */
+.sectionTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2c1f14;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e8d8c6;
+  letter-spacing: -0.01em;
+}
+
+/* ── Form card ─────────────────────────────────────────── */
+.formCard {
+  background: #fdf6ef;
+  border: 1px solid #e8d8c6;
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Field groups ──────────────────────────────────────── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.1rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7a5c42;
+  font-family: system-ui, sans-serif;
+}
+
+/* ── Inputs ────────────────────────────────────────────── */
+.select,
+.textarea {
+  width: 100%;
+  font-family: "Georgia", serif;
+  font-size: 0.93rem;
+  color: #2c1f14;
+  background: #fff;
+  border: 1.5px solid #d4b89a;
+  border-radius: 8px;
+  padding: 0.55rem 0.8rem;
+  outline: none;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+  box-sizing: border-box;
+  appearance: none;
+}
+
+.select:focus,
+.textarea:focus {
+  border-color: #a06a3a;
+  box-shadow: 0 0 0 3px rgba(160, 106, 58, 0.12);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.6;
+}
+
+.select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237a5c42' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  padding-right: 2rem;
+}
+
+/* ── Divider before image upload ───────────────────────── */
+.uploadSection {
+  padding-top: 0.5rem;
+  border-top: 1px solid #ede0d0;
+  margin-top: 0.25rem;
+}
+
+/* ── Submit button ─────────────────────────────────────── */
+.submitBtn {
+  margin-top: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.6rem;
+  background: #7a3f1a;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    transform 0.12s ease;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #5e2e10;
+  transform: translateY(-1px);
+}
+
+.submitBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── Reviews section ───────────────────────────────────── */
+.reviewsSection {
+  margin-top: 0.5rem;
+}
+
+/* Image upload  */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.previewArea {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  min-height: 48px;
+}
+
+.previewImage {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e0d5c8;
+  transition: transform 0.15s ease;
+}
+
+.previewImage:hover {
+  transform: scale(1.04);
+}
+
+.placeholder {
+  font-size: 0.82rem;
+  color: #9a8c7e;
+  font-style: italic;
+  font-family: "Georgia", serif;
+}
+
+.hint {
+  font-size: 0.78rem;
+  color: #b5a899;
+}
+
+.pickButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.82rem;
+  font-family: inherit;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #6b4f35;
+  background: #fdf6ef;
+  border: 1.5px solid #d4b89a;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+  width: fit-content;
+}
+
+.pickButton:hover {
+  background: #f5e8d8;
+  border-color: #b8926a;
+}
+
+.errorText {
+  font-size: 0.8rem;
+  color: #c0392b;
+  margin-top: 0.25rem;
+}
