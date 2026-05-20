@@ -45,7 +45,7 @@ const ProductImageCarousel = ({ images = [] }) => {
       const dx = e.changedTouches[0].clientX - (touchStartX._x || 0);
       if (Math.abs(dx) > 40) dx < 0 ? next() : prev();
     },
-    [next, prev],
+    [next, prev, touchStartX._x],
   );
 
   useEffect(() => {
