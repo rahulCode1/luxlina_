@@ -1,0 +1,70 @@
+/* ── ProductDetails.module.css ──────────────────────────────────────────
+   Single stylesheet for the entire ProductDetails page.
+   Palette: #1a1208 (ink) · #c97b3a (amber) · #edd9b8 (border)
+            #fdf6ee (cream) · #fbeeda (warm tint) · #8a7560 (muted)
+   Fonts:   DM Sans · Cormorant Garamond
+─────────────────────────────────────────────────────────────────────── */
+
+/* ── Page root ───────────────────────────────────────────────────────── */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: #fdf6ee;
+  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  color: #1a1208;
+}
+
+/* ── Shared section wrapper ──────────────────────────────────────────── */
+.section {
+  margin: 2.25rem 0 0;
+}
+
+/* ── Section header (used by feature videos AND similar products) ─────── */
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0 1rem 0.8rem;
+  border-bottom: 1px solid #edd9b8;
+  margin-bottom: 0;
+}
+
+.sectionHeading {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #1a1208;
+  margin: 0;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+
+.sectionSub {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #8a7560;
+}
+
+/* ── Amber rule accent on section headings ───────────────────────────── */
+.sectionHeading::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #c97b3a;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+}
+
+/* ── "Similar products" section extra top spacing ────────────────────── */
+.similarSection {
+  margin: 2.5rem 0 0;
+}

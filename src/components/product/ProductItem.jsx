@@ -1,4 +1,10 @@
-import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
+import {
+  Link,
+  useParams,
+  useNavigate,
+  useLocation,
+  useRevalidator,
+} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
@@ -8,12 +14,14 @@ import { addToCartAsync, getAllCartAsync } from "../../features/cart/cartSlice";
 import { addOrRemoveWishlistAsync } from "../../features/wishlist/wishlistSlice";
 import { privateApi } from "../../utils/axios";
 import styles from "./ProductItem.module.css";
-// import SimilarProducts from "./SimilarProducts";
-import Footer from "./Footer";
+import AdminFeatures from "./AdminFeatures";
+import ErrorModal from "../ErrorModal";
 
 const ProductItem = ({ productData }) => {
   const [quantity, setQuantity] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const revalidator = useRevalidator();
   const userId = localStorage.getItem("userId") || "";
 
   const { cart: productCart, addTocartLoading } = useSelector(
@@ -26,7 +34,6 @@ const ProductItem = ({ productData }) => {
   const dispatch = useDispatch();
   const productId = useParams().id;
   const productInfo = productData?.product;
-  // const similarProducts = productData?.similarProducts;
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const location = useLocation();
@@ -172,15 +179,16 @@ const ProductItem = ({ productData }) => {
     <>
       <main className={styles.mainContainer}>
         <section>
+          {<ErrorModal message={error} onClose={() => setError(null)} />}
           <div className={styles.container}>
             {/* LEFT IMAGE */}
             <div className={styles["img-container"]}>
               <ProductImageCarousel images={productInfo.images} />
             </div>
             {/* RIGHT DETAILS */}
-
             <div className={styles["details-container"]}>
               {/* Category */}
+
               <div>
                 <span className={styles.categoryBadge}>
                   {productInfo.category || "Handicrafts"}
@@ -259,7 +267,11 @@ const ProductItem = ({ productData }) => {
                 {/* Cart + Wishlist Buttons */}
                 <div className={styles.cartAndWishlistContainer}>
                   {checkProductIsInCart(productInfo.id) ? (
-                    <Link to="/cart" state={{ from: `/products/${productId}` }}>
+                    <Link
+                      to="/cart"
+                      state={{ from: `/products/${productId}` }}
+                      className={styles.goToCartLink} // ← add this
+                    >
                       Go to Cart
                     </Link>
                   ) : (
@@ -312,9 +324,7 @@ const ProductItem = ({ productData }) => {
                   )}
                 </button>
               </div>
-              {userId === productInfo?.createdBy && (
-                <Link to={`edit`}> ✏️ Edit Product </Link>
-              )}
+
               {/* Trust Icons */}
               <div className={styles.trustIconsWrapper}>
                 {[
@@ -392,11 +402,19 @@ const ProductItem = ({ productData }) => {
                   </div>
                 )}
               </div>
+
+              {productInfo?.createdBy === userId && (
+                <AdminFeatures
+                  productId={productId}
+                  media={productInfo?.images}
+                  setError={setError}
+                  revalidator={revalidator}
+                />
+              )}
             </div>
           </div>
         </section>
       </main>
-
     </>
   );
 };

@@ -8,12 +8,10 @@
   box-sizing: border-box;
 }
 
-/* ── img-container: hosts the carousel ─────────────────────────────────── */
 .img-container {
   width: 100%;
 }
 
-/* imgStyle kept for fallback but carousel owns the image now */
 .imgStyle {
   width: 100%;
   height: auto;
@@ -21,7 +19,6 @@
   max-height: 350px;
 }
 
-/* ── Container ─────────────────────────────── */
 .details-container {
   width: 100%;
   display: flex;
@@ -32,7 +29,6 @@
   max-width: 40rem;
 }
 
-/* ── Category Badge ─────────────────────────── */
 .categoryBadge {
   display: inline-block;
   font-family: "DM Sans", sans-serif;
@@ -47,7 +43,6 @@
   border-radius: 2rem;
 }
 
-/* ── Title ──────────────────────────────────── */
 .details-container h1 {
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(1.6rem, 4vw, 2.4rem);
@@ -58,7 +53,6 @@
   letter-spacing: -0.01em;
 }
 
-/* ── Rating ─────────────────────────────────── */
 .ratingWrapper {
   display: flex;
   align-items: center;
@@ -84,7 +78,6 @@
   color: #8a7560;
 }
 
-/* ── Pricing ─────────────────────────────────── */
 .pricingWrapper {
   display: flex;
   align-items: baseline;
@@ -120,7 +113,6 @@
   letter-spacing: 0.03em;
 }
 
-/* ── Description ─────────────────────────────── */
 .descriptionBlock {
   display: flex;
   flex-direction: column;
@@ -146,7 +138,6 @@
   font-weight: 500;
 }
 
-/* ── Quantity ─────────────────────────────────── */
 .quantitySection {
   display: flex;
   flex-direction: column;
@@ -210,7 +201,6 @@
   outline: none;
 }
 
-/* ── Cart + Wishlist Buttons ─────────────────── */
 .cartAndWishlistContainer {
   display: flex;
   gap: 0.75rem;
@@ -274,7 +264,6 @@
   cursor: not-allowed;
 }
 
-/* ── Buy Now ─────────────────────────────────── */
 .buyNowBtn {
   width: 100%;
   padding: 0.9em 1.5em;
@@ -300,7 +289,6 @@
   cursor: not-allowed;
 }
 
-/* ── Trust Icons ─────────────────────────────── */
 .trustIconsWrapper {
   display: flex;
   gap: 1rem;
@@ -324,8 +312,6 @@
   opacity: 1;
 }
 
-
-/* ── Specs Block ─────────────────────────────── */
 .specsBlock {
   border: 1px solid #edd9b8;
   border-radius: 0.75rem;
@@ -422,8 +408,6 @@
   font-weight: 500;
 }
 
-
-/* ── Full Description ─────────────────────────── */
 .fullDescription h3 {
   font-family: "Cormorant Garamond", serif;
   font-size: 1.15rem;
@@ -440,8 +424,8 @@
   margin: 0;
 }
 
-/* ── Go to Cart Link ─────────────────────────── */
-.details-container a {
+/* ── Go to Cart link — SCOPED, no longer targets all <a> ── */
+.goToCartLink {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -459,10 +443,31 @@
   transition: all 0.2s ease;
 }
 
-.details-container a:hover {
+.goToCartLink:hover {
   background: #6e4a2d;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(139, 94, 60, 0.25);
+}
+
+/* ── Edit Product link — plain inline text style ── */
+.editLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #8a7560;
+  text-decoration: none;
+  padding: 0.3em 0;
+  border-bottom: 1px dashed #d4b896;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  width: fit-content;
+}
+
+.editLink:hover {
+  color: #c97b3a;
+  border-color: #c97b3a;
 }
 
 .similarProducts {
@@ -537,23 +542,23 @@
     gap: 2em;
     max-width: 1400px;
     margin: auto;
-    align-items: flex-start;  /* ← children don't stretch to row height */
+    align-items: flex-start;
   }
 
   .img-container {
-    flex: 1 1 0;      /* ← flex-basis: 0 so both start from zero and grow equally */
-    min-width: 0;     /* ← prevents content from overflowing flex */
-    width: 0;         /* ← nukes the base width: 100% so flex-basis wins */
+    flex: 1 1 0;
+    min-width: 0;
+    width: 0;
     align-self: flex-start;
     position: sticky;
     top: 1rem;
   }
 
   .details-container {
-    flex: 1 1 0;      /* ← same flex-basis: 0 = perfectly equal width as img-container */
-    min-width: 0;     /* ← prevents content from overflowing flex */
-    width: 0;         /* ← nukes the base width: 100% */
-    max-width: none;  /* ← nukes the base max-width: 40rem cap */
+    flex: 1 1 0;
+    min-width: 0;
+    width: 0;
+    max-width: none;
   }
 }
 

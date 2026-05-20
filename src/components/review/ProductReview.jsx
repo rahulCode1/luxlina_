@@ -11,7 +11,6 @@ const ProductReview = ({ reviews }) => {
   const [review, setReview] = useState(initialValue);
   const [files, setFiles] = useState([]);
   const [previewUrl, setPreviewUrl] = useState([]);
-  const [isValid, setIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -62,7 +61,6 @@ const ProductReview = ({ reviews }) => {
 
     setPreviewUrl([]);
     setFiles([]);
-   
   };
 
   const handleAddProductRating = async (e) => {

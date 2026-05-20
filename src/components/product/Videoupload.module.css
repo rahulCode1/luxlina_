@@ -1,0 +1,374 @@
+/* ── VideoUpload.module.css ─────────────────────────────────────────────
+   Palette: #1a1208 (ink) · #c97b3a (amber) · #edd9b8 (border)
+            #fdf6ee (cream) · #fbeeda (warm tint) · #8a7560 (muted)
+   Fonts:   DM Sans · Cormorant Garamond
+─────────────────────────────────────────────────────────────────────── */
+
+/* ── Wrapper ────────────────────────────────────────────────────────── */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: #fdf6ee;
+  border: 1px solid #edd9b8;
+  border-radius: 1rem;
+  overflow: hidden;
+  font-family: "DM Sans", sans-serif;
+  color: #1a1208;
+  max-width: 380px;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 1rem 1.1rem 0.9rem;
+  background: #fbeeda;
+  border-bottom: 1px solid #edd9b8;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.headerIcon {
+  width: 32px;
+  height: 32px;
+  background: #1a1208;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.headerIcon i {
+  color: #c97b3a;
+  font-size: 0.9rem;
+}
+
+.headerTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #1a1208;
+  line-height: 1.15;
+}
+
+.headerSub {
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #8a7560;
+  margin-top: 1px;
+}
+
+/* ── "Choose" button ─────────────────────────────────────────────────── */
+.chooseBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.38em 0.9em;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #c97b3a;
+  background: transparent;
+  border: 1.5px solid #c97b3a;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+  white-space: nowrap;
+}
+
+.chooseBtn:hover {
+  background: #c97b3a;
+  color: #fff;
+}
+
+/* ── Body ───────────────────────────────────────────────────────────── */
+.body {
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+/* ── Drop zone ──────────────────────────────────────────────────────── */
+.dropzone {
+  border: 2px dashed #d9c4a0;
+  border-radius: 0.75rem;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease;
+  background: transparent;
+  text-align: center;
+}
+
+.dropzone:hover {
+  border-color: #c97b3a;
+  background: rgba(251, 238, 218, 0.4);
+}
+
+.dropzoneDragging {
+  border-color: #c97b3a;
+  background: rgba(251, 238, 218, 0.55);
+}
+
+.dzIcon {
+  font-size: 2rem;
+  color: rgba(201, 123, 58, 0.6);
+}
+
+.dzText {
+  margin: 0;
+  font-size: 0.79rem;
+  color: #8a7560;
+  line-height: 1.55;
+}
+
+.dzText strong {
+  color: #5c3a1e;
+  font-weight: 600;
+}
+
+/* ── Preview card ────────────────────────────────────────────────────── */
+.previewCard {
+  position: relative;
+  border-radius: 0.65rem;
+  overflow: hidden;
+  background: #1a1208;
+  display: flex;
+  justify-content: center;
+}
+
+.previewVideo {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 300px;
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+}
+
+.removeBtn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(26, 18, 8, 0.65);
+  color: #f7ede2;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s ease;
+  line-height: 1;
+}
+
+.removeBtn:hover {
+  background: rgba(169, 50, 38, 0.9);
+}
+
+/* ── File pill ───────────────────────────────────────────────────────── */
+.filePill {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  background: #fbeeda;
+  border: 1px solid #edd9b8;
+  border-radius: 2rem;
+  font-size: 0.73rem;
+  color: #4a3b28;
+  overflow: hidden;
+}
+
+.filePill i {
+  color: #c97b3a;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+}
+
+.fileName {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+.fileSize {
+  flex-shrink: 0;
+  color: #a89070;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Divider ─────────────────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: #edd9b8;
+  margin: 0.05rem 0;
+}
+
+/* ── Section label ───────────────────────────────────────────────────── */
+.sectionLabel {
+  display: block;
+  font-size: 0.67rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #8a7560;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Radio card group ────────────────────────────────────────────────── */
+.radioGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.radioCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.65rem 0.75rem;
+  border: 1.5px solid #edd9b8;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease;
+  background: #fff8f0;
+  position: relative;
+}
+
+.radioCard:hover {
+  border-color: #c97b3a;
+}
+
+.radioCardChecked {
+  border-color: #c97b3a;
+  background: #fbeeda;
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.rcIcon {
+  font-size: 1.2rem;
+  color: #c97b3a;
+  margin-bottom: 0.2rem;
+}
+
+.rcName {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #1a1208;
+  letter-spacing: 0.01em;
+}
+
+.rcDesc {
+  font-size: 0.67rem;
+  color: #8a7560;
+  line-height: 1.4;
+}
+
+/* ── Title input ─────────────────────────────────────────────────────── */
+.inputWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.textInput {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  color: #1a1208;
+  background: #fff8f0;
+  border: 1.5px solid #edd9b8;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border-color 0.18s ease;
+  box-sizing: border-box;
+}
+
+.textInput:focus {
+  border-color: #c97b3a;
+}
+
+.textInput::placeholder {
+  color: #c4ae94;
+}
+
+/* ── Submit button ───────────────────────────────────────────────────── */
+.submitBtn {
+  width: 100%;
+  padding: 0.8em 1.5em;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #f7ede2;
+  background: #1a1208;
+  border: 2px solid #1a1208;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #3b2a18;
+  border-color: #3b2a18;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(26, 18, 8, 0.22);
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Error message ───────────────────────────────────────────────────── */
+.errorMsg {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  color: #922b21;
+  background: #fdf0ed;
+  border: 1px solid #f5c0b8;
+  border-radius: 0.5rem;
+}
+
+.errorMsg i {
+  flex-shrink: 0;
+}
