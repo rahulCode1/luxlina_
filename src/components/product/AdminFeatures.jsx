@@ -3,16 +3,25 @@ import VideoUpload from "./VideoUpload";
 import { privateApi } from "../../utils/axios";
 import { useState } from "react";
 import styles from "./AdminFeatures.module.css";
+import AddProductVariations from "./AddProductVariations";
 
-const AdminFeatures = ({ productId, setError, media, revalidator }) => {
+const AdminFeatures = ({
+  productId,
+  setError,
+  media,
+  revalidator,
+  variationId,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const isProdHaveVideo = media.some((item) => item.type === "video");
+  const isProdHaveVideo = media?.some((item) => item.type === "video");
 
   const handleDeleteVideo = async () => {
     try {
       setIsLoading(true);
-      const res = await privateApi.patch(`/product/${productId}/video`);
+      const res = await privateApi.patch(
+        `/product/${productId}/deleteVideo/${variationId}`,
+      );
       revalidator.revalidate();
       console.log(res.data);
     } catch (err) {
@@ -72,6 +81,7 @@ const AdminFeatures = ({ productId, setError, media, revalidator }) => {
             setError={setError}
             isProdHaveVideo={isProdHaveVideo}
             revalidator={revalidator}
+            variationId={variationId}
           />
         </div>
 
@@ -109,6 +119,13 @@ const AdminFeatures = ({ productId, setError, media, revalidator }) => {
           </button>
         )}
       </div>
+
+      <h2>Add Product variations </h2>
+      <AddProductVariations
+        productId={productId}
+        setError={setError}
+        revalidator={revalidator}
+      />
     </div>
   );
 };

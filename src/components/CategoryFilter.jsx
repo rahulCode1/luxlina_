@@ -1,4 +1,4 @@
-const CategoryFilter = ({ handleOnChangeCategory, filterCategory }) => {
+const CategoryFilter = ({ filterCategory, setCategory }) => {
   const categories = [
     { id: "MortarPestle", value: "MortarPestle", label: "Mortar & Pestle" },
     { id: "SilBatta", value: "SilBatta", label: "Sil & Batta" },
@@ -7,6 +7,16 @@ const CategoryFilter = ({ handleOnChangeCategory, filterCategory }) => {
     { id: "StatuesIdols", value: "StatuesIdols", label: "Statues & Idols" },
   ];
 
+  const handleSelectCategory = (e) => {
+    const { checked, value } = e.target;
+
+    if (checked) {
+      setCategory((prevCat) => [...prevCat, value]);
+    } else {
+      setCategory((prevCat) => prevCat.filter((cat) => cat !== value));
+    }
+  };
+
   return (
     <>
       <div className="py-3">
@@ -14,18 +24,18 @@ const CategoryFilter = ({ handleOnChangeCategory, filterCategory }) => {
           <strong>Category </strong>
         </label>
 
-        {categories.map((category) => (
-          <div className="form-check" key={category.id}>
+        {categories.map((prodCategory) => (
+          <div className="form-check" key={prodCategory.id}>
             <input
               type="checkbox"
               className="form-check-input"
-              id={category.id}
-              value={category.value}
-              checked={filterCategory.includes(category.value)}
-              onChange={handleOnChangeCategory}
+              id={prodCategory.id}
+              value={prodCategory.value}
+              onChange={handleSelectCategory}
+              checked={filterCategory.includes(prodCategory.value)}
             />
-            <label className="form-check-label" htmlFor={category.id}>
-              {category.label}
+            <label className="form-check-label" htmlFor={prodCategory.id}>
+              {prodCategory.label}
             </label>
           </div>
         ))}

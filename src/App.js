@@ -159,15 +159,15 @@ function App() {
           ),
         },
         {
-          path: "buyNow",
+          path: "buyNow/:variationId",
           element: (
             <ProtectedRoutes>
               <BuyNowPage />
             </ProtectedRoutes>
           ),
-          loader: () =>
+          loader: (meta) =>
             import("./pages/order/BuyNowPage").then((module) =>
-              module.loader(),
+              module.loader(meta),
             ),
         },
         {

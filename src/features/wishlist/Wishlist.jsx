@@ -2,7 +2,7 @@ import Loading from "../../components/Loading";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addOrRemoveWishlistAsync,
+  removeFromWishlistAsync,
   wishlistToCartAsync,
   clearError,
 } from "./wishlistSlice";
@@ -13,22 +13,23 @@ import { useState } from "react";
 
 const Wishlist = () => {
   const [productId, setProductId] = useState("");
+  const [wishlistId, setWishlistId] = useState("");
   const dispatch = useDispatch();
 
   const {
     wishlist,
     getWishlistLoading,
-    toggleWishlistLoading,
+    removeFromWishlistLoading,
     moveToCartLoading,
     error,
   } = useSelector((state) => state.wishlist);
 
-  const handleRemoveToWishList = async (productId) => {
+  const handleRemoveToWishList = async (productId, variationId) => {
     const toastId = toast.loading("Removing from wishlist...");
     try {
       setProductId(productId);
       const res = await dispatch(
-        addOrRemoveWishlistAsync({ productId }),
+        removeFromWishlistAsync({ productId, variationId }),
       ).unwrap();
       setProductId("");
       toast.success(res.message || "Product removed from wishlist.", {
@@ -42,15 +43,21 @@ const Wishlist = () => {
     }
   };
 
-  const handleWishListToCart = async (product) => {
+
+ 
+
+  const handleWishListToCart = async (wishlist) => {
     const toastId = toast.loading("Moving to cart...");
     try {
-      setProductId(product.id);
-      dispatch(addToCart({ ...product, quantity: 1 }));
+      setWishlistId(wishlist?.id);
       const res = await dispatch(
-        wishlistToCartAsync({ productId: product.id }),
+        wishlistToCartAsync({
+          productId: wishlist?.product?.id,
+          variationId: wishlist?.selectedVariation?.id,
+        }),
       ).unwrap();
-      setProductId("");
+      dispatch(addToCart({ ...wishlist, quantity: 1 }));
+      setWishlistId("");
       toast.success(res.message || "Product moved to Cart.", {
         id: toastId,
       });
@@ -117,8 +124,8 @@ const Wishlist = () => {
         <>
           {wishlist && wishlist.length > 0 ? (
             <div className="row g-3 g-md-4">
-              {wishlist.map((product) => (
-                <div className="col-12 col-sm-6 col-lg-4" key={product.id}>
+              {wishlist.map((wishlist) => (
+                <div className="col-12 col-sm-6 col-lg-4" key={wishlist.id}>
                   <div
                     className="card h-100 border-0 rounded-4 overflow-hidden"
                     style={{
@@ -141,11 +148,11 @@ const Wishlist = () => {
                       className="position-relative overflow-hidden"
                       style={{ height: "350px" }}
                     >
-                      <Link to={`/product/${product.id}`}>
+                      <Link to={`/product/${wishlist.id}`}>
                         <img
-                          src={product.images[0].url}
+                          src={wishlist?.selectedVariation?.images[0].url}
                           className="w-100 h-100 object-fit-cover"
-                          alt={product.name}
+                          alt={wishlist.name}
                           style={{ transition: "transform 0.35s ease" }}
                           onMouseEnter={(e) =>
                             (e.currentTarget.style.transform = "scale(1.06)")
@@ -177,9 +184,9 @@ const Wishlist = () => {
                       <h5
                         className="card-title fw-semibold mb-0 text-truncate"
                         style={{ color: "#1e1b4b", fontSize: "0.97rem" }}
-                        title={product.name}
+                        title={wishlist.name}
                       >
-                        {product.name}
+                        {wishlist.name}
                       </h5>
 
                       <p
@@ -192,7 +199,7 @@ const Wishlist = () => {
                           fontSize: "1.05rem",
                         }}
                       >
-                        ₹{product.price}
+                        ₹{wishlist?.selectedVariation?.discountPrice}
                       </p>
 
                       {/* Divider */}
@@ -203,9 +210,9 @@ const Wishlist = () => {
                         <button
                           disabled={
                             moveToCartLoading === "loading" &&
-                            product.id === productId
+                            wishlist?.id === wishlistId
                           }
-                          onClick={() => handleWishListToCart(product)}
+                          onClick={() => handleWishListToCart(wishlist)}
                           className="btn w-100 fw-semibold rounded-3"
                           style={{
                             background:
@@ -217,21 +224,26 @@ const Wishlist = () => {
                           }}
                         >
                           {moveToCartLoading === "loading" &&
-                          product.id === productId
+                          wishlist?.id === wishlistId
                             ? "Moving to cart"
                             : "Move to Cart"}
                           {moveToCartLoading === "loading" &&
-                            product.id === productId && (
+                            wishlist?.id === wishlistId && (
                               <span className="spinner-border spinner-border-sm ms-2"></span>
                             )}
                         </button>
 
                         <button
                           disabled={
-                            toggleWishlistLoading === "loading" &&
-                            product.id === productId
+                            removeFromWishlistLoading === "loading" &&
+                            wishlist?.id === wishlistId
                           }
-                          onClick={() => handleRemoveToWishList(product.id)}
+                          onClick={() =>
+                            handleRemoveToWishList(
+                              wishlist?.product?.id,
+                              wishlist?.selectedVariation?.id,
+                            )
+                          }
                           className="btn w-100 fw-semibold rounded-3"
                           style={{
                             border: "1.5px solid #f87171",
@@ -241,13 +253,13 @@ const Wishlist = () => {
                             padding: "0.5rem",
                           }}
                         >
-                          {toggleWishlistLoading === "loading" &&
-                          product.id === productId
+                          {removeFromWishlistLoading === "loading" &&
+                          wishlist?.id === wishlistId
                             ? "Removing from wishlist"
                             : "Remove from wishlist"}
 
-                          {toggleWishlistLoading === "loading" &&
-                            product.id === productId && (
+                          {removeFromWishlistLoading === "loading" &&
+                            wishlist?.selectedVariation?.id === productId && (
                               <span className="spinner-border spinner-border-sm  ms-2"></span>
                             )}
                         </button>

@@ -4,9 +4,7 @@ import { useDispatch } from "react-redux";
 import { setDefaultAddressAsync } from "../features/address/addressSlice";
 import { privateApi } from "../utils/axios";
 import { clearCart } from "../features/cart/cartSlice";
-import {
-  clearWishlist
-} from "../features/wishlist/wishlistSlice";
+import { clearWishlist } from "../features/wishlist/wishlistSlice";
 
 const EcommerceContext = createContext();
 
@@ -15,6 +13,9 @@ export const useEcommerce = () => useContext(EcommerceContext);
 const EcommerceProvider = ({ children }) => {
   const [searchText, setSearchText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLogin, setIsLogin] = useState(
+    localStorage.getItem("token") ? true : false,
+  );
 
   const dispatch = useDispatch();
   const [error, setError] = useState("");
@@ -49,6 +50,7 @@ const EcommerceProvider = ({ children }) => {
   const handleLogout = async (navigate) => {
     dispatch(clearCart());
     dispatch(clearWishlist());
+    setIsLogin(false);
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     navigate("/login");
@@ -57,6 +59,8 @@ const EcommerceProvider = ({ children }) => {
   return (
     <EcommerceContext.Provider
       value={{
+        isLogin,
+        setIsLogin,
         error,
         setError,
         isLoading,

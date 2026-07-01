@@ -1,5 +1,5 @@
 import { Await, useLoaderData } from "react-router-dom";
-import {  privateApi } from "../../utils/axios";
+import { privateApi } from "../../utils/axios";
 import BuyNow from "../../components/order/BuyNow";
 import { Suspense } from "react";
 import Loading from "../../components/Loading";
@@ -18,9 +18,9 @@ const BuyNowPage = () => {
 
 export default BuyNowPage;
 
-const buyNowItem = async () => {
+const buyNowItem = async (variationId) => {
   try {
-    const res = await privateApi.get(`/order/getBuyNowItem`);
+    const res = await privateApi.get(`/order/getBuyNowItem/${variationId}`);
 
     return res.data;
   } catch (error) {
@@ -28,8 +28,9 @@ const buyNowItem = async () => {
   }
 };
 
-export const loader = async () => {
+export const loader = async ({ req, params }) => {
+  const variationId = params.variationId;
   return {
-    buyNow: buyNowItem(),
+    buyNow: buyNowItem(variationId),
   };
 };

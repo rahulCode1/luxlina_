@@ -10,16 +10,15 @@
 }
 
 /* ── Horizontal scroll track — mobile first ──────────────────────────── */
-/* Small: left-aligned with padding, scrolls horizontally               */
 .track {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  gap: 0.85rem;
+  gap: 1rem;
   overflow-x: auto;
   overflow-y: visible;
-  padding: 0.75rem 1rem 1.1rem 1.25rem;
+  padding: 0.75rem 1rem 1.25rem 1.25rem;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -30,21 +29,23 @@
   display: none;
 }
 
-/* Medium+: center the cards, no scroll needed                          */
+/* Medium+: center, wrap, no horizontal scroll */
 @media (min-width: 640px) {
   .track {
     justify-content: center;
     flex-wrap: wrap;
     overflow-x: visible;
-    padding: 0.75rem 1.5rem 1.1rem;
+    padding: 0.75rem 1.5rem 1.25rem;
     scroll-snap-type: none;
+    gap: 1.25rem;
   }
 }
 
 /* ── Video card ──────────────────────────────────────────────────────── */
 .card {
   flex: 0 0 auto;
-  width: 148px;
+  /* INCREASED: 148 → 200px mobile */
+  width: 200px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -59,11 +60,13 @@
 }
 
 @media (min-width: 640px) {
-  .card { width: 170px; }
+  /* INCREASED: 170 → 230px */
+  .card { width: 230px; }
 }
 
 @media (min-width: 1024px) {
-  .card { width: 190px; }
+  /* INCREASED: 190 → 260px */
+  .card { width: 260px; }
 }
 
 /* ── Video wrapper ───────────────────────────────────────────────────── */
@@ -107,11 +110,42 @@
   display: block;
 }
 
+/* ── Delete button ───────────────────────────────────────────────────── */
+.deleteBtn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26, 18, 8, 0.72);
+  border: none;
+  border-radius: 0.4rem;
+  color: #f7ede2;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.18s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.deleteBtn:hover:not(:disabled) {
+  background: #c0392b;
+}
+
+.deleteBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 /* ── Title ───────────────────────────────────────────────────────────── */
 .title {
   margin: 0;
   font-family: "DM Sans", sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: #4a3b28;
   line-height: 1.4;

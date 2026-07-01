@@ -6,11 +6,7 @@ const OrderDetails = ({ order }) => {
   const { isLoading, handleCancelOrder } = useEcommerce();
   const location = useLocation();
   const goTo = location?.state?.from || "/orders";
-
-  const transformedOrder = order.products.map((product) => ({
-    ...product.product,
-    quantity: product.quantity,
-  }));
+  
 
   const revalidator = useRevalidator();
 
@@ -212,7 +208,7 @@ const OrderDetails = ({ order }) => {
                           </tr>
                         </thead>
                         <tbody>
-                          {transformedOrder.map((product, pIndex) => (
+                          {order?.products.map((product, pIndex) => (
                             <tr
                               key={pIndex}
                               style={{ borderBottom: "1px solid #f5f3ff" }}
@@ -220,8 +216,10 @@ const OrderDetails = ({ order }) => {
                               <td className="py-2 px-3">
                                 <div className="d-flex align-items-center gap-2">
                                   <img
-                                    src={product.images[0].url}
-                                    alt={product.name}
+                                    src={
+                                      product?.selectedVariation?.images[0].url
+                                    }
+                                    alt={product?.selectedVariation?.name}
                                     className="rounded-2 flex-shrink-0"
                                     style={{
                                       width: "clamp(36px, 5vw, 48px)",
@@ -241,10 +239,10 @@ const OrderDetails = ({ order }) => {
                                         lineHeight: 1.3,
                                       }}
                                     >
-                                      {product.name}
+                                      {product?.selectedVariation?.name}
                                     </div>
                                     <small className="text-muted">
-                                      {product.materialType}
+                                      {product?.product?.materialType}
                                     </small>
                                   </div>
                                 </div>
@@ -258,14 +256,17 @@ const OrderDetails = ({ order }) => {
                                     fontWeight: 600,
                                   }}
                                 >
-                                  {product.quantity}
+                                  {product?.product?.quantity}
                                 </span>
                               </td>
                               <td
                                 className="py-2 px-3 text-end fw-bold"
                                 style={{ color: "#4f46e5" }}
                               >
-                                ₹{product.discountPrice.toFixed(2)}
+                                ₹
+                                {product?.selectedVariation?.discountPrice.toFixed(
+                                  2,
+                                )}
                               </td>
                             </tr>
                           ))}

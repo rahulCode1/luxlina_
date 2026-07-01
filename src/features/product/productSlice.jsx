@@ -5,7 +5,7 @@ import { privateApi, API } from "../../utils/axios";
 export const addProductAsync = createAsyncThunk(
   "products/addProduct",
   async (data, { rejectWithValue }) => {
-    console.log(data);
+   
 
     try {
       const response = await privateApi.post(`/product/add`, data, {
@@ -13,7 +13,7 @@ export const addProductAsync = createAsyncThunk(
           "Content-Type": "multipart/form-data",
         },
       });
-
+      console.log(response.data)
       return response.data;
     } catch (error) {
       return (

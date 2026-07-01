@@ -11,8 +11,7 @@ import SentOtp from "./SentOtp";
 import VerifyOtp from "./VerifyOtp";
 import { toast } from "react-hot-toast";
 import ErrorModal from "../../components/ErrorModal";
-import { getAllWishlistAsync } from "../wishlist/wishlistSlice";
-import { getAllCartAsync } from "../cart/cartSlice";
+import { useEcommerce } from "../../context/EcommerceContext";
 
 const LoginWithOtp = () => {
   const initialValue = {
@@ -25,11 +24,10 @@ const LoginWithOtp = () => {
   const [timer, setTimer] = useState(30);
   const [isDisabledBtn, setIsBtnDisabled] = useState(true);
   const { isOtpSent, error } = useSelector((state) => state.user);
+  const { setIsLogin } = useEcommerce();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
-  
 
   const handleOnChange = (e) => {
     setFormData((prevStat) => ({
@@ -123,8 +121,7 @@ const LoginWithOtp = () => {
       const res = await dispatch(verifyOtpAsync(data)).unwrap();
       dispatch(setIsOtpSent());
       setFormData(initialValue);
-      dispatch(getAllWishlistAsync());
-      dispatch(getAllCartAsync());
+      setIsLogin(true);
       toast.success(res.message || "OTP verified successfully", {
         id: toastId,
       });

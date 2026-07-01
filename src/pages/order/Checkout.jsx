@@ -20,7 +20,8 @@ const Checkout = () => {
   const goTo = location.state?.from;
 
   const totalPrice = productCart.reduce(
-    (acc, curr) => acc + Number(curr.discountPrice) * curr.quantity,
+    (acc, curr) =>
+      acc + Number(curr?.selectedVariation?.discountPrice) * curr.quantity,
     0,
   );
 
@@ -31,7 +32,10 @@ const Checkout = () => {
 
   const totalDiscount = productCart.reduce(
     (acc, curr) =>
-      acc + (Number(curr?.price) - Number(curr.discountPrice)) * curr.quantity,
+      acc +
+      (Number(curr?.selectedVariation?.price) -
+        Number(curr?.selectedVariation?.discountPrice)) *
+        curr.quantity,
     0,
   );
 
@@ -101,6 +105,7 @@ const Checkout = () => {
         }
 
         dispatch(clearCart());
+        console.log(data);
         navigate(`/orders/${data?.order.id}`);
         toast.success(data?.message || "Order place successfully.", {
           id: toastId,
@@ -110,10 +115,6 @@ const Checkout = () => {
       console.log(error);
       setError(
         error?.response?.data?.message || "Error occurred while place order.",
-      );
-      toast.error(
-        error?.response?.data?.message || "Error occurred while place order.",
-        { id: toastId },
       );
     } finally {
       setIsLoading(false);
@@ -131,6 +132,8 @@ const Checkout = () => {
 
     handleGetUserAddress();
   }, [dispatch]);
+
+ 
 
   return (
     <>
@@ -194,19 +197,16 @@ const Checkout = () => {
             <div className="card-body px-4 py-3">
               {/* Product list */}
               <div className="d-flex flex-column gap-3 mb-3">
-                {productCart.map((product) => (
-                  <div
-                    key={product.id}
-                    className="d-flex gap-3 align-items-start"
-                  >
+                {productCart.map((cart) => (
+                  <div key={cart.id} className="d-flex gap-3 align-items-start">
                     <Link
-                      to={`/products/${product.id}`}
+                      to={`/products/${cart.id}`}
                       state={{ from: "/checkout" }}
                       className="flex-shrink-0"
                     >
                       <img
-                        src={product?.images[0]?.url}
-                        alt={product.name}
+                        src={cart?.selectedVariation?.images[0]?.url}
+                        alt={cart?.selectedVariation?.name}
                         className="rounded-3 border"
                         style={{ width: 72, height: 72, objectFit: "cover" }}
                       />
@@ -216,30 +216,33 @@ const Checkout = () => {
                         className="fw-semibold text-dark mb-1 lh-sm"
                         style={{ fontSize: "0.88rem" }}
                       >
-                        {product.name}
+                        {cart?.selectedVariation?.name}
                       </p>
                       <div className="d-flex flex-wrap gap-1 mb-1">
                         <span
                           className="badge bg-secondary-subtle text-secondary rounded-pill"
                           style={{ fontSize: "0.65rem" }}
                         >
-                          {product.category}
+                          {cart?.product?.category}
                         </span>
                         <span
                           className="badge bg-light text-muted border rounded-pill"
                           style={{ fontSize: "0.65rem" }}
                         >
                           <i className="bi bi-layers me-1"></i>Qty:{" "}
-                          {product.quantity}
+                          {cart?.quantity}
                         </span>
-                        {product.price - product.discountPrice > 0 && (
+                        {cart?.selectedVariation?.price -
+                          cart?.selectedVariation?.discountPrice >
+                          0 && (
                           <span
                             className="badge bg-success-subtle text-success rounded-pill"
                             style={{ fontSize: "0.65rem" }}
                           >
                             {Math.round(
-                              ((product.price - product.discountPrice) /
-                                product.price) *
+                              ((cart?.selectedVariation?.price -
+                                cart?.selectedVariation?.discountPrice) /
+                                cart?.selectedVariation?.price) *
                                 100,
                             )}
                             % OFF
@@ -251,10 +254,10 @@ const Checkout = () => {
                           className="fw-bold text-dark"
                           style={{ fontSize: "0.92rem" }}
                         >
-                          ₹{product.discountPrice}
+                          ₹{cart?.selectedVariation?.discountPrice}
                         </span>
                         <span className="text-decoration-line-through text-muted small">
-                          ₹{product.price}
+                          ₹{cart?.selectedVariation?.price}
                         </span>
                       </div>
                     </div>

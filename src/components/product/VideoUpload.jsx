@@ -2,7 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { privateApi } from "../../utils/axios";
 import styles from "./Videoupload.module.css";
 
-const VideoUpload = ({ productId, setError, isProdHaveVideo, revalidator }) => {
+const VideoUpload = ({
+  productId,
+  setError,
+  isProdHaveVideo,
+  revalidator,
+  variationId,
+}) => {
   const initialState = {
     title: "",
     videoFor: "product",
@@ -82,7 +88,7 @@ const VideoUpload = ({ productId, setError, isProdHaveVideo, revalidator }) => {
         const formData = new FormData();
         formData.append("video", file);
         const res = await privateApi.patch(
-          `/product/${productId}/upload`,
+          `/product/${productId}/addVideo/${variationId}`,
           formData,
         );
         console.log(res.data);
@@ -92,7 +98,7 @@ const VideoUpload = ({ productId, setError, isProdHaveVideo, revalidator }) => {
         formData.append("product", productId);
         formData.append("video", file);
         const res = await privateApi.post(
-          `/product/${productId}/featureVideo`,
+          `/product/${productId}/featureVideo/${variationId}`,
           formData,
         );
         console.log(res.data);
@@ -126,7 +132,7 @@ const VideoUpload = ({ productId, setError, isProdHaveVideo, revalidator }) => {
       <div className={styles.header}>
         <div className={styles.headerLeft}>
           <div className={styles.headerIcon}>
-            <i className="bi bi-camera-video" />
+            <i className="bi bi-camera-video" aria-hidden="true" />
           </div>
           <div>
             <div className={styles.headerTitle}>Upload Video</div>
@@ -137,33 +143,45 @@ const VideoUpload = ({ productId, setError, isProdHaveVideo, revalidator }) => {
           <button
             type="button"
             className={styles.chooseBtn}
-            onClick={() => inputRef.current.click()}
+            onClick={() => inputRef.current?.click()}
           >
-            <i className="bi bi-plus" /> Choose
+            <i className="bi bi-plus" aria-hidden="true" /> Choose
           </button>
         )}
       </div>
 
+      {/* ── Body ── */}
       <div className={styles.body}>
-        {/* ── Drop zone (shown when no file) ── */}
+        {/* Drop zone */}
         {!file && (
           <div
+            role="button"
+            tabIndex={0}
+            aria-label="Click to choose a video or drag and drop"
             className={`${styles.dropzone} ${isDragging ? styles.dropzoneDragging : ""}`}
-            onClick={() => inputRef.current.click()}
+            onClick={() => inputRef.current?.click()}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") inputRef.current?.click();
+            }}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
           >
-            <i className={`bi bi-cloud-arrow-up ${styles.dzIcon}`} />
+            <i
+              className={`bi bi-cloud-arrow-up ${styles.dzIcon}`}
+              aria-hidden="true"
+            />
             <p className={styles.dzText}>
               <strong>Click to browse</strong> or drag &amp; drop
-              <br />
-              MP4, MOV, WebM · up to 2 GB
             </p>
+            <span className={styles.dzHint}>
+              <i className="bi bi-info-circle" aria-hidden="true" />
+              MP4 · MOV · WebM &nbsp;·&nbsp; up to 2 GB
+            </span>
           </div>
         )}
 
-        {/* ── Preview (shown when file selected) ── */}
+        {/* Preview */}
         {file && (
           <>
             <div className={styles.previewCard}>
@@ -176,14 +194,14 @@ const VideoUpload = ({ productId, setError, isProdHaveVideo, revalidator }) => {
                 type="button"
                 className={styles.removeBtn}
                 onClick={resetOrDeselectVideo}
-                aria-label="Remove video"
+                aria-label="Remove selected video"
               >
-                <i className="bi bi-x" />
+                <i className="bi bi-x" aria-hidden="true" />
               </button>
             </div>
 
             <div className={styles.filePill}>
-              <i className="bi bi-file-earmark-play" />
+              <i className="bi bi-file-earmark-play" aria-hidden="true" />
               <span className={styles.fileName}>{file.name}</span>
               <span className={styles.fileSize}>
                 {formatFileSize(file.size)}
@@ -194,13 +212,17 @@ const VideoUpload = ({ productId, setError, isProdHaveVideo, revalidator }) => {
 
         <div className={styles.divider} />
 
-        {/* ── Video type radio cards ── */}
+        {/* Video type */}
         <div>
-          <div className={styles.sectionLabel}>Video type</div>
+          <span className={styles.sectionLabel}>Video type</span>
           <div className={styles.radioGroup}>
             {!isProdHaveVideo && (
               <label
-                className={`${styles.radioCard} ${videoInfo.videoFor === "product" ? styles.radioCardChecked : ""}`}
+                className={`${styles.radioCard} ${
+                  videoInfo.videoFor === "product"
+                    ? styles.radioCardChecked
+                    : ""
+                }`}
               >
                 <input
                   type="radio"
@@ -210,16 +232,21 @@ const VideoUpload = ({ productId, setError, isProdHaveVideo, revalidator }) => {
                   onChange={handleInfoChange}
                   className={styles.radioInput}
                 />
-                <i className={`bi bi-box-seam ${styles.rcIcon}`} />
+                <i
+                  className={`bi bi-box-seam ${styles.rcIcon}`}
+                  aria-hidden="true"
+                />
                 <span className={styles.rcName}>Product</span>
                 <span className={styles.rcDesc}>
-                  Added to the product image gallery
+                  Added to the image gallery
                 </span>
               </label>
             )}
 
             <label
-              className={`${styles.radioCard} ${videoInfo.videoFor === "features" ? styles.radioCardChecked : ""}`}
+              className={`${styles.radioCard} ${
+                videoInfo.videoFor === "features" ? styles.radioCardChecked : ""
+              }`}
             >
               <input
                 type="radio"
@@ -229,48 +256,54 @@ const VideoUpload = ({ productId, setError, isProdHaveVideo, revalidator }) => {
                 onChange={handleInfoChange}
                 className={styles.radioInput}
               />
-              <i className={`bi bi-stars ${styles.rcIcon}`} />
+              <i
+                className={`bi bi-stars ${styles.rcIcon}`}
+                aria-hidden="true"
+              />
               <span className={styles.rcName}>Feature</span>
-              <span className={styles.rcDesc}>
-                Standalone feature highlight reel
-              </span>
+              <span className={styles.rcDesc}>Standalone highlight reel</span>
             </label>
           </div>
         </div>
 
-        {/* ── Title input (feature only) ── */}
+        {/* Title input — feature only */}
         {videoInfo.videoFor === "features" && (
           <div className={styles.inputWrap}>
-            <label className={styles.sectionLabel} htmlFor="title">
+            <label className={styles.sectionLabel} htmlFor="videoTitle">
               Video title
             </label>
             <input
               type="text"
-              id="title"
+              id="videoTitle"
               name="title"
               className={styles.textInput}
               placeholder="e.g. How to use this product…"
               value={videoInfo.title}
               onChange={handleInfoChange}
+              maxLength={80}
             />
           </div>
         )}
 
-        {/* ── Submit ── */}
+        {/* Submit */}
         <button
           type="button"
           className={styles.submitBtn}
           onClick={handleSubmitVideo}
-          disabled={isLoading}
+          disabled={isLoading || !file}
         >
           {isLoading ? (
             <>
-              <span className="spinner-border spinner-border-sm" />
+              <span
+                className="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              />
               Uploading…
             </>
           ) : (
             <>
-              <i className="bi bi-cloud-arrow-up" />
+              <i className="bi bi-cloud-arrow-up" aria-hidden="true" />
               Upload Video
             </>
           )}

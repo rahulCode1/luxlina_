@@ -299,7 +299,7 @@ const HomePage = () => {
                       </p>
                       <div className="mt-auto">
                         <span
-                          className="text-dark fw-bold border-bottom border-dark border-2 pb-1"
+                          className="text-dark fw-bold border-bottom border-slate-300 py-2 px-3 rounded-lg shadow-md border pb-1"
                           style={{ fontSize: "0.8rem" }}
                         >
                           VIEW DETAILS

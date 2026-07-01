@@ -1,7 +1,7 @@
 import { fetchUserAddressAsync } from "../../features/address/addressSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { privateApi } from "../../utils/axios";
 import ErrorModal from "../ErrorModal";
@@ -11,6 +11,7 @@ const BuyNow = ({ info }) => {
   const [payment, setPayment] = useState("ONLINE");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const variationId = useParams()?.variationId;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -19,15 +20,15 @@ const BuyNow = ({ info }) => {
 
   const totalQuantity = info?.quantity;
   const totalPrice =
-    Number(info?.product.discountPrice) * Number(info?.quantity);
+    Number(info?.selectedVariation?.discountPrice) * Number(info?.quantity);
   const totalDiscount =
-    (info?.product.price - info?.product.discountPrice) *
+    (info?.selectedVariation?.price - info?.selectedVariation?.discountPrice) *
     Number(info?.quantity);
   const finalTotal =
-    Number(info?.product.discountPrice) * Number(info?.quantity);
+    Number(info?.selectedVariation?.discountPrice) * Number(info?.quantity);
   const discountPct = Math.round(
-    ((info?.product.price - info?.product.discountPrice) /
-      info?.product.price) *
+    ((info?.selectedVariation?.price - info?.selectedVariation?.discountPrice) /
+      info?.selectedVariation?.price) *
       100,
   );
 
@@ -35,7 +36,6 @@ const BuyNow = ({ info }) => {
     address &&
     address.length > 0 &&
     address.find((addr) => addr.isDefault === true);
-
 
   const handleSubmitOrder = async (e) => {
     e.preventDefault();
@@ -80,7 +80,7 @@ const BuyNow = ({ info }) => {
             toast.success(data?.message || "Order placed successfully!", {
               id: toastId,
             });
-            navigate(`/orders/${data?.orderId}`);
+            // navigate(`/orders/${data?.orderId}`);
           },
         };
 
@@ -107,7 +107,7 @@ const BuyNow = ({ info }) => {
 
         console.log(data);
 
-        navigate(`/orders/${data?.orderId}`);
+        // navigate(`/orders/${data?.orderId}`);
       }
     } catch (err) {
       const msg =
@@ -185,7 +185,7 @@ const BuyNow = ({ info }) => {
               >
                 <div className="d-flex gap-3 align-items-start">
                   <img
-                    src={info.product.images[0].url}
+                    src={info?.selectedVariation?.images[0].url}
                     alt={info.product.name}
                     className="rounded-3 border flex-shrink-0"
                     style={{ width: 88, height: 88, objectFit: "cover" }}
@@ -195,7 +195,7 @@ const BuyNow = ({ info }) => {
                       className="fw-semibold text-dark mb-1 lh-sm"
                       style={{ fontSize: "0.92rem" }}
                     >
-                      {info.product.name}
+                      {info?.product?.name}
                     </p>
 
                     <div className="d-flex flex-wrap gap-1 mb-2">
@@ -203,14 +203,14 @@ const BuyNow = ({ info }) => {
                         className="badge bg-secondary-subtle text-secondary rounded-pill"
                         style={{ fontSize: "0.68rem" }}
                       >
-                        {info.product.category}
+                        {info?.product?.category}
                       </span>
                       <span
                         className="badge bg-light text-muted border rounded-pill"
                         style={{ fontSize: "0.68rem" }}
                       >
                         <i className="bi bi-layers me-1"></i>Qty:{" "}
-                        {info.quantity}
+                        {info?.quantity}
                       </span>
                       {discountPct > 0 && (
                         <span
@@ -224,10 +224,10 @@ const BuyNow = ({ info }) => {
 
                     <div className="d-flex align-items-baseline gap-2">
                       <span className="fw-bold fs-6 text-dark">
-                        ₹{info.product.discountPrice}
+                        ₹{info?.selectedVariation?.discountPrice}
                       </span>
                       <span className="text-decoration-line-through text-muted small">
-                        ₹{info.product.price}
+                        ₹{info?.selectedVariation?.price}
                       </span>
                     </div>
                   </div>
@@ -273,7 +273,7 @@ const BuyNow = ({ info }) => {
               {totalDiscount > 0 && (
                 <div className="alert alert-success d-flex align-items-center gap-2 py-2 px-3 mb-0 mt-3 rounded-3 small">
                   <i className="bi bi-piggy-bank-fill fs-5"></i>
-                  You're saving{" "}
+                  You're saving
                   <strong className="ms-1">₹{totalDiscount}</strong> on this
                   order!
                 </div>
@@ -297,7 +297,7 @@ const BuyNow = ({ info }) => {
               {/* Always-visible Add New button in header */}
               <Link
                 to="/address/addAddress"
-                state={{ from: "/buyNow" }}
+                state={{ from: `/buyNow/${variationId}` }}
                 className="btn btn-outline-primary btn-sm rounded-3 fw-semibold ms-auto d-flex align-items-center gap-1"
                 style={{ fontSize: "0.72rem", padding: "5px 10px" }}
               >
@@ -381,7 +381,7 @@ const BuyNow = ({ info }) => {
                     <div className="d-flex gap-2">
                       <Link
                         to={`/address/${selectedAddress.id}`}
-                        state={{ from: "/buyNow" }}
+                        state={{ from: `/buyNow/${variationId}` }}
                         className="btn btn-primary btn-sm flex-fill rounded-3 d-flex align-items-center justify-content-center gap-1 fw-medium"
                         style={{ fontSize: "0.8rem", padding: "8px 12px" }}
                       >
@@ -411,7 +411,7 @@ const BuyNow = ({ info }) => {
                   {/* ── Add New — solid button, unmistakably clickable ── */}
                   <Link
                     to="/address/addAddress"
-                    state={{ from: "/buyNow" }}
+                    state={{ from: `/buyNow/${variationId}` }}
                     className="btn btn-outline-primary w-100 rounded-3 d-flex align-items-center justify-content-center gap-2 fw-medium"
                     style={{ fontSize: "0.85rem", padding: "10px" }}
                   >
@@ -423,7 +423,7 @@ const BuyNow = ({ info }) => {
                   {address.length > 1 && (
                     <Link
                       to="/address"
-                      state={{ from: "/buyNow" }}
+                      state={{ from: `/buyNow/${variationId}` }}
                       className="btn btn-outline-secondary w-100 rounded-3 d-flex align-items-center justify-content-center gap-2 fw-medium mt-2"
                       style={{ fontSize: "0.85rem", padding: "10px" }}
                     >
@@ -444,7 +444,7 @@ const BuyNow = ({ info }) => {
                   </p>
                   <Link
                     to="/address/addAddress"
-                    state={{ from: "/buyNow" }}
+                    state={{ from: `/buyNow/${variationId}` }}
                     className="btn btn-primary btn-sm rounded-pill px-4 d-inline-flex align-items-center gap-1"
                   >
                     <i className="bi bi-plus-circle-fill"></i> Add Address

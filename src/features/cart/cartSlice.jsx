@@ -3,11 +3,15 @@ import { privateApi } from "../../utils/axios";
 
 export const addToCartAsync = createAsyncThunk(
   "cart/add",
-  async (data, { rejectWithValue }) => {
+  async ({ productId, variationId, quantity }, { rejectWithValue }) => {
     try {
-      const response = await privateApi.post(`/cart/addToCart`, data);
+      const response = await privateApi.post(
+        `/cart/addToCart/${productId}/variation/${variationId}`,
+        { quantity: quantity },
+      );
 
-      // console.log(response.data);
+      console.log(response.data);
+
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -36,11 +40,11 @@ export const getAllCartAsync = createAsyncThunk(
 
 export const increaseCartQuantityAsync = createAsyncThunk(
   "cart/increase",
-  async (productId, { rejectWithValue }) => {
+  async ({ productId, variationId }, { rejectWithValue }) => {
     try {
-      const response = await privateApi.patch(`/cart/increase`, {
-        productId,
-      });
+      const response = await privateApi.patch(
+        `/cart/increase/${productId}/variation/${variationId}`,
+      );
 
       return response.data;
     } catch (error) {
@@ -53,13 +57,13 @@ export const increaseCartQuantityAsync = createAsyncThunk(
 
 export const decreaseCartQuantityAsync = createAsyncThunk(
   "cart/decrease",
-  async (productId, { rejectWithValue }) => {
+  async ({ productId, variationId }, { rejectWithValue }) => {
     try {
-      const response = await privateApi.patch(`/cart/decrease`, {
-        productId,
-      });
+      const response = await privateApi.patch(
+        `/cart/decrease/${productId}/variation/${variationId}`,
+      );
 
-      // console.log(response.data);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -71,13 +75,16 @@ export const decreaseCartQuantityAsync = createAsyncThunk(
 
 export const removeFromCartAsync = createAsyncThunk(
   "cart/remove",
-  async (productId, { rejectWithValue }) => {
+  async ({ productId, variationId }, { rejectWithValue }) => {
     try {
-      const response = await privateApi.patch(`/cart/remove`, {
-        productId,
-      });
+      const response = await privateApi.patch(
+        `/cart/remove/${productId}/variation/${variationId}`,
+        {
+          productId,
+        },
+      );
 
-      // console.log(response.data);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -89,11 +96,10 @@ export const removeFromCartAsync = createAsyncThunk(
 
 export const moveToWishlistAsync = createAsyncThunk(
   "cart/moveToWishlist",
-  async (productId, { rejectWithValue }) => {
-    // console.log(productId)
+  async ({ productId, variationId }, { rejectWithValue }) => {
     try {
       const response = await privateApi.patch(
-        `/cart/moveto_wishlist`,
+        `/cart/moveto_wishlist/${productId}/variation/${variationId}`,
         productId,
       );
 
@@ -141,8 +147,15 @@ const cartSlice = createSlice({
 
   reducers: {
     addToCart: (state, action) => {
+      const {
+        product: { id: productId },
+        selectedVariation: { id: variationId },
+      } = action.payload;
+
       const productIndex = state.cart.findIndex(
-        (cart) => cart.id === action.payload.id,
+        (cart) =>
+          cart?.product?.id === productId &&
+          cart?.selectedVariation?.id === variationId,
       );
 
       if (productIndex === -1) {
@@ -167,13 +180,8 @@ const cartSlice = createSlice({
     });
 
     builder.addCase(getAllCartAsync.fulfilled, (state, action) => {
-      const transformedCart = action.payload?.carts.map((cart) => ({
-        ...cart.product,
-        quantity: cart.quantity,
-      }));
-
       state.getCartsLoading = "success";
-      state.cart = transformedCart;
+      state.cart = action.payload?.carts;
     });
 
     builder.addCase(getAllCartAsync.rejected, (state, action) => {
@@ -188,17 +196,19 @@ const cartSlice = createSlice({
     builder.addCase(addToCartAsync.fulfilled, (state, action) => {
       state.addTocartLoading = "success";
       const productId = action.payload?.cart?.product?.id;
+      const variationId = action.payload?.cart?.selectedVariation?.id;
 
       const cartIndex = state.cart.findIndex(
-        (product) => product.id === productId,
+        (cart) =>
+          cart.product.id === productId &&
+          cart.selectedVariation.id === variationId,
       );
 
       if (cartIndex > -1) {
-        state.cart[cartIndex].quantity += 1;
+        state.cart[cartIndex].quantity += action.payload?.quantity;
       } else {
         state.cart.push({
-          ...action.payload.cart.product,
-          quantity: action.payload.cart.quantity,
+          ...action.payload.cart,
         });
       }
     });
@@ -214,7 +224,9 @@ const cartSlice = createSlice({
     builder.addCase(increaseCartQuantityAsync.fulfilled, (state, action) => {
       state.increaseQuantityLoading = "success";
       const cartIndex = state.cart.findIndex(
-        (product) => product.id === action.payload.productId,
+        (cart) =>
+          cart.product.id === action.payload.productId &&
+          cart.selectedVariation.id === action.payload.variationId,
       );
 
       state.cart[cartIndex].quantity += 1;
@@ -231,7 +243,9 @@ const cartSlice = createSlice({
 
     builder.addCase(decreaseCartQuantityAsync.fulfilled, (state, action) => {
       const cartIndex = state.cart.findIndex(
-        (cart) => cart.id === action.payload.productId,
+        (cart) =>
+          cart.product.id === action.payload.productId &&
+          cart.selectedVariation.id === action.payload.variationId,
       );
 
       if (cartIndex === -1) return;
@@ -258,10 +272,13 @@ const cartSlice = createSlice({
 
     builder.addCase(removeFromCartAsync.fulfilled, (state, action) => {
       const cartIndex = state.cart.findIndex(
-        (cart) => cart.id === action.payload.productId,
+        (cart) =>
+          cart.product.id === action.payload.productId &&
+          cart.selectedVariation.id === action.payload.variationId,
       );
 
       if (cartIndex === -1) return;
+
       state.cart.splice(cartIndex, 1);
       state.removeFromCartLoading = "success";
     });
@@ -276,11 +293,16 @@ const cartSlice = createSlice({
     });
 
     builder.addCase(moveToWishlistAsync.fulfilled, (state, action) => {
-      const productId = action.payload.productId;
-      const productIndex = state.cart.findIndex(
-        (cart) => cart.id === productId,
+      const { productId, variationId } = action.payload;
+      const cartIndex = state.cart.findIndex(
+        (cart) =>
+          cart?.product?.id === productId &&
+          cart?.selectedVariation?.id === variationId,
       );
-      state.cart.splice(productIndex, 1);
+
+      if (cartIndex === -1) return;
+
+      state.cart.splice(cartIndex, 1);
       state.moveToWishlistLoading = "success";
     });
 

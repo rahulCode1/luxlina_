@@ -2,316 +2,403 @@ import {
   FiLock,
   FiHome,
   FiShoppingBag,
-  FiUser,
-  FiLogOut,
   FiMenu,
   FiX,
-  FiMapPin,
-  FiPackage,
+  FiSearch,
+  FiShoppingCart,
 } from "react-icons/fi";
+import { BsCart3 } from "react-icons/bs";
+
 import { useEffect, useRef, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEcommerce } from "../../context/EcommerceContext";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCartAsync } from "../../features/cart/cartSlice";
 import { getAllWishlistAsync } from "../../features/wishlist/wishlistSlice";
 import { fetchAllProductsAsync } from "../../features/product/productSlice";
-import styles from "./Header.module.css";
-import cart from "../../imgs/cart.png";
+import MenuDropdown from "./MenuDropdown";
 
-/* ─────────────────────────────────────────────────
-   Amazon-style icons: count drawn inside the SVG
-───────────────────────────────────────────────── */
-const CartIcon = ({ count }) => (
-  <span style={{ position: "relative" }}>
-    <img src={cart} style={{ width: count > 9 ? "22px" : "20px" }} alt="Cart" />
-    <span
-      style={{
-        position: "absolute",
-        top: `${count > 9 ? "-2px" : "-4px"}`,
-        left: `${count > 9 ? "7px" : "9px"}`,
-        fontSize: `${count > 9 ? "0.7rem" : "0.8rem"}`,
-      }}
-    >
-      {count}
-    </span>
-  </span>
-);
+const CartIcon = ({ count }) => {
+  return (
+    <span className="relative inline-flex items-center justify-center">
+      <BsCart3 className="text-slate-800" size={28} />
 
-const WishlistIcon = ({ count }) => (
-  <span className={styles.iconWrap}>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="26"
-      height="26"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
       {count > 0 && (
-        <text
-          x="12"
-          y="13"
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fontSize="5.8"
-          fontWeight="800"
-          stroke="none"
-          fill="currentColor"
-          fontFamily="inherit"
-        >
-          {count > 99 ? "99+" : count}
-        </text>
+        <span className="absolute top-[1px] left-[13px] text-[10px] font-bold leading-none">
+          {count}
+        </span>
       )}
-    </svg>
-  </span>
-);
+    </span>
+  );
+};
 
 /* ─────────────────────────────────────────────────
    Header
 ───────────────────────────────────────────────── */
 const Header = () => {
-  const { handleLogout } = useEcommerce();
+  const [enteredText, setEnteredText] = useState("");
+  const [toggleSearch, setToggleSearch] = useState(false);
+  const { handleLogout, setSearchText, isLogin } = useEcommerce();
   const { cart: productCart } = useSelector((state) => state.cart);
   const { wishlist } = useSelector((state) => state.wishlist);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const token = localStorage.getItem("token");
-
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef(null);
+  const desktopMenuRef = useRef();
+  const mobileMenuRef = useRef();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  
   const totalItemsInCart =
     productCart && productCart.length > 0
       ? productCart.reduce((acc, curr) => acc + curr.quantity, 0)
       : 0;
 
-  // Close on outside click
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setMenuOpen(false);
-      }
-    };
-    if (menuOpen) document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [menuOpen]);
-
-  // Close on ESC
-  useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === "Escape") setMenuOpen(false);
-    };
-    document.addEventListener("keydown", handleEsc);
-    return () => document.removeEventListener("keydown", handleEsc);
-  }, []);
-
   const closeMenu = () => setMenuOpen(false);
 
   useEffect(() => {
-    if (token) {
+    if (isLogin) {
       dispatch(getAllCartAsync());
       dispatch(getAllWishlistAsync());
     }
-  }, [token, dispatch]);
+  }, [isLogin, dispatch]);
 
   useEffect(() => {
     dispatch(fetchAllProductsAsync());
   }, [dispatch]);
 
-  const navLinkClass = ({ isActive }) =>
-    `${styles.navTab} ${isActive ? styles.activeTab : ""}`;
+  const logout = () => {
+    handleLogout(navigate);
+    closeMenu();
+  };
+
+  const cancelSearch = () => {
+    setEnteredText("");
+    setSearchText("");
+  };
+
+  const handleSearch = () => {
+    if (!enteredText.trim()) return;
+
+    if (location.pathname !== "/products") {
+      navigate("/products");
+    }
+    setSearchText(enteredText);
+  };
+
+
 
   return (
-    <>
-      {menuOpen && <div className={styles.backdrop} onClick={closeMenu} />}
+    <header
+      className="w-screen sticky top-0  bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-md"
+      style={{ zIndex: 1050 }}
+    >
+      {/* Desktop View */}
+      <nav
+        className={`hidden px-4 py-1 md:flex justify-between items-center gap-4`}
+      >
+        <h1 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-violet-700 to-indigo-400 bg-clip-text text-transparent">
+          Handcrafted
+        </h1>
+        <div className="relative hidden w-full max-w-[580px] md:block mx-4 ">
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={enteredText}
+            onChange={(e) => setEnteredText(e.target.value)}
+            className="
+      h-10
+      w-full
+      rounded-full
+      border
+      border-slate-300
+      bg-white
+      pl-4
+      pr-20
+      text-sm
+      text-slate-700
+      placeholder:text-slate-400
+      shadow-sm
+      outline-none
+      transition-all
+      duration-200
+      focus:border-violet-500
+      focus:ring-2
+      focus:ring-violet-200
+      focus:shadow-md
+    "
+          />
 
-      <nav className={styles.navbar} ref={menuRef}>
-        <div className={styles.inner}>
-          {/* Logo */}
-          <NavLink
-            to="/"
-            state={{ from: "/" }}
-            className={styles.brand}
-            onClick={closeMenu}
-          >
-            It's Handicrafted
-          </NavLink>
-
-          {/* Nav items */}
-          <div className={styles.navItems}>
-            {/* Home — desktop only */}
-            <NavLink
-              to="/"
-              end
-              className={`${styles.navTab} ${styles.desktopTab}`}
-              state={{ from: "/" }}
-              style={({ isActive }) =>
-                isActive
-                  ? { color: "#4f46e5", borderBottomColor: "#4f46e5" }
-                  : {}
-              }
-              onClick={closeMenu}
-            >
-              <FiHome size={22} />
-              <span className={styles.navLabel}>Home</span>
-            </NavLink>
-
-            {/* Shop — desktop only */}
-            <NavLink
-              to="/products"
-              state={{ from: "/products" }}
-              className={`${styles.navTab} ${styles.desktopTab}`}
-              style={({ isActive }) =>
-                isActive
-                  ? { color: "#4f46e5", borderBottomColor: "#4f46e5" }
-                  : {}
-              }
-              onClick={closeMenu}
-            >
-              <FiShoppingBag size={22} />
-              <span className={styles.navLabel}>Shop</span>
-            </NavLink>
-
-            {/* Cart — always visible when logged in */}
-            {token && (
-              <NavLink
-                to="/cart"
-                state={{ from: "/cart" }}
-                className={navLinkClass}
-                onClick={closeMenu}
-                aria-label="Cart"
-              >
-                <CartIcon count={totalItemsInCart} />
-
-                <span className={styles.navLabel}>Cart</span>
-              </NavLink>
-            )}
-
-            {/* Hamburger — only shown when logged in */}
-            {token && (
+          <div className="absolute inset-y-0 right-3 flex items-center gap-2">
+            {enteredText && (
               <button
-                className={`${styles.hamBtn} ${menuOpen ? styles.hamOpen : ""}`}
-                onClick={() => setMenuOpen((prev) => !prev)}
-                aria-label={menuOpen ? "Close menu" : "Open menu"}
-                aria-expanded={menuOpen}
+                type="button"
+                onClick={cancelSearch}
+                className="
+          flex
+          h-7
+          w-7
+          items-center
+          justify-center
+          rounded-full
+          text-slate-500
+          transition
+          duration-200
+          hover:bg-slate-100
+          hover:text-black
+        "
               >
-                <span className={styles.hamIcon}>
-                  {menuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
-                </span>
-                <span className={styles.navLabel}>Menu</span>
+                <FiX size={15} />
               </button>
             )}
 
-            {/* Login — shown directly in navbar when logged out */}
-            {!token && (
-              <NavLink to="/login" className={navLinkClass}>
-                <FiLock size={22} />
-                <span className={styles.navLabel}>Login</span>
-              </NavLink>
-            )}
+            <button
+              type="button"
+              onClick={handleSearch}
+              className="
+        flex
+        h-8
+        w-8
+        items-center
+        justify-center
+        rounded-full
+        bg-slate-100
+        text-slate-700
+        transition-all
+        duration-200
+        hover:bg-violet-100
+        hover:text-violet-700
+        active:scale-95
+      "
+            >
+              <FiSearch size={16} />
+            </button>
           </div>
         </div>
 
-        {/* ── Dropdown ── */}
-        <div
-          className={`${styles.dropdown} ${menuOpen ? styles.dropdownOpen : ""}`}
-        >
-          {/* Home & Shop — mobile only inside drawer */}
+        <div className="flex flex-row items-center gap-2  py-2 rounded-md transition-all">
           <NavLink
             to="/"
             end
-            state={{ from: "/" }}
-            className={`${styles.dropItem} ${styles.mobileDropItem}`}
-            onClick={closeMenu}
+            className={({ isActive }) =>
+              `${isActive ? "text-blue-500 border-b-2 border-blue-500" : "text-black"} flex flex-col items-center no-underline hover:bg-slate-200 rounded py-1 px-2`
+            }
           >
-            <FiHome size={16} />
-            <span>Home</span>
+            <FiHome size={18} />
+            <span className="text-[10px] ">Home </span>
           </NavLink>
           <NavLink
             to="/products"
-            state={{ from: "/products" }}
-            className={`${styles.dropItem} ${styles.mobileDropItem}`}
-            onClick={closeMenu}
+            className={({ isActive }) =>
+              `${isActive ? "text-blue-500 border-b-2 border-blue-500" : "text-black"} flex flex-col items-center no-underline hover:bg-slate-200 rounded py-1 px-2`
+            }
           >
-            <FiShoppingBag size={16} />
-            <span>Shop</span>
+            <FiShoppingBag size={18} />
+            <span className="text-[10px] ">Products</span>
           </NavLink>
 
-          {token && (
-            <>
-              {/* Wishlist — inside drawer on ALL screen sizes */}
-              <NavLink
-                to="/wishlist"
-                state={{ from: "/wishlist" }}
-                className={styles.dropItem}
-                onClick={closeMenu}
-              >
-                <WishlistIcon count={wishlist.length} />
-                <span>Wishlist</span>
-                {wishlist.length > 0 && (
-                  <span className={styles.dropCount}>{wishlist.length}</span>
-                )}
-              </NavLink>
-
-              <NavLink
-                to="/user"
-                state={{ from: "/user" }}
-                className={styles.dropItem}
-                onClick={closeMenu}
-              >
-                <FiUser size={16} />
-                <span>Profile</span>
-              </NavLink>
-              <NavLink
-                to="/address"
-                state={{ from: "/address" }}
-                className={styles.dropItem}
-                onClick={closeMenu}
-              >
-                <FiMapPin size={16} />
-                <span>My Address</span>
-              </NavLink>
-              <NavLink
-                to="/orders"
-                state={{ from: "/orders" }}
-                className={styles.dropItem}
-                onClick={closeMenu}
-              >
-                <FiPackage size={16} />
-                <span>My Orders</span>
-              </NavLink>
-
-              <button
-                className={`${styles.dropItem} ${styles.dropItemBtn} ${styles.dropItemDanger}`}
-                onClick={() => {
-                  closeMenu();
-                  handleLogout(navigate);
-                }}
-              >
-                <FiLogOut size={16} />
-                <span>Logout</span>
-              </button>
-            </>
-          )}
-
-          {!token && (
+          {isLogin && (
             <NavLink
-              to="/login"
-              className={styles.dropItem}
-              onClick={closeMenu}
+              to="/cart"
+              className={({ isActive }) =>
+                `${isActive ? "text-blue-500 border-b-2 border-blue-500" : "text-black"} relative flex flex-col items-center no-underline hover:bg-slate-200 rounded py-1 px-2`
+              }
             >
-              <FiLock size={16} />
-              <span>Login</span>
+              <FiShoppingCart size={18} />
+              {totalItemsInCart > 0 && (
+                <span className="absolute -top-1 -right-0 bg-blue-500 text-white text-[9px] font-semibold rounded-full h-4 w-4 flex items-center justify-center">
+                  {totalItemsInCart}
+                </span>
+              )}
+              <span className="text-[10px]">Cart</span>
             </NavLink>
           )}
+
+          {!isLogin && (
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                `${isActive ? "text-blue-500 border-b-2 border-blue-500" : "text-black"} flex flex-col items-center no-underline hover:bg-slate-200 rounded py-1 px-2`
+              }
+            >
+              <FiLock className="mb-0 pb-0" size={18} />
+              <span className="text-[10px] ">Login</span>
+            </NavLink>
+          )}
+          <div className="relative" ref={desktopMenuRef}>
+            {isLogin && (
+              <button
+                className="text-xs flex flex-col items-center hover:bg-slate-200 rounded py-1 px-2  "
+                onClick={() => setMenuOpen((prevStat) => !prevStat)}
+              >
+                {menuOpen ? <FiX size={18} /> : <FiMenu size={18} />}
+                <span className="text-[10px]">Menu </span>
+              </button>
+            )}
+
+            {menuOpen && (
+              <MenuDropdown
+                logout={logout}
+                wishlist={wishlist}
+                closeMenu={closeMenu}
+              />
+            )}
+          </div>
         </div>
       </nav>
-    </>
+
+      {/* Mobile device */}
+      <nav className="mx-4 my-1">
+        <div className="flex justify-between items-center gap-4 md:hidden">
+          <h1 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-violet-700 to-indigo-400 bg-clip-text text-transparent">
+            Handcrafted
+          </h1>
+
+          <div className="flex flex-row items-center gap-2">
+            {!toggleSearch && (
+              <button
+                onClick={() => setToggleSearch((prevStat) => !prevStat)}
+                className="flex flex-col items-center"
+              >
+                <FiSearch size={16} />
+                <span className="text-[10px]">Search </span>
+              </button>
+            )}
+            {toggleSearch && (
+              <button
+                onClick={() => setToggleSearch((prevStat) => !prevStat)}
+                className="flex flex-col items-center"
+              >
+                <FiX size={18} />
+                <span className="text-[10px]">Close </span>
+              </button>
+            )}
+
+            {isLogin && (
+              <NavLink
+                to="/cart"
+                className={({ isActive }) =>
+                  `no-underline ${isActive ? "text-blue-500 border-b-2 border-blue-500" : "text-black"} flex flex-col items-center hover:bg-slate-200 rounded py-1 px-2`
+                }
+              >
+                <CartIcon count={totalItemsInCart} />
+                <span className="text-[10px]  mt-0 pt-0">Cart</span>
+              </NavLink>
+            )}
+
+            {!isLogin && (
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  `${isActive ? "text-blue-500 border-b-2 border-blue-500" : "text-black"} flex flex-col items-center no-underline hover:bg-slate-200 rounded py-1 px-2`
+                }
+              >
+                <FiLock className="mb-0 pb-0" size={18} />
+                <span className="text-[10px] ">Login</span>
+              </NavLink>
+            )}
+            <div className="relative" ref={mobileMenuRef}>
+              {isLogin && (
+                <button
+                  className="text-xs flex flex-col items-center hover:bg-slate-200 rounded py-1  "
+                  onClick={() => setMenuOpen((prevStat) => !prevStat)}
+                >
+                  {menuOpen ? <FiX size={18} /> : <FiMenu size={18} />}
+                  <span>Menu </span>
+                </button>
+              )}
+
+              {menuOpen && (
+                <MenuDropdown
+                  logout={logout}
+                  wishlist={wishlist}
+                  closeMenu={closeMenu}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={`relative mx-auto  md:hidden overflow-hidden transition-all duration-300 ${toggleSearch ? "max-h-20 opacity-100 mt-1" : "max-h-0 opacity-0"}`}
+        >
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={enteredText}
+            onChange={(e) => setEnteredText(e.target.value)}
+            className="
+      h-11
+      w-full
+      rounded-full
+      border
+      border-slate-300
+      bg-white
+      pl-4
+      pr-20
+      text-sm
+      text-slate-700
+      placeholder:text-slate-400
+      shadow-sm
+      outline-none
+      transition-all
+      duration-200
+      focus:border-violet-500
+      focus:ring-2
+      focus:ring-violet-200
+      focus:shadow-md
+    "
+          />
+
+          <div className="absolute inset-y-0 right-3 flex items-center gap-2">
+            {enteredText && (
+              <button
+                type="button"
+                onClick={cancelSearch}
+                className="
+          flex
+          h-7
+          w-7
+          items-center
+          justify-center
+          rounded-full
+          text-slate-500
+          transition-all
+          duration-200
+          hover:bg-slate-100
+          hover:text-black
+          active:scale-95
+        "
+              >
+                <FiX size={15} />
+              </button>
+            )}
+
+            <button
+              type="button"
+              onClick={handleSearch}
+              className="
+        flex
+        h-8
+        w-8
+        items-center
+        justify-center
+        rounded-full
+        bg-slate-100
+        text-slate-700
+        transition-all
+        duration-200
+        hover:bg-violet-100
+        hover:text-violet-700
+        active:scale-95
+      "
+            >
+              <FiSearch size={16} />
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
   );
 };
 

@@ -18,11 +18,33 @@ export const getAllWishlistAsync = createAsyncThunk(
   },
 );
 
-export const addOrRemoveWishlistAsync = createAsyncThunk(
-  "wishlist/toggle",
-  async (productId, { rejectWithValue }) => {
+export const addToWishlistAsync = createAsyncThunk(
+  "wishlist/add",
+  async ({ productId, variationId }, { rejectWithValue }) => {
     try {
-      const response = await privateApi.post(`/wishlist/toggle`, productId);
+  
+
+      const response = await privateApi.post(
+        `/wishlist/addToWishlist/${productId}/variation/${variationId}`,
+      );
+
+      // console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to update wishlist",
+      );
+    }
+  },
+);
+
+export const removeFromWishlistAsync = createAsyncThunk(
+  "wishlist/remove",
+  async ({ productId, variationId }, { rejectWithValue }) => {
+    try {
+      const response = await privateApi.delete(
+        `/wishlist/removeFromWishlist/${productId}/variation/${variationId}`,
+      );
 
       // console.log(response.data);
       return response.data;
@@ -36,9 +58,12 @@ export const addOrRemoveWishlistAsync = createAsyncThunk(
 
 export const wishlistToCartAsync = createAsyncThunk(
   "wishlist/moveToCart",
-  async (productId, { rejectWithValue }) => {
+  async ({ productId, variationId }, { rejectWithValue }) => {
     try {
-      const response = await privateApi.patch(`/wishlist/moveToCart`, productId);
+      const response = await privateApi.patch(
+        `/wishlist/moveToCart/${productId}/variation/${variationId}`,
+        productId,
+      );
 
       // console.log(response.data);
       return response.data;
@@ -56,7 +81,8 @@ const wishlistSlice = createSlice({
   initialState: {
     wishlist: [],
     getWishlistLoading: "idle",
-    toggleWishlistLoading: "idle",
+    addWishlistLoading: "idle",
+    removeFromWishlistLoading: "idle",
     moveToCartLoading: "idle",
     error: null,
   },
@@ -73,19 +99,16 @@ const wishlistSlice = createSlice({
       state.wishlist = [];
     },
 
-    clearWishlistError: (state)=>{
-      state.error = null 
-    }
+    clearWishlistError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getAllWishlistAsync.pending, (state) => {
       state.getWishlistLoading = "loading";
     });
     builder.addCase(getAllWishlistAsync.fulfilled, (state, action) => {
-      const transformWishlist = action.payload.wishlist.map((wishlist) => ({
-        ...wishlist.product,
-      }));
-      state.wishlist = transformWishlist;
+      state.wishlist = action.payload.wishlist;
       state.getWishlistLoading = "success";
     });
 
@@ -94,28 +117,42 @@ const wishlistSlice = createSlice({
       state.error = null;
     });
 
-    builder.addCase(addOrRemoveWishlistAsync.pending, (state) => {
-      state.toggleWishlistLoading = "loading";
+    builder.addCase(addToWishlistAsync.pending, (state) => {
+      state.addWishlistLoading = "loading";
     });
 
-    builder.addCase(addOrRemoveWishlistAsync.fulfilled, (state, action) => {
-      const type = action.payload.type;
+    builder.addCase(addToWishlistAsync.fulfilled, (state, action) => {
+      state.wishlist.push(action.payload.wishlist);
 
-      if (type === "add") {
-        state.wishlist.push(action.payload.wishlistProduct);
-      } else {
-        const productId = action.payload?.wishlistProduct;
-        const productIndex = state.wishlist.findIndex(
-          (product) => product.id === productId,
-        );
+      state.addWishlistLoading = "success";
+    });
 
-        state.wishlist.splice(productIndex, 1);
+    builder.addCase(addToWishlistAsync.rejected, (state, action) => {
+      state.addWishlistLoading = "error";
+      state.error = action.payload;
+    });
+
+    builder.addCase(removeFromWishlistAsync.pending, (state) => {
+      state.removeFromWishlistLoading = "loading";
+    });
+
+    builder.addCase(removeFromWishlistAsync.fulfilled, (state, action) => {
+      const { productId, variationId } = action.payload;
+
+      const findIndex = state.wishlist.findIndex(
+        (wish) =>
+          wish.product?.id === productId &&
+          wish.selectedVariation?.id === variationId,
+      );
+
+      if (findIndex !== -1) {
+        state.wishlist.splice(findIndex, 1);
       }
-      state.toggleWishlistLoading = "success";
+      state.removeFromWishlistLoading = "success";
     });
 
-    builder.addCase(addOrRemoveWishlistAsync.rejected, (state, action) => {
-      state.toggleWishlistLoading = "error";
+    builder.addCase(removeFromWishlistAsync.rejected, (state, action) => {
+      state.removeFromWishlistLoading = "error";
       state.error = action.payload;
     });
 
@@ -124,11 +161,18 @@ const wishlistSlice = createSlice({
     });
 
     builder.addCase(wishlistToCartAsync.fulfilled, (state, action) => {
-      const productId = action.payload.productId;
+      const { productId, variationId } = action.payload;
       const productIndex = state.wishlist.findIndex(
-        (product) => product.id === productId,
+        (wishlist) =>
+          wishlist?.product?.id === productId &&
+          wishlist?.selectedVariation?.id === variationId,
       );
+     
 
+
+      if (productIndex === -1) {
+        return;
+      }
       state.wishlist.splice(productIndex, 1);
       state.moveToCartLoading = "success";
     });
@@ -140,5 +184,6 @@ const wishlistSlice = createSlice({
   },
 });
 
-export const { addToWishlist, clearError, clearWishlist , clearWishlistError} = wishlistSlice.actions;
+export const { addToWishlist, clearError, clearWishlist, clearWishlistError } =
+  wishlistSlice.actions;
 export default wishlistSlice;

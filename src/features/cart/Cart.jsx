@@ -17,6 +17,7 @@ import { useState } from "react";
 
 const Cart = () => {
   const [productId, setProductId] = useState("");
+  const [cartId, setCartId] = useState(null);
   const dispatch = useDispatch();
   const {
     cart: productCart,
@@ -35,13 +36,11 @@ const Cart = () => {
     return wishlist.some((wish) => wish.id === productId);
   };
 
-
-
-  const handleIncreaseQuantity = async (productId) => {
+  const handleIncreaseQuantity = async (productId, variationId) => {
     const toastId = toast.loading("Quantity increasing...");
     try {
       const response = await dispatch(
-        increaseCartQuantityAsync(productId),
+        increaseCartQuantityAsync({ productId, variationId }),
       ).unwrap();
       toast.success(response.message || "Quantity increased successfully.", {
         id: toastId,
@@ -54,11 +53,11 @@ const Cart = () => {
     }
   };
 
-  const handleDecreaseQuantity = async (productId) => {
+  const handleDecreaseQuantity = async (productId, variationId) => {
     const toastId = toast.loading("Quantity decreasing...");
     try {
       const response = await dispatch(
-        decreaseCartQuantityAsync(productId),
+        decreaseCartQuantityAsync({ productId, variationId }),
       ).unwrap();
       toast.success(response.message || "Quantity decreased successfully.", {
         id: toastId,
@@ -71,11 +70,13 @@ const Cart = () => {
     }
   };
 
-  const handleRemoveFromCart = async (productId) => {
+  const handleRemoveFromCart = async (productId, variationId) => {
     const tostId = toast.loading("Remove from cart...");
     try {
       setProductId(productId);
-      const response = await dispatch(removeFromCartAsync(productId)).unwrap();
+      const response = await dispatch(
+        removeFromCartAsync({ productId, variationId }),
+      ).unwrap();
       toast.success(response.message || "Successfully removed from cart.", {
         id: tostId,
       });
@@ -85,25 +86,19 @@ const Cart = () => {
     }
   };
 
-  const handleCartToWishList = async (product) => {
+  const handleCartToWishList = async (cart) => {
     const toastId = toast.loading("Moving to wishlist...");
-    const existingProduct = wishlist.findIndex(
-      (wish) => wish.id === product.id,
-    );
 
-    if (existingProduct !== -1) {
-      return toast("Product already exist in wishlist", {
-        id: toastId,
-        icon: "ℹ️",
-      });
-    }
     try {
-      setProductId(product.id);
+      setCartId(cart?.id);
       const res = await dispatch(
-        moveToWishlistAsync({ productId: product.id }),
+        moveToWishlistAsync({
+          productId: cart?.product.id,
+          variationId: cart?.selectedVariation?.id,
+        }),
       ).unwrap();
-      dispatch(addToWishlist(product));
-      setProductId("");
+      dispatch(addToWishlist(cart));
+      setCartId("");
       toast.success(res.message || "Successfully moved to wishlist", {
         id: toastId,
       });
@@ -114,8 +109,13 @@ const Cart = () => {
   };
 
   const totalDiscountOnCart = productCart.reduce((acc, curr) => {
-    return acc + (curr.price - curr.discountPrice) * curr.quantity;
+    return (
+      acc +
+      (curr.selectedVariation.price - curr.selectedVariation.discountPrice) *
+        curr.quantity
+    );
   }, 0);
+
 
   return (
     <>
@@ -169,27 +169,27 @@ const Cart = () => {
               ════════════════════════ */}
                   <div className="col-12 col-lg-7">
                     <div className="d-flex flex-column gap-3">
-                      {productCart.map((product) => (
+                      {productCart.map((cart) => (
                         <div
-                          key={product.id}
+                          key={cart.id}
                           className="card border rounded-4 overflow-hidden"
                         >
                           <div className="row g-0">
                             {/* Image */}
                             <div className="col-4 col-sm-3">
                               <Link
-                                to={`/products/${product.id}`}
+                                to={`/products/${cart.product.id}`}
                                 state={{ from: "/cart" }}
                               >
                                 <img
-                                  src={product?.images[0]?.url}
+                                  src={cart?.selectedVariation?.images[0]?.url}
                                   className="w-100 h-100"
                                   style={{
                                     objectFit: "cover",
                                     minHeight: 130,
                                     display: "block",
                                   }}
-                                  alt={product.name}
+                                  alt={cart.selectedVariation.name}
                                 />
                               </Link>
                             </div>
@@ -204,7 +204,7 @@ const Cart = () => {
                                     fontSize: "clamp(0.82rem, 2vw, 0.95rem)",
                                   }}
                                 >
-                                  {product.name}
+                                  {cart.selectedVariation.name}
                                 </p>
 
                                 {/* Price + Save badge */}
@@ -213,10 +213,10 @@ const Cart = () => {
                                     className="fw-bold text-primary"
                                     style={{ fontSize: "1.05rem" }}
                                   >
-                                    ₹{product.discountPrice}
+                                    ₹{cart.selectedVariation.discountPrice}
                                   </span>
                                   <span className="text-muted small text-decoration-line-through">
-                                    ₹{product.price}
+                                    ₹{cart.selectedVariation.price}
                                   </span>
                                   <span
                                     className="badge bg-success-subtle text-success rounded-pill"
@@ -224,7 +224,8 @@ const Cart = () => {
                                   >
                                     <i className="bi bi-tag-fill me-1" />
                                     Save ₹
-                                    {product.price - product.discountPrice}
+                                    {cart.selectedVariation.price -
+                                      cart.selectedVariation.discountPrice}
                                   </span>
                                 </div>
 
@@ -238,10 +239,13 @@ const Cart = () => {
                                     <button
                                       disabled={
                                         decreaseQuantityLoading === "loading" &&
-                                        product.id === productId
+                                        cart.selectedVariation.id === productId
                                       }
                                       onClick={() =>
-                                        handleDecreaseQuantity(product.id)
+                                        handleDecreaseQuantity(
+                                          cart.product.id,
+                                          cart.selectedVariation.id,
+                                        )
                                       }
                                       className="btn btn-sm d-flex align-items-center justify-content-center rounded-circle border bg-white text-primary fw-bold p-0"
                                       style={{
@@ -261,15 +265,18 @@ const Cart = () => {
                                         fontSize: "0.88rem",
                                       }}
                                     >
-                                      {product.quantity}
+                                      {cart.quantity}
                                     </span>
                                     <button
                                       disabled={
                                         increaseQuantityLoading === "loading" &&
-                                        product.id === productId
+                                        cart.selectedVariation.id === productId
                                       }
                                       onClick={() =>
-                                        handleIncreaseQuantity(product.id)
+                                        handleIncreaseQuantity(
+                                          cart.product.id,
+                                          cart.selectedVariation.id,
+                                        )
                                       }
                                       className="btn btn-sm d-flex align-items-center justify-content-center rounded-circle border bg-white text-primary fw-bold p-0"
                                       style={{
@@ -289,10 +296,13 @@ const Cart = () => {
                                     <button
                                       disabled={
                                         removeFromCartLoading === "loading" &&
-                                        product.id === productId
+                                        cart.selectedVariation.id === productId
                                       }
                                       onClick={() =>
-                                        handleRemoveFromCart(product.id)
+                                        handleRemoveFromCart(
+                                          cart.product.id,
+                                          cart.selectedVariation.id,
+                                        )
                                       }
                                       className="btn btn-outline-danger btn-sm rounded-3 fw-semibold d-flex align-items-center justify-content-center"
                                       style={{
@@ -302,7 +312,8 @@ const Cart = () => {
                                       }}
                                     >
                                       {removeFromCartLoading === "loading" &&
-                                      product.id === productId ? (
+                                      cart.selectedVariation.id ===
+                                        productId ? (
                                         <span className="spinner-border spinner-border-sm" />
                                       ) : (
                                         <>
@@ -318,7 +329,9 @@ const Cart = () => {
                                     </button>
 
                                     {/* Wishlist */}
-                                    {isExistOnWishlist(product.id) ? (
+                                    {isExistOnWishlist(
+                                      cart.selectedVariation.id,
+                                    ) ? (
                                       <Link
                                         to="/wishlist"
                                         state={{ from: "/cart" }}
@@ -340,10 +353,10 @@ const Cart = () => {
                                       <button
                                         disabled={
                                           moveToWishlistLoading === "loading" &&
-                                          product.id === productId
+                                          cart.id === cartId
                                         }
                                         onClick={() =>
-                                          handleCartToWishList(product)
+                                          handleCartToWishList(cart)
                                         }
                                         className="btn btn-outline-primary btn-sm rounded-3 fw-semibold d-flex align-items-center justify-content-center"
                                         style={{
@@ -353,7 +366,7 @@ const Cart = () => {
                                         }}
                                       >
                                         {moveToWishlistLoading === "loading" &&
-                                        product.id === productId ? (
+                                        cart.id === cartId ? (
                                           <span className="spinner-border spinner-border-sm" />
                                         ) : (
                                           <>
@@ -396,7 +409,7 @@ const Cart = () => {
                           className="badge bg-primary-subtle text-primary rounded-pill ms-auto"
                           style={{ fontSize: "0.7rem" }}
                         >
-                          {totalQuantity(productCart)}{" "}
+                          {totalQuantity(productCart)}
                           {totalQuantity(productCart) > 1 ? "items" : "item"}
                         </span>
                       </div>

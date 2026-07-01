@@ -1,22 +1,29 @@
 import styles from "./FeatureVideosGallary.module.css";
 import { privateApi } from "../../utils/axios";
 import { useState } from "react";
-import { useParams, useRevalidator } from "react-router-dom";
+import { useParams, useRevalidator, useSearchParams } from "react-router-dom";
+import { useEcommerce } from "../../context/EcommerceContext";
 
 const FeatureVideosGallary = ({ featureVideos }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
   const [videoId, setVideoId] = useState(null);
+  const { setError } = useEcommerce();
   const productId = useParams()?.id;
   const revalidator = useRevalidator();
   const hasVideos = featureVideos && featureVideos.length > 0;
+  const [searchParams] = useSearchParams();
+  const renderVideo = searchParams.get("variationId")
+    ? featureVideos.filter(
+        (video) => video?.variationId === searchParams.get("variationId"),
+      )
+    : featureVideos;
 
-  const handleDeleteVideo = async (videoId) => {
+  const handleDeleteFeatureVideo = async (videoId, variationId) => {
     try {
       setVideoId(videoId);
       setIsLoading(true);
       const res = await privateApi.delete(
-        `product/${productId}/featureVideo?videoId=${videoId}`,
+        `product/${productId}/variation/${variationId}/featureVideo/${videoId}`,
       );
       setVideoId(null);
       revalidator.revalidate();
@@ -29,22 +36,17 @@ const FeatureVideosGallary = ({ featureVideos }) => {
     }
   };
 
-  console.log(error);
-
   return (
     <section className={styles.section}>
       {hasVideos ? (
         <div className={styles.track}>
-          {featureVideos.map((video, i) => (
+          {renderVideo.map((video, i) => (
             <div
               key={video.id}
               className={styles.card}
               style={{ animationDelay: `${i * 0.07}s` }}
             >
-              <div
-                className={styles.videoWrap}
-                style={{ position: "relative" }}
-              >
+              <div className={styles.videoWrap}>
                 <video
                   src={video?.url}
                   controls
@@ -52,20 +54,21 @@ const FeatureVideosGallary = ({ featureVideos }) => {
                   preload="metadata"
                 />
                 <button
+                  aria-label="Delete video"
                   disabled={isLoading}
-                  onClick={() => handleDeleteVideo(video.id)}
-                  style={{
-                    position: "absolute",
-                    top: "4px",
-                    right: "4px",
-                    border: "none",
-                    borderRadius: "8px",
-                  }}
+                  onClick={() =>
+                    handleDeleteFeatureVideo(video.id, video?.variationId)
+                  }
+                  className={styles.deleteBtn}
                 >
                   {video.id === videoId ? (
-                    <span className="spinner-border spinner-border-sm" />
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
                   ) : (
-                    <i class="bi bi-trash-fill" />
+                    <i className="bi bi-trash-fill" aria-hidden="true" />
                   )}
                 </button>
               </div>
@@ -75,7 +78,7 @@ const FeatureVideosGallary = ({ featureVideos }) => {
         </div>
       ) : (
         <div className={styles.empty}>
-          <i className="bi bi-camera-video-off" />
+          <i className="bi bi-camera-video-off" aria-hidden="true" />
           <span>No feature videos for this product yet.</span>
         </div>
       )}

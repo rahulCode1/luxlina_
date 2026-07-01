@@ -33,7 +33,7 @@ const UpdateProduct = ({ product }) => {
     keywords: "",
   };
 
-  console.log(product);
+ 
 
   const [formData, setFormData] = useState(initialFormData);
   const navigate = useNavigate();

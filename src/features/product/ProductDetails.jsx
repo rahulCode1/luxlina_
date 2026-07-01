@@ -8,6 +8,7 @@ import Footer from "../../components/product/Footer";
 import ProductReview from "../../components/review/ProductReview";
 import FeatureVideosGallary from "../../components/product/FeatureVideosGallary";
 import Loading from "../../components/Loading";
+import ProductDetailsSkeleton from "../../components/loading/ProductDetailsSkeleton";
 
 import styles from "./ProductDetails.module.css";
 
@@ -17,9 +18,8 @@ const ProductDetails = () => {
 
   return (
     <div className={styles.page}>
-
       {/* ── Product main ── */}
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<ProductDetailsSkeleton />}>
         <Await resolve={product}>
           {(data) => <ProductItem productData={data} />}
         </Await>
@@ -33,9 +33,7 @@ const ProductDetails = () => {
         </div>
         <Suspense fallback={<Loading />}>
           <Await resolve={featureVideos}>
-            {(data) => (
-              <FeatureVideosGallary featureVideos={data?.videos} />
-            )}
+            {(data) => <FeatureVideosGallary featureVideos={data?.videos} />}
           </Await>
         </Suspense>
       </div>
