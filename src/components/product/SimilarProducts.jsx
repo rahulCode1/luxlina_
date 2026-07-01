@@ -3,23 +3,21 @@ import styles from "./SimilarProducts.module.css";
 
 const SimilarProducts = ({ similarProducts }) => {
   if (!similarProducts || similarProducts.length === 0) return null;
+  
 
   return (
     <section className={styles.section}>
       {/* Header */}
-      {/* <div className={styles.header}>
-        <h2 className={styles.heading}>You May Also Like</h2>
-        <span className={styles.subtext}>Similar handcrafted pieces</span>
-      </div> */}
 
       {/* Scroll Track */}
       <div className={styles.scrollWrapper}>
         <div className={styles.track}>
           {similarProducts.map((product) => {
             const discount = Math.round(
-              ((product.price - product.discountPrice) / product.price) * 100
+              ((product.price - product.discountPrice) / product.price) * 100,
             );
-            const thumbnail = product.images?.[0]?.url || product.images?.[0];
+            const thumbnail =
+              product?.variations[0]?.images?.[0]?.url || product.images?.[0];
 
             return (
               <Link
@@ -37,12 +35,15 @@ const SimilarProducts = ({ similarProducts }) => {
                   {thumbnail ? (
                     <img
                       src={thumbnail}
-                      alt={product.name}
+                      alt={product?.variations[0]?.name}
                       className={styles.img}
                     />
                   ) : (
                     <div className={styles.imgPlaceholder}>
-                      <i className="bi bi-image" style={{ fontSize: "2rem", color: "#c9a87c" }} />
+                      <i
+                        className="bi bi-image"
+                        style={{ fontSize: "2rem", color: "#c9a87c" }}
+                      />
                     </div>
                   )}
                 </div>
@@ -50,12 +51,19 @@ const SimilarProducts = ({ similarProducts }) => {
                 {/* Info */}
                 <div className={styles.info}>
                   <span className={styles.category}>{product.category}</span>
-                  <p className={styles.name}>{product.name}</p>
+                  <p className={styles.name}>{product?.variations[0]?.name}</p>
 
                   {/* Rating */}
                   <div className={styles.ratingRow}>
                     {[...Array(5)].map((_, i) => (
-                      <span key={i} className={i < Math.floor(product.rating) ? styles.starFilled : styles.starEmpty}>
+                      <span
+                        key={i}
+                        className={
+                          i < Math.floor(product.rating)
+                            ? styles.starFilled
+                            : styles.starEmpty
+                        }
+                      >
                         ★
                       </span>
                     ))}
@@ -63,8 +71,12 @@ const SimilarProducts = ({ similarProducts }) => {
 
                   {/* Pricing */}
                   <div className={styles.priceRow}>
-                    <span className={styles.discountPrice}>₹{product.discountPrice}</span>
-                    <span className={styles.originalPrice}>₹{product.price}</span>
+                    <span className={styles.discountPrice}>
+                      ₹{product?.variations[0]?.discountPrice}
+                    </span>
+                    <span className={styles.originalPrice}>
+                      ₹{product?.variations[0]?.price}
+                    </span>
                   </div>
                 </div>
               </Link>
