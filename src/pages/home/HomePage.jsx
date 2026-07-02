@@ -8,13 +8,9 @@ import tray from "../../imgs/tray.jpg";
 import newArrivals from "../../imgs/new.jpg";
 import deepakCategoryImg from "../../imgs/deepak.png";
 import decorativeBowl from "../../imgs/bowl.jpg";
-import MortarPestleImg from "../../imgs/mortarPestle.png";
-import SillBattaImg from "../../imgs/SillBatta.png";
-import chaklaBelanImg from "../../imgs/chaklaBelan.png";
-import mortarPestleSmImg from "../../imgs/mortar&PestleSm.png";
-import sillBattaSmImg from "../../imgs/sillBattaSm.png";
-import chaklaBelanSmImg from "../../imgs/chaklaBelanSm.png";
-import MakingProcess from "./MakingProcess";
+import Bowls from "../../imgs/Bowls.png";
+import Vase from "../../imgs/Vase1.png";
+import Coster from "../../imgs/Coster1.png";
 import styles from "./HomePage.module.css";
 import Footer from "../../components/product/Footer";
 
@@ -35,20 +31,20 @@ const HomePage = () => {
       imgUrl: ganesh,
     },
     {
-      name: "Mortar Pestle",
-      category: "MortarPestle",
-      imgUrl: MortarPestleImg,
+      name: "Decorative Bowls",
+      category: "Bowls",
+      imgUrl: Bowls,
     },
 
     {
-      name: "Chakla & Belan",
-      category: "ChaklaBelan",
-      imgUrl: chaklaBelanImg,
+      name: "Flower Vase",
+      category: "Vase",
+      imgUrl: Vase,
     },
     {
-      name: "Sil & Batta",
-      category: "SilBatta",
-      imgUrl: SillBattaImg,
+      name: "Costers",
+      category: "Coster",
+      imgUrl: Coster,
     },
 
     {
@@ -160,62 +156,65 @@ const HomePage = () => {
         </div>
 
         <div>
-          {/* Mortar & Pestle — text left, img right */}
+          {/* Marble Flower Deepak — text left, img right */}
           <div
             className={styles.categoryContainer}
-            onClick={() => handleUpdateParams("category", "MortarPestle")}
+            onClick={() => handleUpdateParams("category", "MarbleFlowerDeepak")}
           >
             <div className={styles.categoryText}>
-              <p>Kitchen Essentials</p>
+              <p>Spiritual Collection</p>
               <h5>
-                Handcrafted Granite Mortar & Pestle — grind fresher, cook
-                better.
+                Marble Flower Deepak with Brass Bowl — handcrafted elegance for
+                every pooja.
               </h5>
               <span>Explore Collection →</span>
             </div>
             <img
-              src={mortarPestleSmImg}
+              src={Bowls}
               className={styles.sideImg}
-              alt="Mortar Pestle"
+              alt="Marble Flower Deepak"
             />
           </div>
 
-          {/* Sil Batta — img left, text right */}
+          {/* Marble Hexagon Deepak — img left, text right */}
           <div
             className={styles.categoryContainer}
-            onClick={() => handleUpdateParams("category", "SilBatta")}
+            onClick={() =>
+              handleUpdateParams("category", "MarbleHexagonDeepak")
+            }
           >
             <img
-              src={sillBattaSmImg}
+              src={Vase}
               className={styles.sideImg}
-              alt="Sil Batta"
+              alt="Marble Hexagon Deepak"
             />
             <div className={styles.categoryText}>
-              <p>Traditional Grinding</p>
+              <p>Premium Marble Craft</p>
               <h5>
-                Stone Sil Batta — the art of slow grinding, preserved in
-                granite.
+                White Marble Hexagon Deepak — timeless design with a polished
+                brass bowl.
               </h5>
               <span>Shop Now →</span>
             </div>
           </div>
 
-          {/* Chakla Belan — text left, img right */}
+          {/* Marble Star Deepak — text left, img right */}
           <div
             className={styles.categoryContainer}
-            onClick={() => handleUpdateParams("category", "ChaklaBelan")}
+            onClick={() => handleUpdateParams("category", "MarbleStarDeepak")}
           >
             <div className={styles.categoryText}>
-              <p>Everyday Baking</p>
+              <p>Festive Essentials</p>
               <h5>
-                Marble Chakla & Belan — roll the perfect chapati, every time.
+                Marble Star Deepak — illuminate your home temple with
+                handcrafted beauty.
               </h5>
               <span>View All →</span>
             </div>
             <img
-              src={chaklaBelanSmImg}
+              src={Coster}
               className={styles.sideImg}
-              alt="Chakla Belan"
+              alt="Marble Star Deepak"
             />
           </div>
         </div>
@@ -246,7 +245,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <MakingProcess />
+        
 
         {/* 3. New Arrivals - Responsive Grid */}
         <div className="row g-4">
