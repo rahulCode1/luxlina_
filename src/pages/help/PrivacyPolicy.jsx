@@ -52,7 +52,7 @@ const sections = [
     content: [
       {
         subtitle: "We do not sell your data",
-        body: "itsHandicrafted does not sell, rent, or trade your personal information to any third party for marketing or commercial purposes. Your data belongs to you.",
+        body: "Luxlina does not sell, rent, or trade your personal information to any third party for marketing or commercial purposes. Your data belongs to you.",
       },
       {
         subtitle: "Service providers",
@@ -105,7 +105,7 @@ const sections = [
       },
       {
         subtitle: "Correction & deletion",
-        body: "You can update most of your personal information directly in 'My Account'. To request complete deletion of your data, email us at privacy@itshandicrafted.in from your registered email address.",
+        body: "You can update most of your personal information directly in 'My Account'. To request complete deletion of your data, email us at privacy@Luxlina.in from your registered email address.",
       },
       {
         subtitle: "Opt-out of marketing",
@@ -113,7 +113,7 @@ const sections = [
       },
       {
         subtitle: "Grievance redressal",
-        body: "In accordance with the Information Technology Act, 2000 and the IT (Amendment) Act, 2008, any grievance regarding processing of your personal data can be directed to our Grievance Officer at privacy@itshandicrafted.in. We will respond within 30 days.",
+        body: "In accordance with the Information Technology Act, 2000 and the IT (Amendment) Act, 2008, any grievance regarding processing of your personal data can be directed to our Grievance Officer at privacy@Luxlina.in. We will respond within 30 days.",
       },
     ],
   },
@@ -150,7 +150,7 @@ const sections = [
       },
       {
         subtitle: "Continued use",
-        body: "Your continued use of our website and services after the effective date of any changes constitutes your acceptance of the updated policy. If you disagree with any changes, you may close your account by contacting us at privacy@itshandicrafted.in.",
+        body: "Your continued use of our website and services after the effective date of any changes constitutes your acceptance of the updated policy. If you disagree with any changes, you may close your account by contacting us at privacy@Luxlina.in.",
       },
     ],
   },
@@ -161,7 +161,7 @@ const sections = [
     content: [
       {
         subtitle: "Privacy queries",
-        body: "For any questions, requests, or concerns about this Privacy Policy or the handling of your personal data, please contact our Privacy Team at privacy@itshandicrafted.in. For general support queries, reach us at rahulkumawat50665@gmail.com or via WhatsApp at +916377408633.",
+        body: "For any questions, requests, or concerns about this Privacy Policy or the handling of your personal data, please contact our Privacy Team at privacy@Luxlina.in. For general support queries, reach us at rahulkumawat50665@gmail.com or via WhatsApp at +916377408633.",
       },
       {
         subtitle: "Postal address",
@@ -244,7 +244,7 @@ const PrivacyPolicy = () => {
               <i className="bi bi-truck" /> Shipping Policy
             </Link>
             <a
-              href="mailto:privacy@itshandicrafted.in"
+              href="mailto:privacy@Luxlina.in"
               className={styles.sidebarLink}
             >
               <i className="bi bi-envelope" /> Privacy Queries
@@ -262,7 +262,7 @@ const PrivacyPolicy = () => {
             <div className={styles.introText}>
               <h2 className={styles.introTitle}>Your Privacy Matters</h2>
               <p className={styles.introBody}>
-                itsHandicrafted is committed to protecting your personal
+                Luxlina is committed to protecting your personal
                 information. We collect only what is necessary, store it
                 securely, and never sell it to third parties. This policy
                 applies to all users of our website and mobile application.

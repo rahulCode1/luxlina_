@@ -117,7 +117,7 @@ const Sustainability = () => {
             <em className={styles.heroTitleEm}>Earth &amp; People</em>
           </h1>
           <p className={styles.heroSub}>
-            Sustainability at itsHandicrafted isn't a checkbox — it's the
+            Sustainability at Luxlina isn't a checkbox — it's the
             foundation. From the quarry to your doorstep, every decision is
             measured against its impact on land, livelihood, and legacy.
           </p>
@@ -145,7 +145,7 @@ const Sustainability = () => {
             shape it — must be equally enduring.
           </blockquote>
           <p className={styles.introAttr}>
-            — itsHandicrafted, Founding Principle
+            — Luxlina, Founding Principle
           </p>
         </div>
       </section>
@@ -294,7 +294,7 @@ const Sustainability = () => {
             Every Purchase is a Vote for Craft &amp; Planet
           </h2>
           <p className={styles.ctaSub}>
-            When you choose itsHandicrafted, you support a supply chain that is
+            When you choose Luxlina, you support a supply chain that is
             traceable, fair, and built to last — for artisans, for communities,
             and for the earth beneath our workshops.
           </p>

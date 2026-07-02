@@ -503,7 +503,7 @@ const ReturnRefund = () => {
                     <i className="bi bi-info-circle" />
                     <span>
                       Attach photos of the item via email to{" "}
-                      <strong>support@itshandicrafted.in</strong> quoting your
+                      <strong>support@luxlina.in</strong> quoting your
                       Order ID for faster processing.
                     </span>
                   </div>
@@ -549,7 +549,7 @@ const ReturnRefund = () => {
               </p>
               <div className={styles.contactOptions}>
                 <a
-                  href="mailto:support@itshandicrafted.in"
+                  href="mailto:support@luxlina.in"
                   className={styles.contactOption}
                 >
                   <i className="bi bi-envelope-fill" />

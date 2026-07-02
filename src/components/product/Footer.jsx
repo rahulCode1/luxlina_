@@ -33,7 +33,7 @@ const Footer = ({ from }) => {
           {/* Brand column */}
           <div className={styles.brandCol}>
             <Link to="/" className={styles.logo}>
-              It's Handicrafted
+            Luxlina
             </Link>
             <p className={styles.tagline}>
               Crafted from the earth, carried into your home. Each piece is
@@ -45,7 +45,7 @@ const Footer = ({ from }) => {
                 {
                   icon: "bi-instagram",
                   label: "Instagram",
-                  href: "https://www.instagram.com/itshandicrafted/",
+                  href: "",
                 },
                 { icon: "bi-facebook", label: "Facebook", href: "#" },
                 { icon: "bi-pinterest", label: "Pinterest", href: "#" },
@@ -177,7 +177,7 @@ const Footer = ({ from }) => {
               <div className={styles.contactItem}>
                 <i className="bi bi-geo-alt" />
                 <span className={styles.address}>
-                  It's Handicrafted,
+                Luxlina
                   <br />
                   Kishangarh, Rajasthan 305802
                 </span>
@@ -209,7 +209,7 @@ const Footer = ({ from }) => {
       <div className={styles.bottomBar}>
         <div className={styles.bottomInner}>
           <p className={styles.copyright}>
-            © {currentYear} It's Handicrafted. All rights reserved.
+            © {currentYear} Luxlina. All rights reserved.
           </p>
           <div className={styles.legalLinks}>
             <Link to="/privacy-policy" className={styles.legalLink}>

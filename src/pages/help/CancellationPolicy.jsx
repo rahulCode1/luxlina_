@@ -13,11 +13,11 @@ const sections = [
     content: [
       {
         subtitle: "Our cancellation commitment",
-        body: "At itsHandicrafted, we understand that plans change. We offer a fair and transparent cancellation policy that balances your flexibility with the handcrafted nature of our products. Because every item is made by skilled artisans, cancellation windows are time-sensitive once production or dispatch begins.",
+        body: "At Luxlina, we understand that plans change. We offer a fair and transparent cancellation policy that balances your flexibility with the handcrafted nature of our products. Because every item is made by skilled artisans, cancellation windows are time-sensitive once production or dispatch begins.",
       },
       {
         subtitle: "Scope of this policy",
-        body: "This policy applies to all orders placed on itshandicrafted.in — including standard product orders, custom orders, and bulk orders. Different cancellation rules apply to each order type and are described in detail below.",
+        body: "This policy applies to all orders placed on Luxlina.in — including standard product orders, custom orders, and bulk orders. Different cancellation rules apply to each order type and are described in detail below.",
       },
     ],
   },
@@ -32,7 +32,7 @@ const sections = [
       },
       {
         subtitle: "How to cancel",
-        body: "To cancel a standard order, go to 'My Account > My Orders', select the order, and click 'Request Cancellation'. Alternatively, contact us immediately at support@itshandicrafted.in or via WhatsApp at +91 12345 67890 with your Order ID. Phone and WhatsApp cancellations are accepted Mon–Sat, 10 AM to 6 PM IST.",
+        body: "To cancel a standard order, go to 'My Account > My Orders', select the order, and click 'Request Cancellation'. Alternatively, contact us immediately at support@Luxlina.in or via WhatsApp at +91 12345 67890 with your Order ID. Phone and WhatsApp cancellations are accepted Mon–Sat, 10 AM to 6 PM IST.",
       },
       {
         subtitle: "After dispatch",
@@ -100,7 +100,7 @@ const sections = [
   {
     id: "cancellation-by-us",
     icon: "bi-x-octagon",
-    title: "Cancellation by itsHandicrafted",
+    title: "Cancellation by Luxlina",
     content: [
       {
         subtitle: "When we may cancel your order",
@@ -112,7 +112,7 @@ const sections = [
       },
       {
         subtitle: "No obligation to fulfil",
-        body: "In cases of pricing errors or system-generated incorrect orders, itsHandicrafted is under no obligation to fulfil the order at the erroneous price. We will always inform you of the correct price and give you the option to place a fresh order.",
+        body: "In cases of pricing errors or system-generated incorrect orders, Luxlina is under no obligation to fulfil the order at the erroneous price. We will always inform you of the correct price and give you the option to place a fresh order.",
       },
     ],
   },
@@ -165,7 +165,7 @@ const sections = [
     content: [
       {
         subtitle: "Support channels",
-        body: "For cancellation requests or queries, reach us at support@itshandicrafted.in (response within 4 hours on business days), via WhatsApp at +91 12345 67890, or by calling +91 12345 67890 between 10 AM and 6 PM IST, Monday to Saturday.",
+        body: "For cancellation requests or queries, reach us at support@Luxlina.in (response within 4 hours on business days), via WhatsApp at +91 12345 67890, or by calling +91 12345 67890 between 10 AM and 6 PM IST, Monday to Saturday.",
       },
       {
         subtitle: "Always quote your Order ID",
@@ -222,7 +222,7 @@ const CancellationPolicy = () => {
           </h1>
           <p className={styles.heroSub}>
             Clear, fair, and straightforward. Here's everything you need to know
-            about cancelling an order with itsHandicrafted.
+            about cancelling an order with Luxlina.
           </p>
           <div className={styles.heroMeta}>
             <span>
@@ -303,10 +303,10 @@ const CancellationPolicy = () => {
               <i className="bi bi-whatsapp" /> WhatsApp Us
             </a>
             <a
-              href="mailto:support@itshandicrafted.in"
+              href="mailto:support@Luxlina.in"
               className={styles.emailLink}
             >
-              <i className="bi bi-envelope" /> support@itshandicrafted.in
+              <i className="bi bi-envelope" /> support@Luxlina.in
             </a>
           </div>
         </aside>
@@ -376,7 +376,7 @@ const CancellationPolicy = () => {
                 <i className="bi bi-whatsapp" /> WhatsApp Us
               </a>
               <a
-                href="mailto:support@itshandicrafted.in"
+                href="mailto:support@Luxlina.in"
                 className={styles.contactOutline}
               >
                 <i className="bi bi-envelope" /> Email Support

@@ -80,7 +80,7 @@ const Header = () => {
         className={`hidden px-4 py-1 md:flex justify-between items-center gap-4`}
       >
         <h1 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-violet-700 to-indigo-400 bg-clip-text text-transparent">
-          Handcrafted
+          Luxlina
         </h1>
         <div className="relative hidden w-full max-w-[580px] md:block mx-4 ">
           <input

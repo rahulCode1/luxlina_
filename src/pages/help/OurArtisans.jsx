@@ -100,7 +100,7 @@ const values = [
   {
     icon: "bi-shield-check",
     title: "Safe Workshops",
-    desc: "Dust-filtered studios, ergonomic tools, and regular health check-ups — funded by itsHandicrafted.",
+    desc: "Dust-filtered studios, ergonomic tools, and regular health check-ups — funded by Luxlina.",
   },
   {
     icon: "bi-mortarboard",
@@ -167,7 +167,7 @@ const OurArtisans = () => {
             <em className={styles.heroEm}>Artisans</em>
           </h1>
           <p className={styles.heroSub}>
-            Every itsHandicrafted piece begins with a person — a karigar who has
+            Every Luxlina piece begins with a person — a karigar who has
             spent decades mastering their craft in the workshops of Rajasthan.
             These are their stories.
           </p>

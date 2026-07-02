@@ -14,7 +14,7 @@ const sections = [
     content: [
       {
         subtitle: "Agreement to these terms",
-        body: "By accessing or using the itsHandicrafted website (itshandicrafted.in), placing an order, or creating an account, you confirm that you have read, understood, and agree to be bound by these Terms & Conditions. If you do not agree, please refrain from using our services.",
+        body: "By accessing or using the Luxlina website (Luxlina.in), placing an order, or creating an account, you confirm that you have read, understood, and agree to be bound by these Terms & Conditions. If you do not agree, please refrain from using our services.",
       },
       {
         subtitle: "Eligibility",
@@ -22,7 +22,7 @@ const sections = [
       },
       {
         subtitle: "Modifications",
-        body: "itsHandicrafted reserves the right to update or modify these Terms at any time. Material changes will be communicated via email and a prominent notice on our website at least 14 days before they take effect. Continued use of our services after the effective date constitutes acceptance.",
+        body: "Luxlina reserves the right to update or modify these Terms at any time. Material changes will be communicated via email and a prominent notice on our website at least 14 days before they take effect. Continued use of our services after the effective date constitutes acceptance.",
       },
     ],
   },
@@ -79,7 +79,7 @@ const sections = [
       },
       {
         subtitle: "Payment security",
-        body: "itsHandicrafted does not store your card details on our servers at any point. All transactions are encrypted via TLS. In the event of a failed payment where your bank account is debited, the amount is typically reversed within 5–7 business days. Contact us with your payment reference if the reversal does not occur.",
+        body: "Luxlina does not store your card details on our servers at any point. All transactions are encrypted via TLS. In the event of a failed payment where your bank account is debited, the amount is typically reversed within 5–7 business days. Contact us with your payment reference if the reversal does not occur.",
       },
       {
         subtitle: "Cash on Delivery",
@@ -144,7 +144,7 @@ const sections = [
     content: [
       {
         subtitle: "Our content",
-        body: "All content on itshandicrafted.in — including product photographs, videos, descriptions, logo, brand name, and website design — is the exclusive intellectual property of itsHandicrafted or its licensors and is protected under Indian copyright and trademark law.",
+        body: "All content on Luxlina.in — including product photographs, videos, descriptions, logo, brand name, and website design — is the exclusive intellectual property of Luxlina or its licensors and is protected under Indian copyright and trademark law.",
       },
       {
         subtitle: "Restrictions",
@@ -152,7 +152,7 @@ const sections = [
       },
       {
         subtitle: "User content",
-        body: "By submitting reviews, photographs, or other content on our platform, you grant itsHandicrafted a non-exclusive, royalty-free, worldwide licence to use, display, and reproduce that content for marketing and operational purposes. You retain ownership of your content.",
+        body: "By submitting reviews, photographs, or other content on our platform, you grant Luxlina a non-exclusive, royalty-free, worldwide licence to use, display, and reproduce that content for marketing and operational purposes. You retain ownership of your content.",
       },
     ],
   },
@@ -167,7 +167,7 @@ const sections = [
       },
       {
         subtitle: "Consequences of violation",
-        body: "Violation of these prohibitions may result in immediate account suspension, cancellation of pending orders, and — where applicable — legal action. itsHandicrafted reserves the right to report fraudulent or illegal activity to the appropriate authorities.",
+        body: "Violation of these prohibitions may result in immediate account suspension, cancellation of pending orders, and — where applicable — legal action. Luxlina reserves the right to report fraudulent or illegal activity to the appropriate authorities.",
       },
     ],
   },
@@ -182,7 +182,7 @@ const sections = [
       },
       {
         subtitle: "Limitation of damages",
-        body: "To the fullest extent permitted by applicable Indian law, itsHandicrafted's total liability to you for any claim arising from use of our services shall not exceed the amount paid by you for the specific order giving rise to the claim. We are not liable for indirect, incidental, or consequential damages.",
+        body: "To the fullest extent permitted by applicable Indian law, Luxlina's total liability to you for any claim arising from use of our services shall not exceed the amount paid by you for the specific order giving rise to the claim. We are not liable for indirect, incidental, or consequential damages.",
       },
       {
         subtitle: "Force majeure",
@@ -205,7 +205,7 @@ const sections = [
       },
       {
         subtitle: "Consumer grievances",
-        body: "As required under the Consumer Protection (E-Commerce) Rules 2020, our Grievance Officer can be reached at grievance@itshandicrafted.in or by post at itsHandicrafted, 12 Shilpgram Road, Near Jawahar Circle, Jaipur, Rajasthan – 302 017. We will acknowledge grievances within 48 hours and resolve them within 30 days.",
+        body: "As required under the Consumer Protection (E-Commerce) Rules 2020, our Grievance Officer can be reached at grievance@Luxlina.in or by post at Luxlina, 12 Shilpgram Road, Near Jawahar Circle, Jaipur, Rajasthan – 302 017. We will acknowledge grievances within 48 hours and resolve them within 30 days.",
       },
     ],
   },
@@ -216,7 +216,7 @@ const sections = [
     content: [
       {
         subtitle: "Entire agreement",
-        body: "These Terms, together with our Privacy Policy, Shipping Policy, and Refund Policy, constitute the entire agreement between you and itsHandicrafted with respect to the use of our services and supersede all prior agreements and understandings.",
+        body: "These Terms, together with our Privacy Policy, Shipping Policy, and Refund Policy, constitute the entire agreement between you and Luxlina with respect to the use of our services and supersede all prior agreements and understandings.",
       },
       {
         subtitle: "Severability",
@@ -228,7 +228,7 @@ const sections = [
       },
       {
         subtitle: "Contact",
-        body: "For any questions about these Terms & Conditions, contact us at legal@itshandicrafted.in or by post at Ward no.3, Chomu Purohithan, Pin code: 332602, Sikar, Rajasthan, India.",
+        body: "For any questions about these Terms & Conditions, contact us at legal@Luxlina.in or by post at Ward no.3, Chomu Purohithan, Pin code: 332602, Sikar, Rajasthan, India.",
       },
     ],
   },
@@ -265,7 +265,7 @@ const TermsAndConditions = () => {
           <p className={styles.heroSub}>
             Please read these terms carefully before using our website or
             placing an order. They form a binding agreement between you and
-            itsHandicrafted.
+            Luxlina.
           </p>
           <div className={styles.heroMetaRow}>
             <div className={styles.heroMetaItem}>
@@ -324,7 +324,7 @@ const TermsAndConditions = () => {
               <i className="bi bi-truck" /> Shipping Policy
             </Link>
             <a
-              href="mailto:legal@itshandicrafted.in"
+              href="mailto:legal@Luxlina.in"
               className={styles.sidebarLink}
             >
               <i className="bi bi-envelope" /> Legal Queries

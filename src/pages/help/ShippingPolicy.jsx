@@ -87,7 +87,7 @@ const faqs = [
   },
   {
     q: "Can I change my delivery address after placing the order?",
-    a: "Address changes are possible within 12 hours of placing the order, before dispatch. Contact us immediately at support@itshandicrafted.in with your Order ID.",
+    a: "Address changes are possible within 12 hours of placing the order, before dispatch. Contact us immediately at support@luxlina.in with your Order ID.",
   },
   {
     q: "Are stone items packed safely for transit?",
@@ -358,7 +358,7 @@ const ShippingPolicy = () => {
           </div>
           <div className={styles.helpActions}>
             <a
-              href="mailto:support@itshandicrafted.in"
+              href="mailto:support@luxlina.in"
               className={styles.helpBtn}
             >
               <i className="bi bi-envelope" /> Email Us

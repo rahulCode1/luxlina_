@@ -27,7 +27,7 @@ const faqs = [
   {
     cat: "orders",
     q: "Can I modify or cancel my order after placing it?",
-    a: "Orders can be modified or cancelled within 12 hours of placement, before they are dispatched. After dispatch, cancellation is not possible. Contact us immediately at support@itshandicrafted.in with your Order ID.",
+    a: "Orders can be modified or cancelled within 12 hours of placement, before they are dispatched. After dispatch, cancellation is not possible. Contact us immediately at support@Luxlina.in with your Order ID.",
   },
   {
     cat: "orders",
@@ -37,7 +37,7 @@ const faqs = [
   {
     cat: "orders",
     q: "Can I place a bulk or custom order?",
-    a: "Absolutely! We welcome bulk orders for events, gifting, and interior design projects. Contact us at support@itshandicrafted.in for a custom quote, timelines, and packaging options.",
+    a: "Absolutely! We welcome bulk orders for events, gifting, and interior design projects. Contact us at support@Luxlina.in for a custom quote, timelines, and packaging options.",
   },
   {
     cat: "orders",
@@ -91,7 +91,7 @@ const faqs = [
   {
     cat: "returns",
     q: "What if my item arrives broken?",
-    a: "We're so sorry. Please photograph the damage and contact us within 48 hours of delivery at support@itshandicrafted.in. We'll arrange a free return pickup and process a full refund or replacement immediately.",
+    a: "We're so sorry. Please photograph the damage and contact us within 48 hours of delivery at support@Luxlina.in. We'll arrange a free return pickup and process a full refund or replacement immediately.",
   },
 
   // Products
@@ -167,7 +167,7 @@ const faqs = [
   {
     cat: "account",
     q: "How do I delete my account?",
-    a: "To request account deletion, email us at support@itshandicrafted.in from your registered email address. We'll process the deletion within 7 working days as per our data retention policy.",
+    a: "To request account deletion, email us at support@Luxlina.in from your registered email address. We'll process the deletion within 7 working days as per our data retention policy.",
   },
 ];
 
@@ -276,7 +276,7 @@ const FAQs = () => {
               <i className="bi bi-truck" /> Shipping Policy
             </Link>
             <a
-              href="mailto:support@itshandicrafted.in"
+              href="mailto:support@Luxlina.in"
               className={styles.sidebarLink}
             >
               <i className="bi bi-envelope" /> Email Support
@@ -385,7 +385,7 @@ const FAQs = () => {
             </div>
             <div className={styles.contactStripActions}>
               <a
-                href="mailto:support@itshandicrafted.in"
+                href="mailto:support@Luxlina.in"
                 className={styles.contactBtn}
               >
                 <i className="bi bi-envelope" /> Email Us

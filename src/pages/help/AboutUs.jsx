@@ -114,7 +114,7 @@ const AboutUs = () => {
             <em className={styles.heroTitleEm}>Devoted Hands</em>
           </h1>
           <p className={styles.heroSub}>
-            itsHandicrafted brings the timeless art of Rajasthani stone-carving
+            Luxlina brings the timeless art of Rajasthani stone-carving
             into modern homes — ethically sourced, hand-finished, and crafted to
             last generations.
           </p>
@@ -142,7 +142,7 @@ const AboutUs = () => {
                 Built on Craft
               </h2>
               <p className={styles.storyP}>
-                itsHandicrafted began with a simple belief — that the
+                Luxlina began with a simple belief — that the
                 extraordinary skill of Rajasthani stone artisans deserves a
                 modern stage. Every piece leaving our workshop carries centuries
                 of tradition and the touch of a real craftsperson.
@@ -186,7 +186,7 @@ const AboutUs = () => {
                   craftsperson — every chisel mark is a signature."
                 </blockquote>
                 <p className={styles.stoneAttr}>
-                  — Founding Artisan, itsHandicrafted
+                  — Founding Artisan, Luxlina
                 </p>
               </div>
             </div>
@@ -264,7 +264,7 @@ const AboutUs = () => {
           </div>
           <h2 className={styles.promiseTitle}>Craft That Carries a Promise</h2>
           <p className={styles.promiseSub}>
-            Every item you bring home from itsHandicrafted supports a family of
+            Every item you bring home from Luxlina supports a family of
             artisans, keeps a centuries-old tradition alive, and adds a piece of
             genuine Rajasthani heritage to your space.
           </p>

@@ -19,7 +19,7 @@ const SentOtp = ({ handleOnChange, handleSentOtp, formData }) => {
               WebkitTextFillColor: "transparent",
             }}
           >
-            It's Handicrafted
+          Luxlina
           </span>
           <h2
             className="h5 fw-bold mb-1"

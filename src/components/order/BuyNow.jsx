@@ -68,7 +68,7 @@ const BuyNow = ({ info }) => {
           key: process.env.REACT_APP_RAZORPAY_KEY_ID,
           amount: data.amount,
           currency: "INR",
-          name: "It's Handicrafted",
+          name: "Luxlina",
           order_id: data.id,
           handler: async function (response) {
             await privateApi.post("/order/verify-payment", response);
@@ -129,7 +129,7 @@ const BuyNow = ({ info }) => {
       {/* ── Top Bar ── */}
       <div className="bg-dark text-white d-flex align-items-center gap-2 px-3 py-2 border-bottom border-secondary">
         <i className="bi bi-bag-heart-fill text-warning"></i>
-        <span className="fw-semibold small">It's Handicrafted</span>
+        <span className="fw-semibold small">Luxlina</span>
         <span className="vr mx-1 opacity-25"></span>
         <span className="text-white-50 small">Secure Checkout</span>
         <i className="bi bi-shield-lock-fill text-success ms-auto small"></i>
