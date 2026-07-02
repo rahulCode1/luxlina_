@@ -7,8 +7,6 @@ import {
   FiSearch,
   FiShoppingCart,
 } from "react-icons/fi";
-import { BsCart3 } from "react-icons/bs";
-
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEcommerce } from "../../context/EcommerceContext";
@@ -18,19 +16,6 @@ import { getAllWishlistAsync } from "../../features/wishlist/wishlistSlice";
 import { fetchAllProductsAsync } from "../../features/product/productSlice";
 import MenuDropdown from "./MenuDropdown";
 
-const CartIcon = ({ count }) => {
-  return (
-    <span className="relative inline-flex items-center justify-center">
-      <BsCart3 className="text-slate-800" size={28} />
-
-      {count > 0 && (
-        <span className="absolute top-[1px] left-[13px] text-[10px] font-bold leading-none">
-          {count}
-        </span>
-      )}
-    </span>
-  );
-};
 
 /* ─────────────────────────────────────────────────
    Header
@@ -48,7 +33,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  
   const totalItemsInCart =
     productCart && productCart.length > 0
       ? productCart.reduce((acc, curr) => acc + curr.quantity, 0)
@@ -85,8 +69,6 @@ const Header = () => {
     }
     setSearchText(enteredText);
   };
-
-
 
   return (
     <header
@@ -278,11 +260,16 @@ const Header = () => {
               <NavLink
                 to="/cart"
                 className={({ isActive }) =>
-                  `no-underline ${isActive ? "text-blue-500 border-b-2 border-blue-500" : "text-black"} flex flex-col items-center hover:bg-slate-200 rounded py-1 px-2`
+                  `${isActive ? "text-blue-500 border-b-2 border-blue-500" : "text-black"} relative flex flex-col items-center no-underline hover:bg-slate-200 rounded py-1 px-2`
                 }
               >
-                <CartIcon count={totalItemsInCart} />
-                <span className="text-[10px]  mt-0 pt-0">Cart</span>
+                <FiShoppingCart size={18} />
+                {totalItemsInCart > 0 && (
+                  <span className="absolute -top-1 -right-0 bg-blue-500 text-white text-[9px] font-semibold rounded-full h-4 w-4 flex items-center justify-center">
+                    {totalItemsInCart}
+                  </span>
+                )}
+                <span className="text-[10px]">Cart</span>
               </NavLink>
             )}
 
