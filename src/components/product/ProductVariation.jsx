@@ -1,6 +1,6 @@
-import { privateApi } from "../../utils/axios";
-import { useEcommerce } from "../../context/EcommerceContext";
-import { useState } from "react";
+// import { privateApi } from "../../utils/axios";
+// import { useEcommerce } from "../../context/EcommerceContext";
+// import { useState } from "react";
 
 const ProductVariation = ({
   productId,
@@ -10,25 +10,25 @@ const ProductVariation = ({
   selectedVariation,
   setSearchParams,
 }) => {
-  const [deletingVariationId, setDeletingVariationId] = useState(null);
-  const { setError, isLoading, setIsLoading } = useEcommerce();
+  // const [ setDeletingVariationId] = useState(null);
+  // const { setError,  setIsLoading } = useEcommerce();
 
-  const handleRemoveProductVariation = async (variationId) => {
-    try {
-      setDeletingVariationId(variationId);
-      setIsLoading(true);
-      const res = await privateApi.delete(
-        `product/${productId}/removeVariation/${variationId}`,
-      );
-      revalidator.revalidate();
-      console.log(res.data);
-    } catch (err) {
-      setError(err?.response?.data?.message);
-      console.log(err?.response?.data?.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const handleRemoveProductVariation = async (variationId) => {
+  //   try {
+  //     setDeletingVariationId(variationId);
+  //     setIsLoading(true);
+  //     const res = await privateApi.delete(
+  //       `product/${productId}/removeVariation/${variationId}`,
+  //     );
+  //     revalidator.revalidate();
+  //     console.log(res.data);
+  //   } catch (err) {
+  //     setError(err?.response?.data?.message);
+  //     console.log(err?.response?.data?.message);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   return (
     <>
