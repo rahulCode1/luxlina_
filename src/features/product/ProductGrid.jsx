@@ -6,6 +6,10 @@ const ProductGrid = ({
   handleClearFilter,
   productCategory,
 }) => {
+
+
+  console.log(filteredProducts)
+
   return (
     <div
       className="col-md-9 p-3 p-md-4 pb-5"

@@ -3,12 +3,12 @@ import {
   FiHome,
   FiLogOut,
   FiLock,
+  FiShoppingCart,
   FiPackage,
 } from "react-icons/fi";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEcommerce } from "../../context/EcommerceContext";
-import cartIcon from "../../imgs/cart.png";
 
 const Footer = () => {
   const { cart: productCart } = useSelector((state) => state.cart);
@@ -41,23 +41,33 @@ const Footer = () => {
     lineHeight: 1,
   };
 
-  const CartIcon = ({ count }) => (
-    <span style={{ position: "relative" }}>
-      <img
-        src={cartIcon}
-        style={{ width: count > 9 ? "22px" : "20px" }}
-        alt="Cart"
-      />
-      <span
-        style={{
-          position: "absolute",
-          top: `${count > 9 ? "-2px" : "-4px"}`,
-          left: `${count > 9 ? "7px" : "9px"}`,
-          fontSize: `${count > 9 ? "0.7rem" : "0.8rem"}`,
-        }}
-      >
-        {count}
-      </span>
+  const CartIcon = ({ count, isActive }) => (
+    <span style={{ position: "relative", display: "inline-flex" }}>
+      <FiShoppingCart size={21} color={isActive ? "#4f46e5" : "#6b7280"} />
+      {count > 0 && (
+        <span
+          style={{
+            position: "absolute",
+            top: "-7px",
+            right: "-9px",
+            minWidth: "16px",
+            height: "16px",
+            padding: "0 4px",
+            borderRadius: "999px",
+            background: "#4f46e5",
+            color: "#fff",
+            fontSize: "0.62rem",
+            fontWeight: 700,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            lineHeight: 1,
+            boxShadow: "0 0 0 2px #fff",
+          }}
+        >
+          {count > 9 ? "9+" : count}
+        </span>
+      )}
     </span>
   );
 
@@ -110,11 +120,7 @@ const Footer = () => {
             >
               {({ isActive }) => (
                 <div style={getLinkStyle(isActive)}>
-                  <span
-                    style={{ position: "relative", display: "inline-flex" }}
-                  >
-                    <CartIcon count={totalItemsInCart} />
-                  </span>
+                  <CartIcon count={totalItemsInCart} isActive={isActive} />
                   <span style={labelStyle}>Cart</span>
                 </div>
               )}

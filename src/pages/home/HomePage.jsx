@@ -30,26 +30,21 @@ const HomePage = () => {
       category: "StatuesIdols",
       imgUrl: ganesh,
     },
-    {
-      name: "Decorative Bowls",
-      category: "Bowls",
-      imgUrl: Bowls,
-    },
 
     {
       name: "Flower Vase",
-      category: "Vase",
+      category: "Vases",
       imgUrl: Vase,
     },
     {
       name: "Costers",
-      category: "Coster",
+      category: "Coasters",
       imgUrl: Coster,
     },
 
     {
-      name: "Religious Items",
-      category: "ReligiousItems",
+      name: "Incense Holders",
+      category: "IncenseHolders",
       imgUrl: religiousCategory,
     },
 
@@ -106,7 +101,7 @@ const HomePage = () => {
       <section className="container">
         {/* 1. Categories - Horizontal Scroll with improved touch target */}
         <div
-          className="d-flex gap-1 gap-md-4 w-100  pb-3 custom-scrollbar"
+          className="d-flex gap-2 sm:gap-3 w-100  pb-3 custom-scrollbar"
           style={{
             overflowX: "auto",
             WebkitOverflowScrolling: "touch",
@@ -117,26 +112,14 @@ const HomePage = () => {
             <div
               key={i}
               onClick={() => handleUpdateParams("category", data.category)}
-              className="text-center flex-shrink-0"
-              style={{
-                width: "120px",
-                cursor: "pointer",
-                transition: "transform 0.3s ease",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.transform = "translateY(-5px)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.transform = "translateY(0)")
-              }
+              className="text-center flex-shrink-0 w-[80px] md:w-[120px]"
             >
               <div
-                className={`rounded-circle mx-auto mb-2 overflow-hidden border-2 ${
+                className={`w-[70px] h-[70px] md:w-[90px] md:h-[90px] rounded-circle mx-auto mb-2 overflow-hidden border-2 ${
                   "all" === data.category
                     ? "border border-dark"
                     : "border border-transparent"
                 }`}
-                style={{ width: "85px", height: "85px" }}
               >
                 <img
                   src={data?.imgUrl}
@@ -155,67 +138,115 @@ const HomePage = () => {
           ))}
         </div>
 
-        <div>
-          {/* Marble Flower Deepak — text left, img right */}
+        <div className="my-4 flex flex-col gap-4">
+          {/* Marble Bowl — text left, img right */}
           <div
-            className={styles.categoryContainer}
-            onClick={() => handleUpdateParams("category", "MarbleFlowerDeepak")}
+            onClick={() => handleUpdateParams("category", "DecorativeBowls")}
+            className="group cursor-pointer overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col md:flex-row"
           >
-            <div className={styles.categoryText}>
-              <p>Spiritual Collection</p>
-              <h5>
-                Marble Flower Deepak with Brass Bowl — handcrafted elegance for
-                every pooja.
-              </h5>
-              <span>Explore Collection →</span>
+            {/* Image */}
+            <div className="md:w-1/2 overflow-hidden">
+              <img
+                src={Bowls}
+                alt="Marble Decorative Bowl"
+                className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-full"
+              />
             </div>
-            <img
-              src={Bowls}
-              className={styles.sideImg}
-              alt="Marble Flower Deepak"
-            />
-          </div>
 
-          {/* Marble Hexagon Deepak — img left, text right */}
-          <div
-            className={styles.categoryContainer}
-            onClick={() =>
-              handleUpdateParams("category", "MarbleHexagonDeepak")
-            }
-          >
-            <img
-              src={Vase}
-              className={styles.sideImg}
-              alt="Marble Hexagon Deepak"
-            />
-            <div className={styles.categoryText}>
-              <p>Premium Marble Craft</p>
-              <h5>
-                White Marble Hexagon Deepak — timeless design with a polished
-                brass bowl.
+            {/* Content */}
+            <div className="flex md:w-1/2 flex-col justify-center p-6 sm:p-8">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-orange-500">
+                Spiritual Collection
+              </p>
+
+              <h5 className="text-xl font-bold leading-snug text-gray-900 sm:text-2xl">
+                Marble Decorative Bowl — Handcrafted Elegance for Every Pooja.
               </h5>
-              <span>Shop Now →</span>
+
+              <p className="mt-3 text-sm leading-7 text-gray-600 sm:text-base">
+                Crafted from premium white marble, perfect for floating flowers,
+                festive décor, and adding timeless elegance to your home.
+              </p>
+
+              <span className="mt-6 inline-flex items-center font-semibold text-orange-600 transition-all duration-300 group-hover:translate-x-2">
+                Explore Collection
+                <span className="ml-2 text-lg">→</span>
+              </span>
             </div>
           </div>
 
-          {/* Marble Star Deepak — text left, img right */}
+          {/* Marble Vase */}
           <div
-            className={styles.categoryContainer}
-            onClick={() => handleUpdateParams("category", "MarbleStarDeepak")}
+            onClick={() => handleUpdateParams("category", "Vases")}
+            className="group cursor-pointer overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col md:flex-row"
           >
-            <div className={styles.categoryText}>
-              <p>Festive Essentials</p>
-              <h5>
-                Marble Star Deepak — illuminate your home temple with
-                handcrafted beauty.
-              </h5>
-              <span>View All →</span>
+            {/* Image */}
+            <div className="md:w-1/2 overflow-hidden">
+              <img
+                src={Vase}
+                alt="White Marble Vase"
+                className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-full"
+              />
             </div>
-            <img
-              src={Coster}
-              className={styles.sideImg}
-              alt="Marble Star Deepak"
-            />
+
+            {/* Content */}
+            <div className="flex md:w-1/2 flex-col justify-center p-6 sm:p-8">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-orange-500">
+                Luxury Home Décor
+              </p>
+
+              <h5 className="text-xl font-bold leading-snug text-gray-900 sm:text-2xl">
+                Handcrafted Marble Vases — Timeless Elegance for Every Interior.
+              </h5>
+
+              <p className="mt-3 text-sm leading-7 text-gray-600 sm:text-base">
+                Beautifully handcrafted from premium marble, perfect for fresh
+                flowers, dried arrangements, and luxurious home décor.
+              </p>
+
+              <span className="mt-6 inline-flex items-center font-semibold text-orange-600 transition-all duration-300 group-hover:translate-x-2">
+                Shop Now
+                <span className="ml-2 text-lg">→</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Marble Coasters */}
+          <div
+            onClick={() => handleUpdateParams("category", "Coasters")}
+            className="group cursor-pointer overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col-reverse md:flex-row"
+          >
+            {/* Content */}
+            <div className="flex md:w-1/2 flex-col justify-center p-6 sm:p-8">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-orange-500">
+                Table Essentials
+              </p>
+
+              <h5 className="text-xl font-bold leading-snug text-gray-900 sm:text-2xl">
+                Black Marble Coasters — Protect Your Surfaces with Handcrafted
+                Luxury.
+              </h5>
+
+              <p className="mt-3 text-sm leading-7 text-gray-600 sm:text-base">
+                Crafted from natural black marble, these elegant coasters
+                protect your furniture while adding a premium touch to every
+                table setting.
+              </p>
+
+              <span className="mt-6 inline-flex items-center font-semibold text-orange-600 transition-all duration-300 group-hover:translate-x-2">
+                View Collection
+                <span className="ml-2 text-lg">→</span>
+              </span>
+            </div>
+
+            {/* Image */}
+            <div className="md:w-1/2 overflow-hidden">
+              <img
+                src={Coster}
+                alt="Black Marble Coasters"
+                className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-full"
+              />
+            </div>
           </div>
         </div>
         {/* 2. Hero Banner - Responsive text and height */}
@@ -245,10 +276,8 @@ const HomePage = () => {
           </div>
         </div>
 
-        
-
         {/* 3. New Arrivals - Responsive Grid */}
-        <div className="row g-4">
+        <div className="row g-4 mt-4">
           {newArrival.map((product, i) => (
             <div
               className="col-12 col-lg-6"
@@ -256,52 +285,74 @@ const HomePage = () => {
               onClick={() => handleUpdateParams("category", product.category)}
             >
               <div
-                className="card border-0 shadow-sm h-100 overflow-hidden rounded-4 transition-hover"
+                className="card border-0 shadow-sm rounded-4 overflow-hidden h-100"
                 style={{
                   cursor: "pointer",
-                  transition: "all 0.3s ease",
+                  transition: "all .3s ease",
                 }}
               >
-                {/* New Badge */}
-                <span className="position-absolute top-0 start-0 m-3 badge bg-dark px-3 py-2 z-1">
+                {/* Badge */}
+                <span className="position-absolute top-0 start-0 m-3 badge bg-dark px-3 py-2 z-3">
                   NEW
                 </span>
 
-                <div className="row g-0 h-100">
-                  {/* Image Column */}
-                  <div className="col-4 col-sm-5 col-md-4">
+                <div className="row g-0">
+                  {/* Image */}
+                  <div className="col-5 col-md-4">
                     <img
                       src={product.image}
-                      className="w-100 h-100 object-fit-cover"
-                      style={{ minHeight: "200px" }}
                       alt={product.name}
+                      className="w-100 h-100 object-fit-cover"
+                      style={{
+                        minHeight: "180px",
+                      }}
                     />
                   </div>
 
-                  {/* Content Column */}
-                  <div className="col-8 col-sm-7 col-md-8">
-                    <div className="card-body d-flex flex-column justify-content-center h-100 p-3 p-md-4">
+                  {/* Content */}
+                  <div className="col-7 col-md-8">
+                    <div className="card-body h-100 d-flex flex-column justify-content-center p-3 p-md-4">
                       <p
-                        className="text-primary fw-bold text-uppercase mb-1"
-                        style={{ fontSize: "0.65rem", letterSpacing: "1.5px" }}
+                        className="text-primary text-uppercase fw-semibold mb-2"
+                        style={{
+                          fontSize: ".7rem",
+                          letterSpacing: "2px",
+                        }}
                       >
                         New Arrival
                       </p>
+
                       <h5
-                        className="card-title fw-bold mb-2 fs-5 fs-md-4"
-                        style={{ fontFamily: "serif" }}
+                        className="fw-bold mb-2"
+                        style={{
+                          fontFamily: "serif",
+                          fontSize: "clamp(1rem,2vw,1.5rem)",
+                        }}
                       >
                         {product.name}
                       </h5>
-                      <p className="card-text text-muted small d-none d-sm-block">
+
+                      {/* Description */}
+                      <p
+                        className="text-muted mb-3"
+                        style={{
+                          fontSize: "clamp(.8rem,1.5vw,.95rem)",
+                          lineHeight: "1.6",
+                        }}
+                      >
                         {product.details}
                       </p>
+
+                      {/* Button */}
                       <div className="mt-auto">
                         <span
-                          className="text-dark fw-bold border-bottom border-slate-300 py-2 px-3 rounded-lg shadow-md border pb-1"
-                          style={{ fontSize: "0.8rem" }}
+                          className="btn btn-outline-dark rounded-pill px-4 py-2 fw-semibold"
+                          style={{
+                            fontSize: ".8rem",
+                            letterSpacing: ".5px",
+                          }}
                         >
-                          VIEW DETAILS
+                          VIEW DETAILS →
                         </span>
                       </div>
                     </div>
