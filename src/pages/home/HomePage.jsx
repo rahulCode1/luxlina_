@@ -100,7 +100,7 @@ const HomePage = () => {
         background: "linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%)",
       }}
     >
-      <div className="py-4 container">
+      <div className="py-4  container">
         <section>
           {/* 1. Categories - Horizontal Scroll with improved touch target */}
           <div

@@ -12,6 +12,7 @@
   font-family: "DM Sans", sans-serif;
   color: #c4a882;
   margin-top: 4rem;
+  margin-bottom: 2.5rem;
 }
 
 /* ── Top Promise Band ─────────────────────── */
@@ -459,5 +460,11 @@
   .subscribeBtn {
     border-radius: 0 0 0.35rem 0.35rem;
     padding: 0.7rem 1rem;
+  }
+}
+
+@media(min-width:748px){
+  .footer{
+    margin-bottom: 0;
   }
 }
