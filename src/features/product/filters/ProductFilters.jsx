@@ -259,7 +259,7 @@ const ProductFilters = ({
                 fontSize: "0.72rem",
               }}
             >
-              <i className="bi bi-x-circle me-1"></i>Clear All
+             Clear
             </button>
           </div>
 

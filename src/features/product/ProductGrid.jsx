@@ -8,7 +8,6 @@ const ProductGrid = ({
 }) => {
 
 
-  console.log(filteredProducts)
 
   return (
     <div
