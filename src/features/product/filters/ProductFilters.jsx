@@ -1,6 +1,9 @@
 import CategoryFilter from "../../../components/CategoryFilter";
 
 const ProductFilters = ({
+  searchParams,
+  setSearchParams,
+  productCategory,
   handleClearFilter,
   changePrice,
   setChangePrice,
@@ -125,6 +128,9 @@ const ProductFilters = ({
               <CategoryFilter
                 setCategory={setCategory}
                 filterCategory={category}
+                productCategory={productCategory}
+                searchParams={searchParams}
+                setSearchParams={setSearchParams}
               />
             </div>
 

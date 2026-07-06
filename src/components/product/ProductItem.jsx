@@ -19,6 +19,8 @@ const ProductItem = ({ productData }) => {
   const revalidator = useRevalidator();
   const userId = localStorage.getItem("userId") || "";
 
+ 
+
   const dispatch = useDispatch();
   const productId = useParams().id;
   const productInfo = productData?.product;
@@ -50,6 +52,8 @@ const ProductItem = ({ productData }) => {
   if (!productInfo) return null;
 
   const isOwner = productInfo.createdBy === userId;
+
+
 
   return (
     <>

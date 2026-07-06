@@ -17,14 +17,13 @@ const ProductsList = ({ productsList }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const productCategory = searchParams.get("category") || "";
 
+
   // Sync URL category with checkbox state when component mounts or URL changes
   useEffect(() => {
-    if (productCategory && !category.includes(productCategory)) {
-      setCategory([productCategory]);
-    }
-  }, [productCategory, category]);
+    setCategory(productCategory ? [productCategory] : []);
+  }, [productCategory]);
 
- 
+
 
   let filteredProducts = searchText
     ? productsList.filter(
@@ -32,10 +31,7 @@ const ProductsList = ({ productsList }) => {
           product.variations.some((variation) =>
             variation.name.toLowerCase().includes(searchText.toLowerCase()),
           ) ||
-          product?.metaTitle.toLowerCase().includes(searchText.toLowerCase()) ||
-          product?.metaDescription
-            .toLowerCase()
-            .includes(searchText.toLowerCase()),
+          product?.metaTitle.toLowerCase().includes(searchText.toLowerCase()),
       )
     : productsList;
 
@@ -103,6 +99,7 @@ const ProductsList = ({ productsList }) => {
           <ProductFilters
             category={category}
             setCategory={setCategory}
+            productCategory={productCategory}
             changePrice={changePrice}
             handleClearFilter={handleClearFilter}
             productRating={productRating}
@@ -110,6 +107,8 @@ const ProductsList = ({ productsList }) => {
             setProductRating={setProductRating}
             setSortBy={setSortBy}
             sortBy={sortBy}
+            searchParams={searchParams}
+            setSearchParams={setSearchParams}
           />
 
           <ProductGrid

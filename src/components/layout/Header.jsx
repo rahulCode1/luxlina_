@@ -8,14 +8,13 @@ import {
   FiShoppingCart,
 } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, Link } from "react-router-dom";
 import { useEcommerce } from "../../context/EcommerceContext";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCartAsync } from "../../features/cart/cartSlice";
 import { getAllWishlistAsync } from "../../features/wishlist/wishlistSlice";
 import { fetchAllProductsAsync } from "../../features/product/productSlice";
 import MenuDropdown from "./MenuDropdown";
-
 
 /* ─────────────────────────────────────────────────
    Header
@@ -80,7 +79,9 @@ const Header = () => {
         className={`hidden px-4 py-1 md:flex justify-between items-center gap-4`}
       >
         <h1 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-violet-700 to-indigo-400 bg-clip-text text-transparent">
-          Luxlina
+          <Link to="/" className="no-underline text-black">
+            Luxlina
+          </Link>
         </h1>
         <div className="relative hidden w-full max-w-[580px] md:block mx-4 ">
           <input

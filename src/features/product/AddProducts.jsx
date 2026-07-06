@@ -98,7 +98,7 @@ const AddProducts = () => {
 
       toast.success("Product added successfully.", { id: tostId });
 
-      setFormData(initialFormData);
+      // setFormData(initialFormData);
       setSelectedFiles([]);
       setImgPreviewUrl([]);
       fileInputRef.current.value = "";
@@ -304,7 +304,7 @@ const AddProducts = () => {
                   Product Images
                 </label>
                 <div
-                  className="border border-2 border-dashed rounded-3 p-4 text-center"
+                  className=" border-dashed rounded-3 p-4 text-center"
                   style={{
                     borderColor: "#dee2e6",
                     background: "#f8f9fa",

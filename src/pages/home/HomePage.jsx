@@ -108,7 +108,7 @@ const HomePage = () => {
             style={{
               overflowX: "auto",
               WebkitOverflowScrolling: "touch",
-              scrollbarWidth: "none", // Hides scrollbar for Firefox
+              // scrollbarWidth: "none", // Hides scrollbar for Firefox
             }}
           >
             {categories.map((data, i) => (

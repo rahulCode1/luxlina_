@@ -105,14 +105,14 @@ const Checkout = () => {
         }
 
         dispatch(clearCart());
-        console.log(data);
+        // console.log(data);
         navigate(`/orders/${data?.order.id}`);
         toast.success(data?.message || "Order place successfully.", {
           id: toastId,
         });
       }
     } catch (error) {
-      console.log(error);
+     
       setError(
         error?.response?.data?.message || "Error occurred while place order.",
       );
