@@ -231,11 +231,11 @@ const Header = () => {
       </nav>
 
       {/* Mobile device */}
-      <nav className="mx-4 my-1">
+      <nav className="mx-2 my-1">
         <div className="flex justify-between items-center gap-4 md:hidden">
-          <h1 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-violet-700 to-indigo-400 bg-clip-text text-transparent">
+          <h3 className="text-xl font-bold tracking-wide bg-gradient-to-r from-violet-700 to-indigo-400 bg-clip-text text-transparent">
             Handcrafted
-          </h1>
+          </h3>
 
           <div className="flex flex-row items-center gap-2">
             {!toggleSearch && (
@@ -243,7 +243,7 @@ const Header = () => {
                 onClick={() => setToggleSearch((prevStat) => !prevStat)}
                 className="flex flex-col items-center"
               >
-                <FiSearch size={16} />
+                <FiSearch size={14} />
                 <span className="text-[10px]">Search </span>
               </button>
             )}
@@ -292,7 +292,7 @@ const Header = () => {
                   onClick={() => setMenuOpen((prevStat) => !prevStat)}
                 >
                   {menuOpen ? <FiX size={18} /> : <FiMenu size={18} />}
-                  <span>Menu </span>
+                  <span className="text-xs">Menu </span>
                 </button>
               )}
 
@@ -316,7 +316,7 @@ const Header = () => {
             value={enteredText}
             onChange={(e) => setEnteredText(e.target.value)}
             className="
-      h-11
+      h-8
       w-full
       rounded-full
       border
@@ -367,7 +367,7 @@ const Header = () => {
               onClick={handleSearch}
               className="
         flex
-        h-8
+        h-6
         w-8
         items-center
         justify-center
@@ -381,7 +381,7 @@ const Header = () => {
         active:scale-95
       "
             >
-              <FiSearch size={16} />
+              <FiSearch size={14} />
             </button>
           </div>
         </div>
