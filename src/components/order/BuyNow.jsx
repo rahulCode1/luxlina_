@@ -80,7 +80,7 @@ const BuyNow = ({ info }) => {
             toast.success(data?.message || "Order placed successfully!", {
               id: toastId,
             });
-            // navigate(`/orders/${data?.orderId}`);
+            navigate(`/orders/${data?.orderId}`);
           },
         };
 
@@ -107,7 +107,7 @@ const BuyNow = ({ info }) => {
 
         console.log(data);
 
-        // navigate(`/orders/${data?.orderId}`);
+        navigate(`/orders/${data?.orderId}`);
       }
     } catch (err) {
       const msg =

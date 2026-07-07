@@ -8,20 +8,37 @@ Built with React frontend, Express/Node backend, Mongodb database.
 
 ## Demo Link
 
-[Live Demo](https://major-project-frontend-kappa.vercel.app/)
+[Live Demo](https://luxlina-wrgu.vercel.app)
 
 ---
 
 ## Quick Start
 
 ```
-git clone https://github.com/rahulCode1/MajorProject-frontend.git
-cd my-app
+git clone https://github.com/rahulCode1/luxlina_.git
+cd luxlina_
 npm install
-npm run dev
+npm start
 ```
 
 ---
+
+
+## Environment Variables
+
+Create a `.env` file in the root directory and add the following variables:
+
+```
+REACT_APP_BACKEND_URL=XXXXXXXX
+
+REACT_APP_RAZORPAY_KEY_ID=XXXXXXXX
+
+REACT_APP_RAZORPAY_KEY_SECRET=XXXXXXXX
+```
+
+
+---
+
 
 ## Technologies
 
@@ -30,6 +47,7 @@ npm run dev
 - Node JS
 - Express
 - Mongodb
+- JWT 
 
 ## Demo Video
 
@@ -43,7 +61,7 @@ Watch a walkthrough (6 minutes) of all the major features of this app:
 **Home**
 
 - Display different products category.
-- Search products by title, tags.
+- Search products by title, keywords.
 
 **Products List**
 
@@ -56,6 +74,8 @@ Watch a walkthrough (6 minutes) of all the major features of this app:
 - View Product information.
 - View similar products.
 - Add or Remove to Cart & Wishlist.
+- Similar products
+- User review
 
 **Cart Page**
 
@@ -82,106 +102,454 @@ Watch a walkthrough (6 minutes) of all the major features of this app:
 
 ## API Reference
 
-### **GET /api/products**<br>
+## **GET /api/products**<br>
 
-List all products<br>
+List all products.<br>
+
 Sample Response:<br>
 
 ```
-[{_id, name,  description, price, ... }, ...]
-
+[
+  {
+    id,
+    materialType,
+    category,
+    rating,
+    variations: [
+      {
+        id,
+        name,
+        shortDescription,
+        price,
+        discountPrice,
+        images,
+        ...
+      }
+    ],
+    ...
+  }
+]
 ```
 
-## **GET /api/products/id**<br>
+---
 
-Product details<br>
+## **GET /api/product/:productId**<br>
+
+Product details.<br>
+
 Sample Response:<br>
 
 ```
-{id, name, description, ...}
-
+{
+  id,
+  materialType,
+  category,
+  care,
+  metaTitle,
+  metaDescription,
+  keywords,
+  rating,
+  variations: [
+    {
+      id,
+      name,
+      shortDescription,
+      price,
+      discountPrice,
+      images,
+      ...
+    }
+  ],
+  ...
+}
 ```
+
+---
 
 ## **POST /api/product/add**<br>
 
-Add Product<br>
-Sample Response<br>
+Add new product.<br>
+
+Sample Response:<br>
 
 ```
-{name, description, price, ...}
+{
+  id,
+  materialType,
+  category,
+  variations,
+  ...
+}
 ```
 
-## **DELETE /api/product/id**<br>
+---
 
-Delete Product<br>
-Sample Response<br>
+## **PATCH /api/product/:productId/variation/add**<br>
 
-## **POST /api/cart/id**<br>
+Add product variation.<br>
 
-Add Product to Cart<br>
-Sample Response<br>
+Sample Response:<br>
 
 ```
-[{name, description, price, ...}, ...]
+{
+  success,
+  message
+}
 ```
 
-## **GET /api/cart/id**<br>
+---
 
-GET ProductF from Cart<br>
-Sample Response<br>
+## **DELETE /api/product/:productId/removeVariation/:variationId**<br>
 
-```
-[{name, description, price, ...}, ...]
-```
+Remove product variation.<br>
 
-## **PATCH /api/cart/id**<br>
+---
 
-Increase product quantity<br>
-Sample Response<br>
+## **GET /api/product/:productId/similar**<br>
 
-```
-[{name, description, price, quantity, ...}, ...]
-```
+Get similar products.<br>
 
-## **PATCH /api/cart/decrease/id**<br>
-
-Decrease product quantity<br>
-Sample Response<br>
+Sample Response:<br>
 
 ```
-[{name, description, price, quantity, ...}, ...]
+[
+  {
+    id,
+    materialType,
+    category,
+    variations,
+    ...
+  },
+  ...
+]
 ```
 
-## **PATCH /api/cart/remove/id**<br>
+---
 
-Remove product from Cart<br>
-Sample Response<br>
+## **PATCH /api/product/:productId**<br>
 
-## **PATCH /api/cart/moveto_wishlist/id**<br>
+Update product.<br>
 
-Move Product to Wishlist<br>
-Sample Response<br>
+Sample Response:<br>
 
 ```
-[{name, description, price, quantity, ...}, ...]
+{
+  success,
+  message,
+  product: {
+    id,
+    materialType,
+    category,
+    variations,
+    ...
+  }
+}
 ```
 
-## **POST /api/cart/wishlist/id**<br>
+## **POST /api/product/:productId/review**<br>
 
-Add or Remove Product to Wishlist<br>
-Sample Response<br>
+Add a product review.<br>
 
-```
-[{name, description, price, quantity, ...}, ...]
-```
-
-## **PATCH /api/cart/wishlist/id**<br>
-
-Move Product to Cart.<br>
-Sample Response<br>
+Sample Response:<br>
 
 ```
-[{name, description, price, quantity, ...}, ...]
+{
+  success,
+  message
+}
+```
+
+---
+
+## **GET /api/products/:productId/reviews**<br>
+
+Get all product reviews.<br>
+
+Sample Response:<br>
+
+```
+[
+  {
+    id,
+    rating,
+    reviewText,
+    user,
+    images,
+    createdAt,
+    ...
+  },
+  ...
+]
+```
+
+<!-- ---
+
+## **PATCH /api/product/:productId/addVideo/:variationId**<br>
+
+Add a product video to a variation.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message
+}
+```
+
+---
+
+## **PATCH /api/product/:productId/deleteVideo/:variationId**<br>
+
+Delete product video from a variation.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message
+}
+```
+
+---
+
+## **POST /api/product/:productId/featureVideo/:variationId**<br>
+
+Add a feature video for a product variation.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message
+}
+```
+
+---
+
+## **GET /api/feature/:productId/videos**<br>
+
+Get all feature videos of a product.<br>
+
+Sample Response:<br>
+
+```
+[
+  {
+    id,
+    title,
+    url,
+    variationId,
+    uploadedBy,
+    createdAt,
+    ...
+  },
+  ...
+]
+```
+
+---
+
+## **DELETE /api/product/:productId/variation/:variationId/featureVideo/:videoId**<br>
+
+Delete a feature video.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message
+}
+``` -->
+
+## **POST /api/addToCart/:productId/variation/:variationId**<br>
+
+Add product to cart.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message,
+  cart: {
+    id,
+    quantity,
+    product,
+    selectedVariation,
+    ...
+  },
+  quantity
+}
+```
+
+---
+
+## **GET /api/getAllCart**<br>
+
+Get all cart items.<br>
+
+Sample Response:<br>
+
+```
+[
+  {
+    id,
+    quantity,
+    product,
+    selectedVariation,
+    createdAt,
+    ...
+  },
+  ...
+]
+```
+
+---
+
+## **PATCH /api/increase/:productId/variation/:variationId**<br>
+
+Increase product quantity.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message,
+  productId,
+  variationId
+}
+```
+
+---
+
+## **PATCH /api/decrease/:productId/variation/:variationId**<br>
+
+Decrease product quantity.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message,
+  productId,
+  variationId
+}
+```
+
+---
+
+## **PATCH /api/remove/:productId/variation/:variationId**<br>
+
+Remove product from cart.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message,
+  productId,
+  variationId
+}
+```
+
+---
+
+## **PATCH /api/moveto_wishlist/:productId/variation/:variationId**<br>
+
+Move product from cart to wishlist.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message,
+  productId,
+  variationId
+}
+```
+
+---
+
+## **GET /api/getAllWishlist**<br>
+
+Get all wishlist items.<br>
+
+Sample Response:<br>
+
+```
+[
+  {
+    id,
+    quantity,
+    product,
+    selectedVariation,
+    createdAt,
+    ...
+  },
+  ...
+]
+```
+
+---
+
+## **POST /api/addToWishlist/:productId/variation/:variationId**<br>
+
+Add product to wishlist.<br>
+
+Sample Response:<br>
+
+```
+{
+  message,
+  wishlist: {
+    id,
+    product,
+    selectedVariation,
+    createdAt,
+    ...
+  }
+}
+```
+
+---
+
+## **DELETE /api/removeFromWishlist/:productId/variation/:variationId**<br>
+
+Remove product from wishlist.<br>
+
+Sample Response:<br>
+
+```
+{
+  message,
+  productId,
+  variationId
+}
+```
+
+---
+
+## **PATCH /api/moveToCart/:productId/variation/:variationId**<br>
+
+Move product from wishlist to cart.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message,
+  productId,
+  variationId
+}
 ```
 
 ## **POST /api/address/new**<br>
@@ -193,7 +561,7 @@ Sample Response<br>
 [{name, phoneNumber, zipCode,  ...}, ...]
 ```
 
-## **GET /api/address/id**<br>
+## **GET /api/address/:id**<br>
 
 Get user addresses<br>
 Sample Response<br>
@@ -229,48 +597,283 @@ Sample Response<br>
 {name, phoneNumber, isDefault,  ...}
 ```
 
-## **DELETE /api/address/id**<br>
+## **POST /api/placeOrder**<br>
 
-Delete user addresses<br>
+Place order from cart.<br>
 
-## **POST /api/order/:id**<br>
-
-Place Order.<br>
-Sample Response<br>
+Sample Response:<br>
 
 ```
-[{products: [], orderSummary: {}, address, ...}]
+{
+  success,
+  message,
+  order: {
+    id,
+    products,
+    address,
+    summary,
+    paymentMethod,
+    paymentStatus,
+    orderStatus,
+    ...
+  }
+}
 ```
 
-## **GET /api/order/:id**<br>
+---
 
-Get User Order.<br>
-Sample Response<br>
+## **GET /api/getUserOrders**<br>
 
-```
-[{products: [], orderSummary: {}, address, ...}]
-```
+Get all user orders.<br>
 
-## **POST /api/user**<br>
-
-Add new User<br>
-Sample Response<br>
+Sample Response:<br>
 
 ```
-{name, email}
-
-
+[
+  {
+    id,
+    products: [
+      {
+        product,
+        selectedVariation,
+        ...
+      }
+    ],
+    address,
+    summary,
+    paymentMethod,
+    paymentStatus,
+    orderStatus,
+    createdAt,
+    ...
+  },
+  ...
+]
 ```
 
-## **GET /api/user**<br>
+---
 
-Get User<br>
-Sample Response<br>
+## **GET /api/:orderId/details**<br>
+
+Get order details.<br>
+
+Sample Response:<br>
 
 ```
-{name, email}
+{
+  id,
+  products: [
+    {
+      product,
+      selectedVariation,
+      ...
+    }
+  ],
+  address,
+  summary,
+  paymentMethod,
+  paymentStatus,
+  orderStatus,
+  orderPlacedBy,
+  createdAt,
+  ...
+}
+```
+
+---
+
+## **PATCH /api/:orderId/cancel**<br>
+
+Cancel order.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message,
+  orderId
+}
+```
+
+<!-- ---
+
+## **POST /api/create-order**<br>
+
+Create Razorpay order.<br>
+
+Sample Response:<br>
+
+```
+{
+  id,
+  amount,
+  currency,
+  receipt,
+  status,
+  ...
+}
+```
+
+---
+
+## **POST /api/verify-payment**<br>
+
+Verify Razorpay payment.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message,
+  razorpay_order_id,
+  razorpay_payment_id,
+  razorpay_signature
+}
+``` -->
+
+---
+
+## **POST /api/addItemToBuyNow/:productId/:variationId**<br>
+
+Add item to Buy Now.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message,
+  order: {
+    id,
+    product,
+    variation,
+    quantity,
+    ...
+  }
+}
+```
+
+---
+
+## **GET /api/getBuyNowItem/:variationId**<br>
+
+Get Buy Now item.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message,
+  item: {
+    id,
+    product,
+    quantity,
+    selectedVariation,
+    ...
+  }
+}
+```
+
+---
+
+## **POST /api/placeOrderViaBuyNow**<br>
+
+Place order using Buy Now.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message,
+  orderId
+}
+```
+
+---
+
+## **GET /api/allOrders**<br>
+
+Get all orders.<br>
+
+Sample Response:<br>
+
+```
+[
+  {
+    id,
+    products,
+    summary,
+    address,
+    paymentMethod,
+    paymentStatus,
+    orderStatus,
+    orderPlacedBy,
+    createdAt,
+    ...
+  },
+  ...
+]
+```
+
+## **POST /api/send-otp**<br>
+
+Send OTP to user's phone number.<br>
+
+Sample Response:<br>
+
+```
+{
+  message
+}
+```
+
+---
+
+## **POST /api/verify-otp**<br>
+
+Verify OTP and login/register user.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  token,
+  user: {
+    userId,
+    name,
+    phoneNumber
+  }
+}
+```
+
+---
+
+## **GET /api/userDetails**<br>
+
+Get logged in user details.<br>
+
+Sample Response:<br>
+
+```
+{
+  success,
+  message,
+  user: {
+    id,
+    name,
+    phoneNumber,
+    reviews,
+    createdAt,
+    ...
+  }
+}
 ```
 
 ## Contact
 
-For bugs or feature request, please reach out to rahulkumawat50555@gmail.com#
+For bugs or feature request, please reach out to rahul7497678@gmail.com

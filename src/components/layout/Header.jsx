@@ -60,14 +60,19 @@ const Header = () => {
     setSearchText("");
   };
 
-  const handleSearch = () => {
-    if (!enteredText.trim()) return;
+  useEffect(() => {
+    if (!enteredText.trim()) return setSearchText("");
 
-    if (location.pathname !== "/products") {
-      navigate("/products");
-    }
-    setSearchText(enteredText);
-  };
+    const timer = setTimeout(() => {
+      if (location.pathname !== "/products") {
+        navigate("/products");
+      }
+
+      setSearchText(enteredText);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [enteredText, location.pathname, navigate, setSearchText]);
 
   return (
     <header
@@ -135,9 +140,7 @@ const Header = () => {
               </button>
             )}
 
-            <button
-              type="button"
-              onClick={handleSearch}
+            <span
               className="
         flex
         h-8
@@ -147,15 +150,11 @@ const Header = () => {
         rounded-full
         bg-slate-100
         text-slate-700
-        transition-all
-        duration-200
-        hover:bg-violet-100
-        hover:text-violet-700
-        active:scale-95
+        
       "
             >
               <FiSearch size={16} />
-            </button>
+            </span>
           </div>
         </div>
 
@@ -362,9 +361,7 @@ const Header = () => {
               </button>
             )}
 
-            <button
-              type="button"
-              onClick={handleSearch}
+            <span
               className="
         flex
         h-6
@@ -374,15 +371,11 @@ const Header = () => {
         rounded-full
         bg-slate-100
         text-slate-700
-        transition-all
-        duration-200
-        hover:bg-violet-100
-        hover:text-violet-700
-        active:scale-95
+        
       "
             >
               <FiSearch size={14} />
-            </button>
+            </span>
           </div>
         </div>
       </nav>
