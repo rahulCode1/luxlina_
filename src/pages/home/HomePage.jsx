@@ -118,7 +118,7 @@ const HomePage = () => {
                 className="text-center flex-shrink-0 w-[80px] md:w-[120px]"
               >
                 <div
-                  className={`w-[70px] h-[70px] md:w-[90px] md:h-[90px] rounded-circle mx-auto mb-2 overflow-hidden border-2 ${
+                  className={`w-[70px] h-[70px] cursor-pointer md:w-[90px] md:h-[90px] rounded-circle mx-auto mb-2 overflow-hidden border-2 ${
                     "all" === data.category
                       ? "border border-dark"
                       : "border border-transparent"

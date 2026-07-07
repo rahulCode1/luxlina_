@@ -71,7 +71,7 @@ const Header = () => {
 
   return (
     <header
-      className="w-screen sticky top-0  bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-md"
+      className="w-full sticky top-0  bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-md"
       style={{ zIndex: 1050 }}
     >
       {/* Desktop View */}

@@ -32,6 +32,7 @@ const Cart = () => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const location = useLocation();
   const goTo = location.state?.from;
+
   const isExistOnWishlist = (productId) => {
     return wishlist.some((wish) => wish.id === productId);
   };
@@ -116,6 +117,7 @@ const Cart = () => {
     );
   }, 0);
 
+  console.log(productCart);
 
   return (
     <>
@@ -390,6 +392,57 @@ const Cart = () => {
                       ))}
                     </div>
                   </div>
+
+                  {/* <div>
+                    {productCart.map((cart) => (
+                      <div className="border rounded-3xl overflow-hidden">
+                        <div className="h-[200px] sm:h-[300px] ">
+                          <img
+                            src={cart.selectedVariation?.images[0]?.url}
+                            alt={cart.selectedVariation?.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="p-3">
+                          <p className="font-semibold text-sm text-slate-800">
+                            {cart.selectedVariation?.name}
+                          </p>
+                          <h5 className="flex font-bold text-slate-900 items-center">
+                            {cart.selectedVariation?.discountPrice}
+                            <span className="line-through text-slate-500 font-normal text-sm">
+                              {cart.selectedVariation?.price}
+                            </span>
+                            <span className=" font-normal text-[10px] text-green-900 bg-green-300 py-1 px-3 rounded-2xl">
+                              Save{" "}
+                              {cart.selectedVariation.price -
+                                cart.selectedVariation.discountPrice}
+                            </span>
+                          </h5>
+                          <div className="">
+                            <div className="bg-white  inline-block p-1 border rounded-3xl">
+                              <button className="w-[2rem] h-[2rem] bg-white rounded-full font-bold border">
+                                -
+                              </button>
+                              <span className="font-bold mx-3">
+                                {cart.quantity}
+                              </span>
+                              <button className="w-[2rem] h-[2rem] bg-white rounded-full font-bold border">
+                                +
+                              </button>
+                            </div>
+                            <div className="flex gap-3">
+                              <button className="text-red-500 border-red-500 border-1 px-3 rounded-lg">
+                                D
+                              </button>
+                              <button className="text-blue-500 border-blue-500 border-1 px-3 rounded-lg">
+                                W
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div> */}
 
                   {/* ════════════════════════
                   RIGHT — Order Summary
