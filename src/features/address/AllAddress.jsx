@@ -49,11 +49,8 @@ const AllAddress = () => {
       {fetchUserAddressLoading === "loading" ? (
         <Loading />
       ) : (
-        <div
-          className="min-vh-100 py-4 py-md-5"
-          style={{ background: "var(--bs-light)", marginBottom: "5em" }}
-        >
-          <div className="container-lg px-3 px-md-4">
+        <div className="min-vh-100 " style={{ background: "var(--bs-light)" }}>
+          <div className="container py-4 py-md-5 px-3 mb-5">
             {error && (
               <ErrorModal
                 message={error}

@@ -4,14 +4,13 @@ const UserProfile = ({ user }) => {
   return (
     <>
       <div
-        className="min-vh-100 py-4 py-md-5"
+        className="min-vh-100 "
         style={{
-          marginBottom: "5em",
           background:
             "linear-gradient(160deg, #f0f4ff 0%, #fafafa 60%, #f5f3ff 100%)",
         }}
       >
-        <div className="container">
+        <div className="container py-4 py-md-5 mb-5 mb-md-0" >
           <div className="row justify-content-center">
             <div className="col-12 col-sm-10 col-md-7 col-lg-5">
               <div

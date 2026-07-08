@@ -137,8 +137,8 @@ const Cart = () => {
       {getCartsLoading === "loading" ? (
         <Loading />
       ) : (
-        <main className="min-h-screen bg-slate-50 p-3 pb-24 md:pb-6">
-          <div className="w-full sm:w-11/12 max-w-6xl mx-auto">
+        <main className="min-h-screen bg-slate-50 p-3 pb-24 ">
+          <div className="w-full sm:w-11/12 max-w-6xl mx-auto mb-5 ">
             {productCart && productCart.length > 0 ? (
               <>
                 {goTo && goTo !== "/cart" && (

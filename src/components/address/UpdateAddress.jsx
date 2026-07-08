@@ -1,4 +1,10 @@
-import { useNavigate, useParams, Form, useLocation, Link } from "react-router-dom";
+import {
+  useNavigate,
+  useParams,
+  Form,
+  useLocation,
+  Link,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { useEffect } from "react";
@@ -47,9 +53,7 @@ const UpdateAddress = ({ addressInfo }) => {
   useEffect(() => {
     dispatch(fetchUserAddressAsync());
   }, [dispatch]);
-  const goBack = location.state?.from || "address"
-
-  
+  const goBack = location.state?.from || "address";
 
   return (
     <>
@@ -57,15 +61,14 @@ const UpdateAddress = ({ addressInfo }) => {
         style={{
           background: "linear-gradient(135deg, #f0f4ff 0%, #fafafa 100%)",
           minHeight: "100vh",
-          padding: "2rem 0",
-          marginBottom: "5em",
         }}
       >
-        <div className="container">
-          <Link 
-          to={goBack}
-          className="btn btn-primary mb-3">
-          Back to {goBack.split("/")[1] || "address"}
+        <div
+          className="container  mb-5 mb-md-0"
+          style={{ padding: "2rem 1rem",  }}
+        >
+          <Link to={goBack} className="btn btn-primary mb-3">
+            Back to {goBack.split("/")[1] || "address"}
           </Link>
           <div className="row justify-content-center">
             <div className="col-12 col-md-10 col-lg-8 col-xl-7">
