@@ -230,10 +230,12 @@ const Header = () => {
       </nav>
 
       {/* Mobile device */}
-      <nav className="mx-2 my-1">
+      <nav className="mx-2 my-2">
         <div className="flex justify-between items-center gap-4 md:hidden">
           <h3 className="text-xl font-bold tracking-wide bg-gradient-to-r from-violet-700 to-indigo-400 bg-clip-text text-transparent">
-            Handcrafted
+            <Link to="/" className="no-underline text-black">
+              Luxlina
+            </Link>
           </h3>
 
           <div className="flex flex-row items-center gap-2">

@@ -45,13 +45,10 @@ const UserOrders = ({ userOrders }) => {
   ];
 
   return (
-    <>
+    <main className="bg-slate-100 w-screen min-h-screen">
       <div
-        className="px-3 px-md-4 py-3 pb-5 mb-5 mb-md-2"
-        style={{
-          background: "linear-gradient(135deg, #f0f4ff 0%, #fafafa 100%)",
-          minHeight: "100vh",
-        }}
+        className="p-4 w-11/12 mx-auto mb-5 pb-5 mb-md-0"
+      style={{maxWidth: "1200px"}}
       >
         {/* Back Button */}
         {goTo && goTo !== "/orders" && (
@@ -565,7 +562,7 @@ const UserOrders = ({ userOrders }) => {
           </div>
         )}
       </div>
-    </>
+    </main>
   );
 };
 

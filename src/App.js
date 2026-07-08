@@ -10,7 +10,7 @@ import AddProducts from "./features/product/AddProducts";
 import AddAddress from "./features/address/AddAddress";
 import Checkout from "./pages/order/Checkout";
 import NotFound from "./components/NotFound";
-import ErrorPage from "./pages/ErrorPage";
+// import ErrorPage from "./pages/ErrorPage";
 import { lazy, Suspense } from "react";
 import Loading from "./components/Loading";
 import ProtectedRoutes from "./pages/auth/ProtectedRoutes";
@@ -52,7 +52,7 @@ function App() {
     {
       path: "/",
       element: <Layout />,
-      errorElement: <ErrorPage />,
+      // errorElement: <ErrorPage />,
       children: [
         {
           index: true,

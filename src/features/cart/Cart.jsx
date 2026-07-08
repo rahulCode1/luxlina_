@@ -14,6 +14,18 @@ import {
 import { addToWishlist } from "../wishlist/wishlistSlice";
 import ErrorModal from "../../components/ErrorModal";
 import { useState } from "react";
+import {
+  FiArrowLeft,
+  FiShoppingCart,
+  FiTag,
+  FiTrash2,
+  FiHeart,
+  FiFileText,
+  FiTruck,
+  FiTrendingDown,
+  FiShoppingBag,
+  FiLock,
+} from "react-icons/fi";
 
 const Cart = () => {
   const [productId, setProductId] = useState("");
@@ -117,8 +129,6 @@ const Cart = () => {
     );
   }, 0);
 
-  console.log(productCart);
-
   return (
     <>
       {error && (
@@ -127,104 +137,80 @@ const Cart = () => {
       {getCartsLoading === "loading" ? (
         <Loading />
       ) : (
-        <main
-          className="min-vh-100 py-4 py-md-5 bg-light"
-          style={{ marginBottom: "6em" }}
-        >
-          <div className="container">
+        <main className="min-h-screen bg-slate-50 p-3 pb-24 md:pb-6">
+          <div className="w-full sm:w-11/12 max-w-6xl mx-auto">
             {productCart && productCart.length > 0 ? (
               <>
                 {goTo && goTo !== "/cart" && (
                   <Link
                     to={goTo}
-                    style={{
-                      padding: "6px 15px",
-                      marginBottom: "20px",
-                      display: "inline-block",
-                    }}
-                    className="text-light rounded bg-primary text-decoration-none"
+                    className="inline-block mb-5 px-4 py-1.5 rounded-md bg-violet-600 text-white text-sm font-medium hover:bg-violet-700 transition-colors"
                   >
-                    <i className="bi bi-arrow-left"></i> Back
+                    <FiArrowLeft className="inline-block mr-1" /> Back
                   </Link>
                 )}
 
                 {/* ── Page Header ── */}
-                <div className="d-flex align-items-center gap-3 mb-4">
-                  <div
-                    className="d-flex align-items-center justify-content-center rounded-3 bg-primary flex-shrink-0"
-                    style={{ width: 46, height: 46 }}
-                  >
-                    <i className="bi bi-cart3 text-white fs-5"></i>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="flex items-center justify-center rounded-xl bg-violet-600 shrink-0 w-10 h-10 sm:w-[46px] sm:h-[46px]">
+                    <FiShoppingCart className="text-white text-lg sm:text-xl" />
                   </div>
                   <div>
-                    <h4 className="fw-bold mb-0 text-dark">My Cart</h4>
-                    <span className="text-muted small">
+                    <h4 className="font-bold text-base sm:text-lg mb-0 text-slate-900">
+                      My Cart
+                    </h4>
+                    <span className="text-slate-500 text-xs sm:text-sm">
                       {productCart.length}{" "}
                       {productCart.length === 1 ? "item" : "items"} in your cart
                     </span>
                   </div>
                 </div>
 
-                <div className="row g-4 align-items-start">
+                <div className="flex flex-col lg:flex-row gap-6 items-start">
                   {/* ════════════════════════
-                  LEFT — Cart Items
-              ════════════════════════ */}
-                  <div className="col-12 col-lg-7">
-                    <div className="d-flex flex-column gap-3">
+              LEFT — Cart Items
+          ════════════════════════ */}
+                  <div className="w-full lg:w-7/12">
+                    <div className="flex flex-col gap-3">
                       {productCart.map((cart) => (
                         <div
                           key={cart.id}
-                          className="card border rounded-4 overflow-hidden"
+                          className="border border-slate-200 rounded-2xl overflow-hidden bg-white"
                         >
-                          <div className="row g-0">
+                          {/* stack on very small screens, row from sm up */}
+                          <div className="flex flex-row">
                             {/* Image */}
-                            <div className="col-4 col-sm-3">
+                            <div className="w-28 sm:w-1/3 md:w-1/4 shrink-0">
                               <Link
                                 to={`/products/${cart.product.id}`}
                                 state={{ from: "/cart" }}
                               >
                                 <img
                                   src={cart?.selectedVariation?.images[0]?.url}
-                                  className="w-100 h-100"
-                                  style={{
-                                    objectFit: "cover",
-                                    minHeight: 130,
-                                    display: "block",
-                                  }}
+                                  className="w-full h-full min-h-[110px] sm:min-h-[130px] object-cover block"
                                   alt={cart.selectedVariation.name}
                                 />
                               </Link>
                             </div>
 
                             {/* Info */}
-                            <div className="col-8 col-sm-9">
-                              <div className="p-3 h-100 d-flex flex-column justify-content-between">
+                            <div className="flex-1 min-w-0">
+                              <div className="p-2.5 sm:p-3 h-full flex flex-col justify-between">
                                 {/* Name */}
-                                <p
-                                  className="fw-semibold mb-2 text-dark lh-sm"
-                                  style={{
-                                    fontSize: "clamp(0.82rem, 2vw, 0.95rem)",
-                                  }}
-                                >
+                                <p className="font-semibold mb-2 text-slate-900 leading-snug text-[clamp(0.8rem,2vw,0.95rem)] line-clamp-2">
                                   {cart.selectedVariation.name}
                                 </p>
 
                                 {/* Price + Save badge */}
-                                <div className="d-flex align-items-center gap-2 mb-3 flex-wrap">
-                                  <span
-                                    className="fw-bold text-primary"
-                                    style={{ fontSize: "1.05rem" }}
-                                  >
+                                <div className="flex items-center gap-2 mb-3 flex-wrap">
+                                  <span className="font-bold text-violet-600 text-sm sm:text-[1.05rem]">
                                     ₹{cart.selectedVariation.discountPrice}
                                   </span>
-                                  <span className="text-muted small text-decoration-line-through">
+                                  <span className="text-slate-400 text-xs sm:text-sm line-through">
                                     ₹{cart.selectedVariation.price}
                                   </span>
-                                  <span
-                                    className="badge bg-success-subtle text-success rounded-pill"
-                                    style={{ fontSize: "0.62rem" }}
-                                  >
-                                    <i className="bi bi-tag-fill me-1" />
+                                  <span className="bg-emerald-50 text-emerald-600 rounded-full px-2 py-0.5 text-[0.6rem] sm:text-[0.62rem] font-medium flex items-center whitespace-nowrap">
+                                    <FiTag className="mr-1" size={10} />
                                     Save ₹
                                     {cart.selectedVariation.price -
                                       cart.selectedVariation.discountPrice}
@@ -232,12 +218,9 @@ const Cart = () => {
                                 </div>
 
                                 {/* Stepper + actions */}
-                                <div className="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                <div className="flex items-center justify-between flex-wrap gap-2">
                                   {/* Quantity stepper */}
-                                  <div
-                                    className="d-flex align-items-center gap-1 rounded-pill px-2 py-1 border bg-light"
-                                    style={{ width: "fit-content" }}
-                                  >
+                                  <div className="flex items-center gap-1 rounded-full px-2 py-1 border border-slate-200 bg-slate-50 w-fit">
                                     <button
                                       disabled={
                                         decreaseQuantityLoading === "loading" &&
@@ -249,24 +232,11 @@ const Cart = () => {
                                           cart.selectedVariation.id,
                                         )
                                       }
-                                      className="btn btn-sm d-flex align-items-center justify-content-center rounded-circle border bg-white text-primary fw-bold p-0"
-                                      style={{
-                                        width: 26,
-                                        height: 26,
-                                        fontSize: 15,
-                                        lineHeight: 1,
-                                      }}
+                                      className="flex items-center justify-center rounded-full border border-slate-200 bg-white text-violet-600 font-bold w-6 h-6 sm:w-[26px] sm:h-[26px] text-sm leading-none disabled:opacity-50 shrink-0"
                                     >
                                       −
                                     </button>
-                                    <span
-                                      className="fw-bold text-dark px-1"
-                                      style={{
-                                        minWidth: 22,
-                                        textAlign: "center",
-                                        fontSize: "0.88rem",
-                                      }}
-                                    >
+                                    <span className="font-bold text-slate-900 px-1 min-w-[20px] text-center text-xs sm:text-sm">
                                       {cart.quantity}
                                     </span>
                                     <button
@@ -280,20 +250,14 @@ const Cart = () => {
                                           cart.selectedVariation.id,
                                         )
                                       }
-                                      className="btn btn-sm d-flex align-items-center justify-content-center rounded-circle border bg-white text-primary fw-bold p-0"
-                                      style={{
-                                        width: 26,
-                                        height: 26,
-                                        fontSize: 15,
-                                        lineHeight: 1,
-                                      }}
+                                      className="flex items-center justify-center rounded-full border border-slate-200 bg-white text-violet-600 font-bold w-6 h-6 sm:w-[26px] sm:h-[26px] text-sm leading-none disabled:opacity-50 shrink-0"
                                     >
                                       +
                                     </button>
                                   </div>
 
                                   {/* Action buttons */}
-                                  <div className="d-flex gap-2">
+                                  <div className="flex gap-1.5 sm:gap-2">
                                     {/* Remove */}
                                     <button
                                       disabled={
@@ -306,24 +270,16 @@ const Cart = () => {
                                           cart.selectedVariation.id,
                                         )
                                       }
-                                      className="btn btn-outline-danger btn-sm rounded-3 fw-semibold d-flex align-items-center justify-content-center"
-                                      style={{
-                                        fontSize: "0.75rem",
-                                        padding: "4px 10px",
-                                        minWidth: 36,
-                                      }}
+                                      className="flex items-center justify-center gap-1 rounded-lg border border-red-500 text-red-500 font-semibold text-xs px-2 sm:px-2.5 py-1 min-w-[32px] sm:min-w-[36px] hover:bg-red-50 transition-colors disabled:opacity-50"
                                     >
                                       {removeFromCartLoading === "loading" &&
                                       cart.selectedVariation.id ===
                                         productId ? (
-                                        <span className="spinner-border spinner-border-sm" />
+                                        <span className="w-3.5 h-3.5 border-2 border-red-500 border-t-transparent rounded-full animate-spin" />
                                       ) : (
                                         <>
-                                          <i
-                                            className="bi bi-trash3-fill"
-                                            style={{ fontSize: 11 }}
-                                          />
-                                          <span className="d-none d-sm-inline ms-1">
+                                          <FiTrash2 size={11} />
+                                          <span className="hidden sm:inline">
                                             Remove
                                           </span>
                                         </>
@@ -337,17 +293,13 @@ const Cart = () => {
                                       <Link
                                         to="/wishlist"
                                         state={{ from: "/cart" }}
-                                        className="btn btn-primary btn-sm rounded-3 fw-semibold d-flex align-items-center justify-content-center gap-1"
-                                        style={{
-                                          fontSize: "0.75rem",
-                                          padding: "4px 10px",
-                                        }}
+                                        className="flex items-center justify-center gap-1 rounded-lg bg-violet-600 text-white font-semibold text-xs px-2 sm:px-2.5 py-1 hover:bg-violet-700 transition-colors"
                                       >
-                                        <i
-                                          className="bi bi-heart-fill"
-                                          style={{ fontSize: 11 }}
+                                        <FiHeart
+                                          className="fill-current"
+                                          size={11}
                                         />
-                                        <span className="d-none d-sm-inline">
+                                        <span className="hidden sm:inline">
                                           Wishlisted
                                         </span>
                                       </Link>
@@ -360,23 +312,15 @@ const Cart = () => {
                                         onClick={() =>
                                           handleCartToWishList(cart)
                                         }
-                                        className="btn btn-outline-primary btn-sm rounded-3 fw-semibold d-flex align-items-center justify-content-center"
-                                        style={{
-                                          fontSize: "0.75rem",
-                                          padding: "4px 10px",
-                                          minWidth: 36,
-                                        }}
+                                        className="flex items-center justify-center gap-1 rounded-lg border border-violet-600 text-violet-600 font-semibold text-xs px-2 sm:px-2.5 py-1 min-w-[32px] sm:min-w-[36px] hover:bg-violet-50 transition-colors disabled:opacity-50"
                                       >
                                         {moveToWishlistLoading === "loading" &&
                                         cart.id === cartId ? (
-                                          <span className="spinner-border spinner-border-sm" />
+                                          <span className="w-3.5 h-3.5 border-2 border-violet-600 border-t-transparent rounded-full animate-spin" />
                                         ) : (
                                           <>
-                                            <i
-                                              className="bi bi-heart"
-                                              style={{ fontSize: 11 }}
-                                            />
-                                            <span className="d-none d-sm-inline ms-1">
+                                            <FiHeart size={11} />
+                                            <span className="hidden sm:inline">
                                               Wishlist
                                             </span>
                                           </>
@@ -393,84 +337,27 @@ const Cart = () => {
                     </div>
                   </div>
 
-                  {/* <div>
-                    {productCart.map((cart) => (
-                      <div className="border rounded-3xl overflow-hidden">
-                        <div className="h-[200px] sm:h-[300px] ">
-                          <img
-                            src={cart.selectedVariation?.images[0]?.url}
-                            alt={cart.selectedVariation?.name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div className="p-3">
-                          <p className="font-semibold text-sm text-slate-800">
-                            {cart.selectedVariation?.name}
-                          </p>
-                          <h5 className="flex font-bold text-slate-900 items-center">
-                            {cart.selectedVariation?.discountPrice}
-                            <span className="line-through text-slate-500 font-normal text-sm">
-                              {cart.selectedVariation?.price}
-                            </span>
-                            <span className=" font-normal text-[10px] text-green-900 bg-green-300 py-1 px-3 rounded-2xl">
-                              Save{" "}
-                              {cart.selectedVariation.price -
-                                cart.selectedVariation.discountPrice}
-                            </span>
-                          </h5>
-                          <div className="">
-                            <div className="bg-white  inline-block p-1 border rounded-3xl">
-                              <button className="w-[2rem] h-[2rem] bg-white rounded-full font-bold border">
-                                -
-                              </button>
-                              <span className="font-bold mx-3">
-                                {cart.quantity}
-                              </span>
-                              <button className="w-[2rem] h-[2rem] bg-white rounded-full font-bold border">
-                                +
-                              </button>
-                            </div>
-                            <div className="flex gap-3">
-                              <button className="text-red-500 border-red-500 border-1 px-3 rounded-lg">
-                                D
-                              </button>
-                              <button className="text-blue-500 border-blue-500 border-1 px-3 rounded-lg">
-                                W
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div> */}
-
                   {/* ════════════════════════
-                  RIGHT — Order Summary
-              ════════════════════════ */}
-                  <div className="col-12 col-lg-5">
-                    <div
-                      className="card border-0 shadow-sm rounded-4 overflow-hidden position-lg-sticky"
-                      style={{ top: 24 }}
-                    >
+              RIGHT — Order Summary
+          ════════════════════════ */}
+                  <div className="w-full lg:w-5/12">
+                    <div className="bg-white rounded-2xl shadow-sm overflow-hidden lg:sticky lg:top-6">
                       {/* Card header */}
-                      <div className="card-header bg-white border-bottom px-4 py-3 d-flex align-items-center gap-2">
-                        <i className="bi bi-receipt-cutoff text-primary"></i>
-                        <span className="fw-semibold text-dark">
+                      <div className="border-b border-slate-100 px-4 py-3 flex items-center gap-2">
+                        <FiFileText className="text-violet-600" />
+                        <span className="font-semibold text-slate-900 text-sm sm:text-base">
                           Order Summary
                         </span>
-                        <span
-                          className="badge bg-primary-subtle text-primary rounded-pill ms-auto"
-                          style={{ fontSize: "0.7rem" }}
-                        >
-                          {totalQuantity(productCart)}
+                        <span className="bg-violet-50 text-violet-600 rounded-full ml-auto px-2.5 py-0.5 text-[0.7rem] font-medium whitespace-nowrap">
+                          {totalQuantity(productCart)}{" "}
                           {totalQuantity(productCart) > 1 ? "items" : "item"}
                         </span>
                       </div>
 
-                      <div className="card-body px-4 py-3">
+                      <div className="px-4 py-3">
                         {/* Price breakdown rows */}
-                        <div className="d-flex flex-column gap-2 mb-3">
-                          <div className="d-flex justify-content-between small text-muted">
+                        <div className="flex flex-col gap-2 mb-3">
+                          <div className="flex justify-between text-xs sm:text-sm text-slate-500">
                             <span>
                               MRP ({totalQuantity(productCart)}{" "}
                               {totalQuantity(productCart) > 1
@@ -480,24 +367,27 @@ const Cart = () => {
                             </span>
                             <span>₹{totalPrice(productCart)}</span>
                           </div>
-                          <div className="d-flex justify-content-between small">
-                            <span className="text-muted">Discount</span>
-                            <span className="text-success fw-semibold">
+                          <div className="flex justify-between text-xs sm:text-sm">
+                            <span className="text-slate-500">Discount</span>
+                            <span className="text-emerald-600 font-semibold">
                               − ₹{totalDiscountOnCart}
                             </span>
                           </div>
-                          <div className="d-flex justify-content-between small">
-                            <span className="text-muted">Delivery Charges</span>
-                            <span className="text-success fw-semibold">
-                              <i className="bi bi-truck me-1"></i>FREE
+                          <div className="flex justify-between text-xs sm:text-sm">
+                            <span className="text-slate-500">
+                              Delivery Charges
+                            </span>
+                            <span className="text-emerald-600 font-semibold flex items-center">
+                              <FiTruck className="mr-1" size={14} />
+                              FREE
                             </span>
                           </div>
-                          <hr className="my-1" />
-                          <div className="d-flex justify-content-between align-items-center">
-                            <span className="fw-bold text-dark">
+                          <hr className="my-1 border-slate-100" />
+                          <div className="flex justify-between items-center">
+                            <span className="font-bold text-slate-900 text-sm sm:text-base">
                               Total Payable
                             </span>
-                            <span className="fw-bold fs-5 text-dark">
+                            <span className="font-bold text-base sm:text-lg text-slate-900">
                               ₹{totalPrice(productCart)}
                             </span>
                           </div>
@@ -505,39 +395,36 @@ const Cart = () => {
 
                         {/* Savings alert */}
                         {totalDiscountOnCart > 0 && (
-                          <div className="alert alert-success d-flex align-items-center gap-2 py-2 px-3 mb-3 rounded-3 small">
-                            <i className="bi bi-piggy-bank-fill fs-5"></i>
-                            You're saving{" "}
-                            <strong className="ms-1">
-                              ₹{totalDiscountOnCart}
-                            </strong>{" "}
-                            on this order!
+                          <div className="flex items-center gap-2 py-2 px-3 mb-3 rounded-lg bg-emerald-50 text-emerald-700 text-xs sm:text-sm">
+                            <FiTrendingDown className="text-lg shrink-0" />
+                            <span>
+                              You're saving{" "}
+                              <strong className="ml-1">
+                                ₹{totalDiscountOnCart}
+                              </strong>{" "}
+                              on this order!
+                            </span>
                           </div>
                         )}
 
                         {/* CTA */}
-                        <div className="d-grid mb-2">
+                        <div className="grid mb-2">
                           <Link
                             to="/checkout"
                             state={{ from: "/cart" }}
-                            className="btn btn-dark fw-bold py-3 rounded-3 d-flex align-items-center justify-content-center gap-2"
-                            style={{
-                              fontSize: "1rem",
-                              letterSpacing: "0.02em",
-                            }}
+                            className="flex items-center justify-center gap-2 rounded-lg bg-slate-900 text-white font-bold py-2.5 text-sm sm:text-base tracking-wide hover:bg-slate-800 transition-colors text-center"
                           >
-                            <i className="bi bi-bag-check-fill text-warning fs-5"></i>
-                            Proceed to Checkout &nbsp;·&nbsp; ₹
-                            {totalPrice(productCart)}
+                            <FiShoppingBag className="text-amber-400 text-lg shrink-0" />
+                            <span className="whitespace-normal sm:whitespace-nowrap">
+                              Proceed to Checkout &nbsp;·&nbsp; ₹
+                              {totalPrice(productCart)}
+                            </span>
                           </Link>
                         </div>
 
                         {/* Secure note */}
-                        <p
-                          className="text-center text-muted d-flex align-items-center justify-content-center gap-1 mb-0"
-                          style={{ fontSize: "0.72rem" }}
-                        >
-                          <i className="bi bi-shield-lock-fill text-success"></i>
+                        <p className="text-center text-slate-500 flex items-center justify-center gap-1 mb-0 text-[0.68rem] sm:text-[0.72rem]">
+                          <FiLock className="text-emerald-600 shrink-0" />
                           100% Secure &amp; Encrypted Checkout
                         </p>
                       </div>
@@ -547,31 +434,26 @@ const Cart = () => {
               </>
             ) : (
               /* ── Empty State ── */
-              <div className="row justify-content-center">
-                <div className="col-12 col-md-7 col-lg-5">
-                  <div className="card border-0 shadow-sm text-center rounded-4">
-                    <div className="card-body py-5 px-4">
-                      <div
-                        className="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary bg-opacity-10 mb-4"
-                        style={{ width: 88, height: 88 }}
-                      >
-                        <i
-                          className="bi bi-cart-x text-primary"
-                          style={{ fontSize: 36 }}
-                        ></i>
+              <div className="flex justify-center">
+                <div className="w-full md:w-7/12 lg:w-5/12">
+                  <div className="bg-white rounded-2xl shadow-sm text-center">
+                    <div className="py-10 sm:py-12 px-4 sm:px-6">
+                      <div className="inline-flex items-center justify-center rounded-full bg-violet-50 mb-4 w-16 h-16 sm:w-[88px] sm:h-[88px]">
+                        <FiShoppingCart className="text-violet-600" size={30} />
                       </div>
-                      <h4 className="fw-bold mb-2 text-dark">
+                      <h4 className="font-bold mb-2 text-base sm:text-lg text-slate-900">
                         Your Cart is Empty
                       </h4>
-                      <p className="text-muted mb-4 small">
+                      <p className="text-slate-500 mb-4 text-xs sm:text-sm">
                         Looks like you haven't added anything yet.
                       </p>
                       <Link
                         to="/products"
                         state={{ from: "/cart" }}
-                        className="btn btn-primary fw-semibold px-4 py-2 rounded-3"
+                        className="inline-block bg-violet-600 text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-violet-700 transition-colors text-sm sm:text-base"
                       >
-                        <i className="bi bi-shop me-2"></i>Browse Products
+                        <FiShoppingBag className="inline-block mr-2" />
+                        Browse Products
                       </Link>
                     </div>
                   </div>

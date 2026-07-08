@@ -44,6 +44,7 @@ const Checkout = () => {
     address.length > 0 &&
     address.find((address) => address.isDefault === true);
 
+
   const handleSubmitOrder = async () => {
     if (!selectedAddress) {
       return navigate("/address/addAddress", { state: { from: "/checkout" } });
@@ -149,8 +150,8 @@ const Checkout = () => {
       {error && <ErrorModal message={error} onClose={() => setError(null)} />}
 
       <div
-        className="bg-light min-vh-100 py-3 pb-5"
-        style={{ marginBottom: "5em" }}
+        className="bg-light min-vh-100 py-3 pb-5 mb-5 mb-md-0"
+        // style={{ marginBottom: "5em" }}
       >
         <div className="container" style={{ maxWidth: 540 }}>
           {isLoading && (
@@ -675,12 +676,12 @@ const Checkout = () => {
             <button
               onClick={handleSubmitOrder}
               disabled={isLoading}
-              className="btn btn-dark fw-bold py-3 rounded-3 d-flex align-items-center justify-content-center gap-2"
+              className="btn btn-dark fw-bold py-2 rounded-3 d-flex align-items-center justify-content-center gap-2"
               style={{ fontSize: "1rem", letterSpacing: "0.02em" }}
             >
               {isLoading ? (
                 <>
-                  Placing Order…{" "}
+                  Placing Order
                   <span className="spinner-border spinner-border-sm" />
                 </>
               ) : (

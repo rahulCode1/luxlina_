@@ -43,9 +43,6 @@ const Wishlist = () => {
     }
   };
 
-
- 
-
   const handleWishListToCart = async (wishlist) => {
     const toastId = toast.loading("Moving to cart...");
     try {
@@ -68,6 +65,8 @@ const Wishlist = () => {
       console.log(error);
     }
   };
+
+
 
   return (
     <main
@@ -126,23 +125,7 @@ const Wishlist = () => {
             <div className="row g-3 g-md-4">
               {wishlist.map((wishlist) => (
                 <div className="col-12 col-sm-6 col-lg-4" key={wishlist.id}>
-                  <div
-                    className="card h-100 border-0 rounded-4 overflow-hidden"
-                    style={{
-                      boxShadow: "0 2px 12px rgba(79,70,229,0.08)",
-                      transition: "box-shadow 0.2s, transform 0.2s",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow =
-                        "0 8px 28px rgba(79,70,229,0.18)";
-                      e.currentTarget.style.transform = "translateY(-3px)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow =
-                        "0 2px 12px rgba(79,70,229,0.08)";
-                      e.currentTarget.style.transform = "translateY(0)";
-                    }}
-                  >
+                  <div className="card h-100 border-0 shadow-md rounded-4 overflow-hidden">
                     {/* Image */}
                     <div
                       className="position-relative overflow-hidden"
@@ -154,12 +137,6 @@ const Wishlist = () => {
                           className="w-100 h-100 object-fit-cover"
                           alt={wishlist.name}
                           style={{ transition: "transform 0.35s ease" }}
-                          onMouseEnter={(e) =>
-                            (e.currentTarget.style.transform = "scale(1.06)")
-                          }
-                          onMouseLeave={(e) =>
-                            (e.currentTarget.style.transform = "scale(1)")
-                          }
                         />
                       </Link>
                       {/* Wishlist badge */}
@@ -184,9 +161,8 @@ const Wishlist = () => {
                       <h5
                         className="card-title fw-semibold mb-0 text-truncate"
                         style={{ color: "#1e1b4b", fontSize: "0.97rem" }}
-                        title={wishlist.name}
                       >
-                        {wishlist.name}
+                        {wishlist?.selectedVariation?.name}
                       </h5>
 
                       <p
