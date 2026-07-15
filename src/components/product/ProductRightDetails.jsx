@@ -66,6 +66,13 @@ const ProductRightDetails = ({
     },
   ];
 
+  
+  const getSpec = (label) => SPECS.find((s) => s.label === label) || {};
+  const lengthSpec = getSpec("Length");
+  const widthSpec = getSpec("Width");
+  const heightSpec = getSpec("Height");
+  const weightSpec = getSpec("Weight");
+
   const checkProductIsInCart = (id) =>
     productCart.some(
       (c) => c?.product?.id === id && c?.variation === selectedVariation?.id,
@@ -245,27 +252,176 @@ const ProductRightDetails = ({
         </div>
 
         {/* Specs */}
-        <div className={styles.specsBlock}>
-          <h4 className={styles.specsTitle}>
-            <i className="bi bi-rulers" aria-hidden="true" /> Dimensions &amp;
-            Details
+
+        <div className="border border-[#edd9b8] rounded-xl overflow-hidden">
+          {/* Title */}
+          <h4 className="text-[0.65rem] font-semibold tracking-[0.14em] uppercase text-[#8a7560] m-0 px-4 py-2.5 bg-[#fdf6ee] border-b border-[#edd9b8] flex items-center gap-2">
+            <i className="bi bi-rulers" aria-hidden="true" />
+            Dimensions &amp; Details
           </h4>
-          <div className={styles.specsGrid}>
-            {SPECS.map(({ label, value, alt }) => (
-              <div key={label} className={styles.specItem}>
-                <span className={styles.specLabel}>{label}</span>
-                <span className={styles.specValue}>
-                  {value}
-                  {alt && <span className={styles.specAlt}>/ {alt}</span>}
+
+          {/* Diagram + values, stacked on mobile, side by side from sm up */}
+          <div className="flex flex-col sm:flex-row items-center gap-6 p-4">
+            {/* Diagram with SVG shape + arrows, labels as HTML overlay */}
+            <div className="relative w-44 sm:w-48 flex-shrink-0">
+              <svg
+                viewBox="0 0 300 220"
+                className="w-full h-auto"
+                aria-hidden="true"
+              >
+                <defs>
+                  <marker
+                    id="dimArrow"
+                    markerWidth="7"
+                    markerHeight="7"
+                    refX="3.5"
+                    refY="3.5"
+                    orient="auto"
+                  >
+                    <path d="M0,0 L7,3.5 L0,7 Z" fill="#8a7560" />
+                  </marker>
+                </defs>
+
+                {/* box */}
+                <polygon
+                  points="70,150 170,150 170,60 70,60"
+                  fill="#fdf6ee"
+                  stroke="#c97b3a"
+                  strokeWidth="1.5"
+                />
+                <polygon
+                  points="70,60 170,60 210,30 110,30"
+                  fill="#f2e2c9"
+                  stroke="#c97b3a"
+                  strokeWidth="1.5"
+                />
+                <polygon
+                  points="170,150 210,120 210,30 170,60"
+                  fill="#ead2ac"
+                  stroke="#c97b3a"
+                  strokeWidth="1.5"
+                />
+
+                {/* length arrow (bottom, horizontal) */}
+                <line
+                  x1="70"
+                  y1="175"
+                  x2="170"
+                  y2="175"
+                  stroke="#8a7560"
+                  strokeWidth="1.5"
+                  markerStart="url(#dimArrow)"
+                  markerEnd="url(#dimArrow)"
+                />
+
+                {/* width arrow (side, diagonal) */}
+                <line
+                  x1="185"
+                  y1="163"
+                  x2="225"
+                  y2="133"
+                  stroke="#8a7560"
+                  strokeWidth="1.5"
+                  markerStart="url(#dimArrow)"
+                  markerEnd="url(#dimArrow)"
+                />
+
+                {/* height arrow (left, vertical) */}
+                <line
+                  x1="48"
+                  y1="60"
+                  x2="48"
+                  y2="150"
+                  stroke="#8a7560"
+                  strokeWidth="1.5"
+                  markerStart="url(#dimArrow)"
+                  markerEnd="url(#dimArrow)"
+                />
+              </svg>
+
+              {/* Labels rendered as HTML, not SVG text — stays crisp at any size */}
+              <span className="absolute left-[40%] top-[85%] -translate-x-1/2 text-[9px] sm:text-[10px] font-bold uppercase tracking-wide text-[#6a5540] whitespace-nowrap">
+                Length
+              </span>
+              <span className="absolute left-[81%] top-[64%] text-[9px] sm:text-[10px] font-bold uppercase tracking-wide text-[#6a5540] whitespace-nowrap">
+                Width
+              </span>
+              <span className="absolute left-[6%] top-[47%] -translate-y-1/2 -rotate-90 origin-left text-[9px] sm:text-[10px] font-bold uppercase tracking-wide text-[#6a5540] whitespace-nowrap">
+                Height
+              </span>
+            </div>
+
+            {/* value list */}
+            <div className="flex flex-col gap-2 w-full min-w-0 flex-1">
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <span className="w-2 h-2 rounded-full bg-[#c97b3a] flex-shrink-0" />
+                <span className="text-[0.62rem] font-semibold tracking-wider uppercase text-[#b8a090] w-14 flex-shrink-0">
+                  Length
+                </span>
+                <span className="text-sm font-semibold text-[#1a1208] flex items-baseline gap-1 flex-wrap">
+                  {lengthSpec.value}
+                  {lengthSpec.alt && (
+                    <span className="text-xs font-normal text-[#a89070]">
+                      / {lengthSpec.alt}
+                    </span>
+                  )}
                 </span>
               </div>
-            ))}
+
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <span className="w-2 h-2 rounded-full bg-[#a8823f] flex-shrink-0" />
+                <span className="text-[0.62rem] font-semibold tracking-wider uppercase text-[#b8a090] w-14 flex-shrink-0">
+                  Width
+                </span>
+                <span className="text-sm font-semibold text-[#1a1208] flex items-baseline gap-1 flex-wrap">
+                  {widthSpec.value}
+                  {widthSpec.alt && (
+                    <span className="text-xs font-normal text-[#a89070]">
+                      / {widthSpec.alt}
+                    </span>
+                  )}
+                </span>
+              </div>
+
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <span className="w-2 h-2 rounded-full bg-[#8a7560] flex-shrink-0" />
+                <span className="text-[0.62rem] font-semibold tracking-wider uppercase text-[#b8a090] w-14 flex-shrink-0">
+                  Height
+                </span>
+                <span className="text-sm font-semibold text-[#1a1208] flex items-baseline gap-1 flex-wrap">
+                  {heightSpec.value}
+                  {heightSpec.alt && (
+                    <span className="text-xs font-normal text-[#a89070]">
+                      / {heightSpec.alt}
+                    </span>
+                  )}
+                </span>
+              </div>
+            </div>
           </div>
+
+          {/* weight row */}
+          <div className="flex items-center gap-2 px-4 py-2 border-t border-[#f2e8da] text-sm">
+            <i className="bi bi-box-seam text-[#c97b3a]" aria-hidden="true" />
+            <span className="font-semibold text-[#1a1208] flex items-baseline gap-1 flex-wrap">
+              {weightSpec.value}
+              {weightSpec.alt && (
+                <span className="text-xs font-normal text-[#a89070]">
+                  / {weightSpec.alt}
+                </span>
+              )}
+            </span>
+          </div>
+
           {productInfo.care && (
-            <div className={styles.specCare}>
-              <i className="bi bi-info-circle" aria-hidden="true" />
+            <div className="flex items-start gap-2 px-4 py-2.5 bg-[#fdfaf6] border-t border-[#edd9b8] text-[0.78rem] leading-relaxed text-[#6a5540]">
+              <i
+                className="bi bi-info-circle text-[#c97b3a] mt-0.5 flex-shrink-0"
+                aria-hidden="true"
+              />
               <span>
-                <strong>Care:</strong> {productInfo.care}
+                <strong className="text-[#5c4430] font-medium">Care:</strong>{" "}
+                {productInfo.care}
               </span>
             </div>
           )}

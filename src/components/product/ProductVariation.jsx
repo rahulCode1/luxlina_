@@ -64,7 +64,7 @@ const ProductVariation = ({
                     });
                 }}
               >
-                <p>{v.name}</p>
+                <p className="line-clamp-2">{v.name}</p>
                 <div className={styles.variationPriceRow}>
                   <span className={styles.variationDiscountPrice}>
                     ₹{v.discountPrice}
@@ -85,6 +85,13 @@ const ProductVariation = ({
                     Pack of {v.packQuantity}
                   </p>
                 )}
+
+                {
+                  <p className={styles.variationPackQty}>
+                    Size: {v.height / Math.floor(2.54)}{" "}
+                    <span className="lowercase">inch</span>
+                  </p>
+                }
 
                 {/* <button
                   onClick={() => handleRemoveProductVariation(v.id)}
